@@ -1,0 +1,327 @@
+<script language="javascript" type="text/javascript">
+function check()
+{
+if(document.cartform.name.value=="")
+{
+alert("Tên không được bỏ trống");
+document.cartform.name.focus();
+return false;
+}
+if(document.cartform.phone.value=="")
+{
+alert("Bạn chưa điền số điện thoại");
+document.cartform.phone.focus();
+return false;
+}
+if(document.cartform.email.value=="")
+{
+alert("Bạn chưa nhập email");
+document.cartform.email.focus();
+return false;
+}
+if(document.cartform.address.value=="")
+{
+alert("Bạn chưa điền địa chỉ");
+document.cartform.address.focus();
+return false;
+}
+return true;
+}
+</script>
+<?if (!isset($_SESSION['log']) || $_SESSION['log']==''){	unset($_SESSION['log']);}
+if (count($_SESSION['cart'])<=0){
+?>
+<script>window.location='./<? echo $user;?>/cart.html'</script>
+<?}?>
+<?	function send_mail_order()
+{		
+global $con;	
+global $adminemail;		
+$sql_pay = "select * from thanhvien where user='".$_SESSION['log']."' ";	
+$result = mysql_query($sql_pay,$con);
+$cust=mysql_fetch_assoc($result);		
+$name=$cust['fullname'];	
+$address=$cust['address'];	
+$phone=$cust['phone'];	
+$email=$cust['email'];	
+$dathang="";	
+$cart=$_SESSION['cart'];	
+$tongcong=0;	
+$cnt=0;	
+foreach ($cart as $product){		
+	$sql = "select * from products where id='".$product[0]."'";		
+	$result = mysql_query($sql,$con);		
+	$pro=mysql_fetch_assoc($result);				
+	$dathang.="Ma san pham : ".$pro['code']."<br>"; 		
+	$dathang.="Ten san pham : ".$pro['name']."<br>"; 		
+	$dathang.="So luong : ".$product[1]."<br>"; 			
+	$dathang.="Don gia : ".$pro['price']."<br>";		
+	$dathang.="Thanh tien : ".$pro['price']*$product[1]."<br><br>";				
+	$tongcong=$tongcong+$pro['price']*$product[1];		
+	$cnt=$cnt+1;		} 		
+	$dathang.="<hr>Tong cong : ".$tongcong."<br>";	
+	$m2=sendmail($email,$adminemail, "Thong tin dat hang cua : ".$name, "Ho ten : ".$name."<br>Dia chi : ".$address."<br>Dien thoai : ".$phone."<br>Email : ".$email."<BR><hr><b>Don hang :</b><br>".$dathang);		if (m2)	
+	{			return "";		}		else			
+		return "Không th&#7875; g&#7903;i thông tin.";	}?>
+		<?	if (count($_SESSION['cart'])<=0) 
+		echo "<script>window.location='./?home=cart'</script>";	
+	$cart=$_SESSION['cart'];	
+	$sql = "select * from thanhvien where user='".$_SESSION['log']."'";	
+	$result = mysql_query($sql,$con);	
+	$cust=mysql_fetch_assoc($result);
+	
+	
+	
+	
+	?>  
+	
+<?
+	if (isset($_POST['butSub']))
+	{
+foreach ($cart as $product)
+{       $sql = "select * from products where id='".$product[0]."'";
+        $result = mysql_query($sql,$con);
+        $pro=mysql_fetch_array($result);
+		$name=$_POST['name'];
+        if($pro['price_special']=='0')
+        {
+            $price_p=$pro['price'];
+        }
+        else
+        {
+            $price_p=$pro['price_special'];
+        }
+		$company=$_POST['company'];
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$ghichu=$_POST['ghichu'];
+		$address=$_POST['address'];
+		$order_user=$pro['user'];
+		$cart=$_SESSION['cart'];
+		$tongcong=0;
+		$cnt=0;
+		$new_id=mysql_insert_id();
+		$sqlorder="insert into orders (orders_customer_id, orders_name, orders_company, orders_email, orders_phone, orders_address, orders_user, new_id, ghichu, orders_date) values ('".$cust['id']."','".$name."','".$company."','".$email."','".$phone."','".$address."','".$order_user."','".$new_id."','".$ghichu."',SYSDATE())";		
+		mysql_query($sqlorder,$con);
+		$newid=mysql_insert_id();
+			$sqlorder2="insert into orderdetail (ordersdetail_product_id,ordersdetail_quantity,ordersdetail_price,ordersdetail_ordersid,user) values (".$product[0].",".$product[1].",'".$price_p."',".$newid.",'".$pro['user']."')";
+			mysql_query($sqlorder2,$con);
+			$tongcong=$tongcong+$pro['price']*$product[1];
+			$cnt=$cnt+1;
+
+}
+		?>
+		<?
+		if (send_mail_order()=="")
+		{?>
+			<script>window.location='./index.php?home=checkout&code=1'</script>
+           <?}else
+			{
+				echo "<p align='center' class='err'><font color=red>Không th&#7875; g&#7903;i thông tin</font></p>";
+			}?>
+<?}
+?>
+
+<p align="center" style="line-height: 150%" class="err"><font face="Tahoma" style="font-size: 16px">
+<? 	if ($_REQUEST['code']=='1') {   	
+	echo "<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Quý khách đã đặt hàng thành công,xin cảm ơn quý khách')
+    window.location.href='/';
+    </SCRIPT>";  
+	echo "<a href='./index.html'>Nh&#7845;n &#273;ây &#273;&#7875; tr&#7903; v&#7873; trang chính</a>";   		
+unset($_SESSION['cart']);
+unset($_SESSION['tongcong']);
+}	
+else{?>
+</font></p>
+<table border="0" width="100%" id="table1090" cellspacing="0" cellpadding="0">
+<tr>
+<td width="54"><a href="./<? echo $user;?>"><img src="template/base/images/home.jpg"></a></td>
+<td>
+<b><font face="Tahoma" style="font-size: 9pt; color:#5A635C">
+Trang chủ > Thanh toán</b>
+</td>
+</tr>
+
+
+
+</table>
+    <div class="d-shoppingcart">
+        <div class="d-step">
+            <span class="s-title-step icon-shopping">THÔNG TIN</span>
+            <div class="d-item-step first">
+                <p class="p-step">Bước 3</p>
+                <p class="p-text-step">HOÀN TẤT</p>
+            </div>
+            <div class="d-item-step">
+                <p class="p-step">Bước 2</p>
+                <p class="p-text-step selected">THÔNG TIN</p>
+            </div>
+            <div class="d-item-step">
+                <p class="p-step">Bước 1</p>
+                <p class="p-text-step">GIỎ HÀNG</p>
+            </div>
+        </div>
+
+<FORM action="" method="POST" name="cartform" onsubmit="return check()">
+<div class="d-shoppingcart-content">
+            <div class="d-box-cart">
+                <div class="d-box-cart-title">
+                    <h3>Thông tin người mua hàng</h3>
+                </div>
+                <div class="d-box-cart-content">
+                    <table cellspacing="0" cellpadding="3" border="0" style="width:100%;">
+						<tr>
+							<td style="width:100px;">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td><b>Họ tên<span class="s-batbuoc">*</span></b></td>
+							<td>
+								<input type="text" maxlength="100" style="width:100%;" value="<? echo $cust['fullname']; ?>" placeholder="Nhâp Họ và Tên quý khách hàng" name="name" />
+							</td>
+						</tr>
+						<tr>
+							<td><b>Điện thoại<span class="s-batbuoc">*</span></b></td>
+							<td>
+								<input type="text" maxlength="50" style="width:100%;" value="<? echo $cust['phone']; ?>" placeholder="Nhập số điện thoại liên lạc của quý khách" name="phone" />
+							</td>
+						</tr>
+						<tr>
+							<td><b>Email</b></td>
+							<td>
+								<input type="text" maxlength="50" style="width:100%;" value="<? echo $cust['email']; ?>" placeholder="Nhập đia chỉ Email của quý khách" name="email" />
+							</td>
+						</tr>
+						<tr>
+							<td><b>Địa chỉ<span class="s-batbuoc">*</span></b></td>
+							<td>
+								<input type="text" maxlength="100" style="width:100%;" value="<? echo $cust['address']; ?>" placeholder="VD: 534 Đường 30/04, P.Hưng Lợi, Q.Ninh Kiều, TP.Cần Thơ" name="address" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="width:100px;"><b>Ghi chú thêm</b></td>
+							<td>
+								<textarea style="width:100%;height:80px;" name="ghichu" placeholder="" ></textarea>
+							</td>
+						</tr>
+					</table>
+                </div>
+            </div>
+            <div class="d-box-cart" style="float:right;">
+                <div class="d-box-cart-title">
+                    <h3>Thông tin thanh toán:</h3>
+                </div>
+                <div class="d-box-cart-content">
+                    <table cellspacing="0" cellpadding="3" border="0" style="width:100%;">
+
+						<table border="1" bordercolor="#ddd" width="100%" cellspacing="0" cellpadding="4" id="table7" style="border-collapse: collapse;
+    width: 592px;
+    margin-left: -11px;
+    margin-top: -11px;">	
+ 
+
+
+<tr style="font-size:18px;font-weight:bold;height:40px;background:#FFFACD">	
+<td align="center" nowrap><font face="Tahoma" style="font-size: 16px">Hình ảnh</font></td>	
+<td align="center" nowrap><font face="Tahoma" style="font-size: 16px">S&#7843;n ph&#7849;m</font></td>		
+<td align="center" nowrap width="90"><font face="Tahoma" style="font-size: 16px">S&#7889; l&#432;&#7907;ng</font></td>		
+<td align="center" nowrap width="100"><font face="Tahoma" style="font-size: 16px">&#272;&#417;n giá</font></td>		
+<td align="center" nowrap width="120"><font face="Tahoma" style="font-size: 16px">Thành ti&#7873;n</font></td>	</tr>
+
+<?$cart=$_SESSION['cart'];$cnt=0;$tongcong=0;
+foreach ($cart as $product)
+{$sql = "select * from products where id='".$product[0]."'";
+$result = mysql_query($sql,$con);
+if (mysql_num_rows($result)>0)
+	{
+	$pro=mysql_fetch_assoc($result);
+    if($pro['price_special']=='0')
+        {
+            $price_p=$pro['price'];
+        }
+    else
+        {
+            $price_p=$pro['price_special'];
+        }
+    ?>	
+	
+<tr>		
+<td align="center" width="100">		
+<font face="Tahoma" style="font-size: 16px">
+<A href="./<?php echo doidau(mb_strtolower($pro['name'],"UTF8"));?>-pro-<?php echo $pro['id'];?>.html">
+<IMG id="" src="<? echo $pro['image']; ?>" alt="<? echo $pro['name']; ?>" border="0" width="50" height="50"></A></font></td>		
+<td align="left" style="padding:5px;"><span style="font-size: 12px"><?php echo dwebvn($pro['name'],3);?></span></td>	
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo $product[1]; ?></span></td>	
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo number_format($price_p); ?>đ</span></td>		
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo number_format(($price_p*$product[1])); ?>đ</span></td></tr>
+
+<?}$tongcong=$tongcong+$price_p*$product[1];$cnt=$cnt+1;} ?>
+
+</table>
+<p align="right"><font face="Tahoma" style="font-size: 16px;color:#ff4400"><b>T&#7893;ng c&#7897;ng : <? echo number_format($tongcong); ?>đ	</b></font>
+					</table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+<TABLE border="0" cellpadding="10" cellspacing="1" width="100%" id="table1" style="
+    margin-left: -11px;
+    width: 1221px;
+">
+<TR><TD class="DialogBox">
+<!--<table border="1" bordercolor="#ddd" width="100%" cellspacing="0" cellpadding="4" id="table7" style="border-collapse: collapse">	
+ 
+
+
+<tr style="font-size:18px;font-weight:bold;height:40px;background:#FFFACD">	
+<td align="center" nowrap><font face="Tahoma" style="font-size: 16px">Hình ảnh</font></td>	
+<td align="center" nowrap><font face="Tahoma" style="font-size: 16px">S&#7843;n ph&#7849;m</font></td>		
+<td align="center" nowrap width="90"><font face="Tahoma" style="font-size: 16px">S&#7889; l&#432;&#7907;ng</font></td>		
+<td align="center" nowrap width="100"><font face="Tahoma" style="font-size: 16px">&#272;&#417;n giá</font></td>		
+<td align="center" nowrap width="120"><font face="Tahoma" style="font-size: 16px">Thành ti&#7873;n</font></td>	</tr>
+
+<?$cart=$_SESSION['cart'];$cnt=0;$tongcong=0;
+foreach ($cart as $product)
+{$sql = "select * from products where id='".$product[0]."'";
+$result = mysql_query($sql,$con);
+if (mysql_num_rows($result)>0)
+	{
+	$pro=mysql_fetch_assoc($result);
+    if($pro['price_special']=='0')
+        {
+            $price_p=$pro['price'];
+        }
+    else
+        {
+            $price_p=$pro['price_special'];
+        }
+    ?>	
+	
+<tr>		
+<td align="center" width="100">		
+<font face="Tahoma" style="font-size: 16px">
+<A href="./<?php echo doidau(mb_strtolower($pro['name'],"UTF8"));?>-pro-<?php echo $pro['id'];?>.html">
+<IMG id="" src="<? echo $pro['image']; ?>" alt="<? echo $pro['name']; ?>" border="0" width="100"></A></font></td>		
+<td align="left" style="padding:5px;"><span style="font-size: 16px"><? echo $pro['name']; ?></span></td>	
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo $product[1]; ?></span></td>	
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo number_format($price_p); ?>đ</span></td>		
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo number_format(($price_p*$product[1])); ?>đ</span></td></tr>
+
+<?}$tongcong=$tongcong+$price_p*$product[1];$cnt=$cnt+1;} ?>
+
+</table-->
+
+<!--TABLE border="0" width="100%" id="table2" style=" border: 1px solid #e7e7e7;">
+<TR><TD>
+<p align="right"><font face="Tahoma" style="font-size: 16px;color:#ff4400"><b>T&#7893;ng c&#7897;ng : <? echo number_format($tongcong); ?>đ	</b></font><TD></TR></TABLE-->
+<TABLE border="0" cellpadding="0" cellspacing="0" width="100%" id="table5">
+<TR><TD><p align="center"><font face="Verdana" size="3">
+<input style="padding:5px;background: #0094da;color:#ffffff;border:0px" type=submit name=butSub value="Gửi đơn hàng"></font></TD></TR></TABLE>
+<input type="hidden" name="menu" value="checkout"></FORM>
+<font face="Tahoma" style="font-size: 16px">&nbsp; </font></TD></TR></TABLE><?}?>

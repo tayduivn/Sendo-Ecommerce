@@ -1,0 +1,16 @@
+
+<?php
+
+   $mysql_hostname = "localhost";
+
+   $mysql_user = "shopct16_data";
+
+   $mysql_password = "S@2V5Ey@MjzW@1";
+
+   $mysql_database = "shopct16_data";
+
+   $bd = mysql_connect($mysql_hostname, $mysql_user, $mysql_password) or die("Could not connect database");
+
+   mysql_select_db($mysql_database, $bd) or die("Could not select database");
+
+?>

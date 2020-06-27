@@ -1,0 +1,85 @@
+<? $sql_mem=mysql_query("SELECT * FROM user_shop where user='".$_SESSION['log']."' ");
+$row_mem=mysql_fetch_assoc($sql_mem);?>
+<? $sql_cat=mysql_query("SELECT * FROM cat where id='".$row_mem['cat_mem']."' ");
+$row_cat=mysql_fetch_assoc($sql_cat);?>
+<? $sql_city=mysql_query("SELECT * FROM city where id='".$row_mem['city']."' ");
+$row_city=mysql_fetch_assoc($sql_city);?>
+<table border="1" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber1">
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Tên đăng nhập
+</td>
+<td style="padding-left:20px">
+<? echo $row_mem['user'];?>
+</td>
+</tr>
+<?if($row_mem['level_shop']=='1' or $row_mem['level_shop']=='2')
+{?>
+<?}else{?>
+<tr>
+<td style="padding-right:10px">
+<p align="right">Địa chỉ gian hàng
+</td>
+<td style="padding-left:20px">
+<?php echo $domain_home;?><? echo $row_mem['user'];?>
+</td>
+</tr>
+<?}?>
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Lĩnh vực kinh doanh 
+</td>
+<td style="padding-left:20px">
+<? echo $row_cat['name'];?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Tỉnh/TP
+</td>
+<td style="padding-left:20px">
+<? echo $row_city['name'];?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Tên công ty 
+</td>
+<td style="padding-left:20px">
+<? echo $row_mem['company'];?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Địa chỉ 
+</td>
+<td style="padding-left:20px">
+<? echo $row_mem['address'];?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Điện thoại di động
+</td>
+<td style="padding-left:20px">
+<? echo $row_mem['phone'];?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-right:10px">
+<p align="right">Email liên hệ 
+</td>
+<td style="padding-left:20px">
+<? echo $row_mem['email'];?>
+</td>
+</tr>
+
+
+</table>

@@ -1,0 +1,99 @@
+
+     h4
+    {
+        padding:0px;
+		padding-bottom:5px;
+        margin:0px;
+        font-size:11px;
+        color:#107ddd
+     }
+    h4 a:link,
+    h4 a:active,
+    h4 a:visited
+    {
+    padding:0px;
+    margin:0px;
+    font-size:11px;
+    color:#107ddd;
+	text-decoration:none;
+    }
+	.h5
+    {
+        padding:0px;
+        margin:0px;
+        font-size:12px;
+		font-weight:bold;
+        color:red
+     }
+	img{border:none;}	
+			
+    /* image replacement */
+        .graphic, #prevBtn, #nextBtn, #slider1prev, #slider1next{
+            margin:0;
+            padding:0;
+            display:block;
+            overflow:hidden;
+            text-indent:-8000px;
+            }
+    /* // image replacement */
+			
+	#container{	
+		margin:0 auto;
+		position:relative;
+		text-align:left;
+		width:210px;
+		background:#fff;		
+		margin-bottom:2em;
+		}				
+	#content_pro{
+		position:relative;
+		}			
+
+/* Easy Slider */
+
+	#slider ul, #slider li,
+	#slider_new ul, #slider_new li{
+		margin:0;
+		padding:0;
+		list-style:none;
+		z-index:36000;
+		position: relative;
+		}
+	#slider2{margin-top:1em;}
+	#slider li, #slider_new li{ 
+		/* 
+			define width and height of list item (slide)
+			entire slider area will adjust according to the parameters provided here
+		*/ 
+		width:200px;
+		overflow:hidden; 
+		z-index:36000
+		}	
+	#prevBtn,#prevBtn_new, #nextBtn,#nextBtn_new,
+	#slider1next,
+	#slider1next_new, 
+	#slider1prev,#slider1prev_new{ 
+		display:block;
+		width:40px;
+		height:28px;
+		position:absolute;
+		left:70px;
+		top:759px;
+		z-index:1000;
+		}	
+	#nextBtn,#nextBtn_new, #slider1next,#slider1next_new{ 
+	    top:759px;
+		left:107px;
+		}														
+	#prevBtn a,#prevBtn_new a, #nextBtn a,#nextBtn_new a,
+	#slider1next a,#slider1next_new a, #slider1prev a,#slider1prev_new a{  
+		display:block;
+		position:relative;
+		width:40px;
+		height:28px;
+		background:url(back_left.png) no-repeat 0 0;	
+		}	
+	#nextBtn a,#nextBtn_new a, #slider1next a,#slider1next_new a{ 
+		background:url(back_right.png) no-repeat 0 0;	
+		}	
+/* // Easy Slider */

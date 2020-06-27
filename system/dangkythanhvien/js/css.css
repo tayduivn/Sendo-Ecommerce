@@ -1,0 +1,49 @@
+@CHARSET "ISO-8859-1";
+/*============== STYLE FOR PAGE ==============*/
+*{margin:0px; padding:0px;}
+body{
+    width: 500px; background: #000; 
+    margin: 0 auto; padding: 0;
+}
+h1{color:#DB2E66; margin:20px 0px;}
+#loading{ width: 300px;  position: absolute; top: 80px; right:160px;}
+
+/*============== STYLE FOR PAGING ==============*/
+#container .pagination ul li.active,
+#container .pagination ul li.inactive:hover{
+	background-color: #DB2E66; color:#fff;
+    border:1px solid #DB2E66; cursor: default;
+}
+#container .pagination ul li.inactive{
+	background-color: #000; color: #DB2E66; 
+	border: 1px solid #eaeaea; cursor: default;
+}
+#container .pagination ul li.actived{color:#DB2E66;background-color:#fff; border:1px solid #fff;}
+#container .data ul li{
+    list-style: none;
+    margin: 5px 0; color: #fff;
+    font:normal 13px verdana;
+}
+
+#container .pagination{  width: 550px;   height: 25px; margin-top:20px;}
+#container .pagination ul li{
+    list-style: none;
+    float: left; margin: 0 3px;
+    border: 1px solid #eaeaea;
+    padding: 2px 6px 2px 6px;
+    font: bold 14px arial;
+    background-color: #000; color: #DB2E66;
+}
+#container .pagination ul li:hover{
+    background-color: #DB2E66;
+ 	border: 1px solid #DB2E66;
+    cursor: pointer; color: #fff;
+}
+.go_button{
+	background-color:#DB2E66;
+	border:1px solid #fff;
+	color:#cc0000;padding:2px 6px;
+	cursor:pointer;position:absolute;margin-top:-1px;
+}
+.total{	float:right;font-family:arial;color:#999; }
+

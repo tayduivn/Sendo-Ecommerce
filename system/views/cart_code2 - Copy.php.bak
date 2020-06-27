@@ -1,0 +1,2353 @@
+
+
+
+
+     <script src="/system/views/js1/jquery.js"></script>
+        <script src="/system/views/js1/cart.js"></script>
+
+
+<?
+
+function checkexist()
+
+{
+
+	$cart=$_SESSION['cart'];
+	$tongcong=$_SESSION['tongcong'];
+
+	foreach ($cart as $product)
+
+		if ($product[0]==$_REQUEST['p']) return true;
+
+	return false;
+
+}
+
+
+
+	if ($_REQUEST['act']=='del')
+
+	{
+
+		if (count($_SESSION['cart'])==1)
+
+			unset($_SESSION['cart']);
+
+		else
+
+		{
+
+			$cart=$_SESSION['cart'];
+
+			unset($cart[$_REQUEST['pos']]);
+
+			$_SESSION['cart']=$cart;
+
+		}
+
+	}
+
+
+
+	if (isset($_POST['butUpdate'])||isset($_POST['butCheckout']))
+
+	{
+
+		$cart=$_SESSION['cart'];
+
+		$t=0;
+
+		foreach ($_POST['txtQuantity'] as $quantity)
+
+		{
+
+			if (is_numeric($quantity) && $quantity>0 && strlen($quantity)<5)
+
+				$cart[$t][1]=(int)$quantity;
+
+			if ($quantity<=0)
+
+			{
+
+				unset($cart[$t]);
+
+				$t=$t-1;
+
+			}
+
+			$t=$t+1;
+
+		}
+
+		if (count($cart)<=0) unset($cart);
+
+		$_SESSION['cart']=$cart;
+
+		
+
+		if (isset($_POST['butCheckout'])) 
+		{?>
+		<script>window.location='./index.php?home=checkout'</script>
+		
+		<?}?>
+
+	<?}
+
+	
+
+	if (isset($_POST['butClear']))
+	{
+
+		unset($_SESSION['cart']);
+		unset($_SESSION['tongcong']);
+	}
+
+
+
+	if (isset($_REQUEST['p']))
+
+	{
+
+		{
+
+			if (!isset($_SESSION['cart']))
+
+			{
+
+				$pro=$_REQUEST['p'];
+
+				$cart=array();
+
+				$cart[] = array($pro,1);
+
+				$_SESSION['cart']=$cart;
+
+			}
+
+			else
+
+			{
+
+				$pro=$_REQUEST['p'];
+
+				$cart=$_SESSION['cart'];
+
+				if (count_record("products","id='".$_REQUEST['p']."'")>0 && checkexist()==false)
+
+				{
+
+					$cart[]=array($pro,1);
+
+					$_SESSION['cart']=$cart;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	else
+
+	{
+
+		$cart=$_SESSION['cart'];
+		
+
+	}
+
+?>
+
+<? 
+
+   if (!isset($_SESSION['cart'])) {
+
+
+?>
+
+
+
+<table border="1" width="100%" cellspacing="0" cellpadding="4" id="table7" style="border-collapse: collapse">
+
+
+
+
+
+<tr><td>
+<br>
+
+<p align="center">
+
+<font face="Tahoma" style="font-size: 14px" color="#FF0000">
+
+<? 
+   		echo "Giỏ hàng trống";
+
+?>
+
+</font>
+
+</p>
+</td></tr></table>
+<?
+}
+   else
+
+{
+
+?>
+<?
+
+}
+
+?>
+
+
+<?if (!isset($_SESSION['mem']) || $_SESSION['mem']==''){	unset($_SESSION['mem']);}
+if (count($_SESSION['cart'])<=0){
+?>
+<script>window.location='./<? echo $user;?>/cart.html'</script>
+<?}?>
+<?	function send_mail_order()
+{		
+global $con;	
+global $adminemail;		
+$sql_pay = "select * from thanhvien where user='".$_SESSION['mem']."' ";	
+$result = mysql_query($sql_pay,$con);
+$cust=mysql_fetch_assoc($result);		
+$name=$cust['fullname'];	
+$user_mem=$cust['user'];	
+$address=$cust['address'];	
+$phone=$cust['phone'];	
+$email=$cust['email'];	
+$dathang="";	
+$cart=$_SESSION['cart'];	
+$tongcong=0;	
+$cnt=0;	
+
+									
+foreach ($cart as $product){		
+	$sql = "select * from products where id='".$product[0]."'";		
+	$result = mysql_query($sql,$con);		
+	$pro=mysql_fetch_assoc($result);				
+	$dathang.="Ma san pham : ".$pro['code']."<br>"; 		
+	$dathang.="Ten san pham : ".$pro['name']."<br>"; 		
+	$dathang.="So luong : ".$product[1]."<br>"; 			
+	$dathang.="Don gia : ".$pro['price']."<br>";		
+	$dathang.="Thanh tien : ".$pro['price']*$product[1]."<br><br>";				
+	$tongcong=$tongcong+$pro['price']*$product[1];		
+	$cnt=$cnt+1;		} 		
+	$dathang.="<hr>Tong cong : ".$tongcong."<br>";	
+	$m2=sendmail($email,$adminemail, "Thong tin dat hang cua : ".$name, "Ho ten : ".$name."<br>Dia chi : ".$address."<br>Dien thoai : ".$phone."<br>Email : ".$email."<BR><hr><b>Don hang :</b><br>".$dathang);		if (m2)	
+	{			return "";		}		else			
+		return "Không th&#7875; g&#7903;i thông tin.";	}?>
+		<?	if (count($_SESSION['cart'])<=0) 
+		echo "<script>window.location='./?home=cart'</script>";	
+	$cart=$_SESSION['cart'];	
+	$sql = "select * from thanhvien where user='".$_SESSION['mem']."'";	
+	$result = mysql_query($sql,$con);	
+	$cust=mysql_fetch_assoc($result);
+
+	
+	
+	
+	
+	?>  
+	
+<?
+
+	if (isset($_POST['butSub']))
+	{
+foreach ($cart as $product)
+			$sql_cat_sub2=mysql_query("SELECT * FROM thanhvien where user='".$row['user']."' ");
+$row_cat_sub2=mysql_fetch_assoc($sql_cat_sub2);
+{       $sql = "select * from products where id='".$product[0]."'";
+        $result = mysql_query($sql,$con);
+        $pro=mysql_fetch_array($result);
+		$name=$_POST['name'];
+        if($pro['price_special']=='0')
+        {
+            $price_p=$pro['price'];
+        }
+        else
+        {
+            $price_p=$pro['price_special'];
+        }
+		$company=$_POST['company'];
+		$mausac=$_POST['mausac'];
+		$kichthuoc=$_POST['kichthuoc'];
+		$phivanchuyen=$_POST['phivanchuyen'];
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$ghichu=$_POST['ghichu'];
+		$address=$_POST['address'];
+		$order_user=$pro['user'];
+		$diemlua=$_POST['diemlua'];
+		$cart=$_SESSION['cart'];
+
+date_default_timezone_set("Asia/Ho_Chi_Minh");
+	$date = date("d-m-Y H:i:s");
+		$tongcong=0;
+		$cnt=0;
+		$new_id=mysql_insert_id();
+		
+		$sqlorder="insert into orders (orders_customer_id, orders_name, orders_company, orders_email, orders_phone, orders_address, orders_user, new_id, ghichu, mausac, kichthuoc,user_mem,diemlua, orders_date) values ('".$cust['id']."','".$name."','".$company."','".$email."','".$phone."','".$address."','".$order_user."','".$new_id."','".$ghichu."','".$mausac."','".$kichthuoc."','".$cust['user']."','".$diemlua."','".$date."')";		
+		mysql_query($sqlorder,$con);
+		
+		$newid=mysql_insert_id();
+        $sqlorder2="insert into orderdetail (ordersdetail_product_id,ordersdetail_quantity,ordersdetail_price,ordersdetail_ordersid,phivanchuyen,user,user_mem) values (".$product[0].",".$product[1].",'".$price_p."',".$newid.",".$phivanchuyen.",'".$pro['user']."','".$cust['user']."')";
+			mysql_query($sqlorder2,$con);
+			$tongcong=$tongcong+$pro['price']*$product[1];
+			$cnt=$cnt+1;
+			$_SESSION['tim_id']=$newid;
+			$newid=mysql_insert_id();
+			
+        $sqlorder3="update products set nguoimua = nguoimua + 1 where id='".$product[0]."' ";
+			mysql_query($sqlorder3,$con);
+           
+}
+unset($_SESSION['cart']);
+unset($_SESSION['tongcong']);
+
+
+		?>
+		<?
+		if (send_mail_order()=="")
+			
+		{?>
+			<script>window.location='./index1.php?home=quanlydonhang_order'</script>
+			
+           <?}else
+			{
+				echo "<p align='center' class='err'><font color=red>Không th&#7875; g&#7903;i thông tin</font></p>";
+			}?>
+<?}
+?>
+<FORM action="" method="POST" name="cartform" onsubmit="return check()" >	
+
+<p align="center" style="line-height: 150%" class="err"><font face="Tahoma" style="font-size: 16px">
+<? 	if ($_REQUEST['code']=='1') {   	
+
+	echo '<center>
+<b style=" font-family: sans-serif; font-size: 24px; color: #F44336; ">Chúc mừng quý khách đã mua hàng thành công</b>
+<br>
+<b style=" font-family: sans-serif; font-size: 22px; color: ##0a196b; ">Nhân viên chúng tôi sẽ gọi điện xác nhận đơn hàng cho quý khách ngay lập tức</b>
+<br>
+<b style=" font-family: sans-serif; font-size: 22px; color: ##0a196b; ">Quý khách có thể kiểm tra tình trạng đơn hàng trong phần quản lý đơn hàng.Xin cảm ơn quý khách</b>
+
+</center>';   	
+	
+unset($_SESSION['cart']);
+unset($_SESSION['tongcong']);
+}	
+else{?>
+
+</font></p>
+    <div class="d-shoppingcart">
+        <div class="d-step">
+            <span class="s-title-step icon-shopping">Tiến trình mua hàng</span>
+            <div class="d-item-step first">
+                <p class="p-step">Bước 3</p>
+                <p class="p-text-step">Gửi đơn hàng</p>
+            </div>
+            <div class="d-item-step">
+                <p class="p-step">Bước 2</p>
+                <p class="p-text-step">Nhập thông tin người nhận</p>
+            </div>
+            <div class="d-item-step">
+                <p class="p-step">Bước 1</p>
+                <p class="p-text-step ">Chọn màu sắc - Kích thước - Số lượng</p>
+            </div>
+        </div>
+
+
+
+<table border="1" bordercolor="#ddd" width="97%" cellspacing="0" cellpadding="4" id="table7" style="border-collapse: collapse;margin:0 auto">
+<font face="Verdana" size="3">
+
+
+
+<input style="margin-right: 325px;background: #0094da;color:#ffffff;border: 3px;float: right;margin-bottom: 0px;font-size: 15px;" type=submit class="buttonorange" onmouseover="this.className='buttonblue'" onmouseout="this.className='buttonorange'"  name=butUpdate value="Cập nhật"></font>
+
+	<tr style="font-size:18px;font-weight:bold;height:40px;background:#FFFACD">
+
+		<td align="center" nowrap><font face="Tahoma" style="font-size: 14px">Hình ảnh</font></td>
+
+		<td align="center" nowrap><font face="Tahoma" style="font-size: 14px">S&#7843;n ph&#7849;m</font></td>
+
+		<td align="center" nowrap width="40"><font face="Tahoma" style="font-size: 14px">S&#7889; l&#432;&#7907;ng</font></td>
+
+		<td align="center" nowrap width="100"><font face="Tahoma" style="font-size: 14px">&#272;&#417;n giá</font></td>
+
+		<td align="center" nowrap width="120"><font face="Tahoma" style="font-size: 14px">Thành ti&#7873;n</font></td>
+
+         <td align="center" nowrap width="60"><font face="Tahoma" style="font-size: 14px">Xóa</font></td>
+
+	</tr>
+
+<?
+
+$cnt=0;
+
+$tongcong=0;
+
+foreach ($cart as $product){
+
+$sql = "select * from products where id='".$product[0]."'";
+
+$result = mysql_query($sql,$con);
+
+if (mysql_num_rows($result)>0)
+
+{
+
+$pro=mysql_fetch_assoc($result);
+if($pro['price_special']=='0')
+        {
+            $price_p=$pro['price'];
+        }
+        else
+        {
+            $price_p=$pro['price_special'];
+        }
+
+?>	
+
+	<tr>
+
+		<td align="center" width="100">
+
+		<font face="Tahoma" style="font-size: 14px">
+
+		<A href="./<?php echo doidau(mb_strtolower($pro['name'],"UTF8"));?>-pro-<?php echo $pro['id'];?>.html"><IMG id="" src="<? echo $pro['image']; ?>" alt="<? echo $pro['name']; ?>" border="0" width="100" height="100"></A></font></td>
+
+		<td align="left"><span style="padding-left:10px;font-size: 14px"><? echo $pro['name']; ?></span>
+		<br>
+		
+		
+		
+	
+		
+		
+		
+	
+				<br>
+				
+		<span style="font-size: 12px">
+	<?php if($pro['mausac_nau']=='' &  $pro['mausac_vang']=='' &  $pro['mausac_trang']==''&  $pro['mausac_xanhden']==''&  $pro['mausac_hong']==''&  $pro['mausac_xanhla']==''&  $pro['mausac_xanhnuocbien']==''&  $pro['mausac_xanhngoc']==''&  $pro['mausac_xanhden']==''&  $pro['mausac_xam']==''&  $pro['mausac_tim']==''&  $pro['mausac_do']==''&  $pro['mausac_cam']==''&  $pro['mausac_kem']==''&  $pro['mausac_xanhduong']==''&  $pro['mausac_soc']==''&  $pro['mausac_xanhladam']==''&  $pro['mausac_hoatiet']==''&  $pro['mausac_bac']==''&  $pro['mausac_hongphan']=='')
+{?>
+<?}
+else{?>
+ <div class="d-pro" >
+                        <label class="khungsanpham"style="
+        width: 57px;
+    margin-right: 15px;
+" >Màu sắc </label>
+
+ <span class="s-text" itemprop="brand"><?php if($pro['mausac_nau']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #804000;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu nâu"> 
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px;color: #00f5f5;" type="radio"  name="mausac" value="804000" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_vang']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #ffff00;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu vàng">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="ffff00" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_trang']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #ffffff;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu trắng">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="ffffff" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_den']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #000000;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu đen">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="000000" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_hong']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #ff00ff;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu hồng">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="ff00ff" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_xanhla']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #00ff00;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xanh lá">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="00ff00" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_xanhnuocbien']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #0080ff;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xanh nước biển">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="0080ff" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_xanhngoc']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #00ffff;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xanh ngọc">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="00ffff" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_xanhden']=='' )
+{?>
+<?}
+else{?>
+
+ <label style="background: #112c4e;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xanh đen">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="112c4e" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_xam']=='' )
+{?>
+<?}
+else{?>
+
+ <label style="background: #999999;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xám">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="999999" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_tim']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #800080;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu tím">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="800080" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_do']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #ff0000;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu đỏ">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="ff0000" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_cam']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #ff8040;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu cam">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="ff8040" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_kem']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #fef1ce;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu kem">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="fef1ce" >
+                    </label>
+<?}?>
+
+<?php if($pro['mausac_xanhduong']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #0522c5;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xanh dương">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="0522c5" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_soc']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: url(/images/mul-color.gif) center center no-repeat;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu sọc">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="mul-color.gif" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_xanhladam']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #007000;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu xanh lá đậm">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="007000" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_hoatiet']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: url(/images/floral.jpg) center center no-repeat;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu họa tiết">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="floral.jpg" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_bac']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #cccccc;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu bạc">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="cccccc" >
+                    </label>
+<?}?>
+<?php if($pro['mausac_hongphan']=='' )
+{?>
+<?}
+else{?>
+ <label style="background: #ffc0cb;padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;" title="Màu hồng phấn">
+					 <input style="
+    padding-right: 3px;
+    width: 17px;
+    margin-left: -5px;
+    color: #00f5f5;
+" type="radio" name="mausac" value="ffc0cb" >
+                    </label>
+<?}?></span>
+ 
+ 
+ 
+ 
+ </div>	
+
+		<?}?>	
+		
+		
+		
+		<br>
+		
+		<?php if($pro['kichthuoc_freesize']=='' & $pro['kichthuoc_1']=='' & $pro['kichthuoc_2']=='' & $pro['kichthuoc_3']=='' & $pro['kichthuoc_4']=='' & $pro['kichthuoc_5']=='' & $pro['kichthuoc_6']=='' & $pro['kichthuoc_7']=='' & $pro['kichthuoc_8']=='' & $pro['kichthuoc_9']=='' & $pro['kichthuoc_10']=='' & $pro['kichthuoc_11']=='' & $pro['kichthuoc_12']=='' & $pro['kichthuoc_S']=='' & $pro['kichthuoc_M']=='' & $pro['kichthuoc_L']=='' & $pro['kichthuoc_XL']=='' & $pro['kichthuoc_XXL']=='' & $pro['kichthuoc_XS']=='' & $pro['kichthuoc_XXS']=='' & $pro['kichthuoc_2XL']=='' & $pro['kichthuoc_3XL']=='' & $pro['kichthuoc_4XL']=='' & $pro['kichthuoc_5XL']=='' & $pro['kichthuoc_6XL']=='' & $pro['kichthuoc_25']=='' & $pro['kichthuoc_26']=='' & $pro['kichthuoc_27']=='' & $pro['kichthuoc_28']=='' & $pro['kichthuoc_29']=='' & $pro['kichthuoc_30']=='' & $pro['kichthuoc_31']=='' & $pro['kichthuoc_32']=='' & $pro['kichthuoc_33']=='' & $pro['kichthuoc_34']=='' & $pro['kichthuoc_35']=='' & $pro['kichthuoc_36']=='' & $pro['kichthuoc_37']=='' & $pro['kichthuoc_38']=='' & $pro['kichthuoc_39']=='' & $pro['kichthuoc_40']=='' & $pro['kichthuoc_41']=='' & $pro['kichthuoc_42']=='' & $pro['kichthuoc_43']=='' & $pro['kichthuoc_44']=='' & $pro['kichthuoc_45']=='' & $pro['kichthuoc_46']=='' & $pro['kichthuoc_47']=='')
+{?>
+<?}
+else{?>
+ <div class="d-pro" >
+                        <label class="khungsanpham" style="
+    width: 73px;
+">Kích thước </label>
+                            <span class="s-text">
+<?php if($pro['kichthuoc_freesize']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="FreeSize" >
+<span style="color: #000;padding-right: 5px;">Free Size</span>
+                    </label>
+					
+<?}?>
+<?php if($pro['kichthuoc_1']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="1" >
+<span style="color: #000;padding-right: 5px;">1</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_2']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="2" >
+<span style="color: #000;padding-right: 5px;">2</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_3']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="3" >
+<span style="color: #000;padding-right: 5px;">3</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_4']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="4" >
+<span style="color: #000;padding-right: 5px;">4</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_5']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="5" >
+<span style="color: #000;padding-right: 5px;">5</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_6']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="6" >
+<span style="color: #000;padding-right: 5px;">6</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_7']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="7" >
+<span style="color: #000;padding-right: 5px;">7</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_8']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="8" >
+<span style="color: #000;padding-right: 5px;">8</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_9']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="9" >
+<span style="color: #000;padding-right: 5px;">9</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_10']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="10" >
+<span style="color: #000;padding-right: 5px;">10</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_11']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="11" >
+<span style="color: #000;padding-right: 5px;">11</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_12']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="12" >
+<span style="color: #000;padding-right: 5px;">12</span>
+                    </label>
+<?}?>
+				<?php if($pro['kichthuoc_S']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="S" >
+<span style="color: #000;padding-right: 5px;">S</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_M']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="M" >
+<span style="color: #000;padding-right: 5px;">M</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_L']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="L" >
+<span style="color: #000;padding-right: 5px;">L</span>
+                    </label>
+<?}?>		
+<?php if($pro['kichthuoc_XL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="XL" >
+<span style="color: #000;padding-right: 5px;">XL</span>
+                    </label>
+<?}?>	
+<?php if($pro['kichthuoc_XXL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="XXL" >
+<span style="color: #000;padding-right: 5px;">XXL</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_XS']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="XS" >
+<span style="color: #000;padding-right: 5px;">XS</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_XXS']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="XXS" >
+<span style="color: #000;padding-right: 5px;">XXS</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_2XL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="2XL" >
+<span style="color: #000;padding-right: 5px;">2XL</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_3XL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="3XL" >
+<span style="color: #000;padding-right: 5px;">3XL</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_4XL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="4XL" >
+<span style="color: #000;padding-right: 5px;">4XL</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_5XL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="5XL" >
+<span style="color: #000;padding-right: 5px;">5XL</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_6XL']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="6XL" >
+<span style="color: #000;padding-right: 5px;">6XL</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_25']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="25" >
+<span style="color: #000;padding-right: 5px;">25</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_26']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="26" >
+<span style="color: #000;padding-right: 5px;">26</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_27']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="27" >
+<span style="color: #000;padding-right: 5px;">27</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_28']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="28" >
+<span style="color: #000;padding-right: 5px;">28</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_29']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="29" >
+<span style="color: #000;padding-right: 5px;">29</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_30']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="30" >
+<span style="color: #000;padding-right: 5px;">30</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_31']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="31" >
+<span style="color: #000;padding-right: 5px;">31</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_32']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="32" >
+<span style="color: #000;padding-right: 5px;">32</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_33']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="33" >
+<span style="color: #000;padding-right: 5px;">33</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_34']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="34" >
+<span style="color: #000;padding-right: 5px;">34</span>
+                    </label>
+<?}?><?php if($pro['kichthuoc_35']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="35" >
+<span style="color: #000;padding-right: 5px;">35</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_36']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="36" >
+<span style="color: #000;padding-right: 5px;">36</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_37']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="37" >
+<span style="color: #000;padding-right: 5px;">37</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_38']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="38" >
+<span style="color: #000;padding-right: 5px;">38</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_39']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="39" >
+<span style="color: #000;padding-right: 5px;">39</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_40']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="40" >
+<span style="color: #000;padding-right: 5px;">40</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_41']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="41" >
+<span style="color: #000;padding-right: 5px;">41</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_42']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="42" >
+<span style="color: #000;padding-right: 5px;">42</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_43']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="43" >
+<span style="color: #000;padding-right: 5px;">43</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_44']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="44" >
+<span style="color: #000;padding-right: 5px;">44</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_45']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="45" >
+<span style="color: #000;padding-right: 5px;">45</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_46']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="46" >
+<span style="color: #000;padding-right: 5px;">46</span>
+                    </label>
+<?}?>
+<?php if($pro['kichthuoc_47']=='' )
+{?>
+<?}
+else{?>
+ <label style="padding-left: 7px;outline: 1px solid #ccc;    margin-right: 9px;background: #e8e6e6;" >
+ <input style="padding-right: 3px;width: 17px;margin-left: -5px; color: #000;" type="radio" name="kichthuoc" value="47" >
+<span style="color: #000;padding-right: 5px;">47</span>
+                    </label>
+<?}?>
+<?}?></span>
+		</td>
+
+		<td align="center" width="30" style="padding:5px;"><span style="font-size: 14px">
+
+		<center>
+		<input      style="text-align: center;width: 64px;"  type="number"  name="txtQuantity[]" size="3" value="<? echo $product[1]; ?>">
+
+
+		</center></span></td>
+
+		<td align="center" width="60" style="padding:5px;"><span style="font-size: 14px;color:#ff4400">
+		<? echo number_format($price_p,0); ?>đ</span></td>
+
+		<td  align="center" width="60" style="padding:5px;"><span style="font-size: 14px;color:#ff4400"><b>
+		
+		<? echo number_format(($price_p*$product[1]),0); ?>đ</b></span></td>
+
+		<td align="center" width="60"><font face="Verdana" size="1">
+
+        <span style="font-size: 14px">
+
+        <input type=submit class="buttonorange"  name=butXoa value="Xóa" onclick="window.location='xoa-san-pham2-<? echo ($cnt) ?>.html';return false;" height="5"></span></font></td>
+
+	</tr>
+
+<?
+
+}
+$tongcong=$tongcong+$price_p*$product[1];
+
+$cnt=$cnt+1;
+$_SESSION['tongcong']=$tongcong;
+} 
+
+
+?>
+
+</table>
+		 		  		  <?php 
+$sql_user_mem=mysql_query("SELECT * FROM user_shop where user='".$pro['user']."' ");
+$row_user_mem=mysql_fetch_assoc($sql_user_mem);?>
+
+	<?php if($row_user_mem['hotrovanchuyen_tu'] == '')
+{?>
+<p align="right" style="padding-right: 18px; padding-top: 7px;"><font face="Tahoma" style="font-size: 13px;color:#ff4400"><b>Chú ý:</b><i> Giá trên chưa bao gồm phí vận chuyển</i></font>
+ 
+<?}else{?>
+<?php if($tongcong < $row_user_mem['hotrovanchuyen_tu'] )
+{?>
+<p align="right" style="padding-right: 18px; padding-top: 7px;"><font face="Tahoma" style="font-size: 13px;color:#ff4400"><b>Chú ý:</b><i> Giá trên chưa bao gồm phí vận chuyển</i></font>
+ 
+<?}else{?>
+
+	<label 
+ style="float: right;padding-right: 16px;padding-top: 6px;" ><i class="fa fa-fw fa-rocket"></i> Shop <b style="color: red;">MIỄN PHÍ VẬN CHUYỂN</b> cho đơn hàng từ <b style="color: #10ab16;"><?php echo str_replace(",",",",number_format($row_user_mem['hotrovanchuyen_tu'],0));?>đ</b> trở lên</label>
+
+<?}?> 
+<?}?> 
+
+
+
+
+
+
+
+
+
+
+<TABLE border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto" width="97%" id="table5">
+
+<TR>
+
+
+
+<TD>
+
+
+
+
+
+</TR>
+
+</TABLE>
+
+
+
+
+
+
+
+    <div class="d-shoppingcart">
+
+
+
+<div class="d-shoppingcart-content">
+            <div class="d-box-cart" style="
+    margin-left: 17px;
+	width: 605px;
+">
+                <div class="d-box-cart-title">
+                    <h3>Thông tin người mua hàng</h3>
+                </div>
+                <div class="d-box-cart-content">
+                    <table cellspacing="0" cellpadding="3" border="0" style="width:100%;">
+						<tr>
+							<td style="width:100px;">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td><b>Họ tên<span class="s-batbuoc">*</span></b></td>
+							<td style="
+    padding-bottom: 14px;
+"  >
+								<input type="text" maxlength="100" style="width:100%;    height: 35px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;" value="<? echo $cust['fullname']; ?>" placeholder="Nhâp Họ và Tên quý khách hàng" name="name" />
+							</td style="
+    padding-bottom: 14px;
+" >
+						</tr>
+						<tr>
+							<td ><b>Điện thoại<span class="s-batbuoc">*</span></b></td>
+							<td style="
+    padding-bottom: 14px;
+" >
+								<input type="text" maxlength="50" style="width:100%;    height: 35px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;" value="<? echo $cust['phone']; ?>" placeholder="Nhập số điện thoại liên lạc của quý khách" name="phone" />
+							</td>
+						</tr>
+						<tr>
+							<td><b>Email</b></td>
+							<td style="
+    padding-bottom: 14px;
+">
+								<input type="text" maxlength="50" style="width:100%;    height: 35px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;" value="<? echo $cust['email']; ?>" placeholder="Nhập đia chỉ Email của quý khách" name="email" />
+							</td>
+						</tr>
+						<tr>
+							<td><b>Địa chỉ<span class="s-batbuoc">*</span></b></td>
+							<td style="
+    padding-bottom: 14px;
+">
+					<input type="text"  maxlength="100" style="width:100%;    height: 35px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;" value="<? echo $cust['address']; ?>" placeholder="Nhập địa chỉ cụ thể bao gồm Số nhà, Hẻm, Đường" name="address" />
+
+	<br>
+						
+
+							</td>
+						</tr>
+						 <!--script type="text/javascript" src="system/views/js1/jquery.js"></script>
+        <script>
+			$(document).ready(function(){
+				$("#province").change(function(){
+					id=$("#province").val();
+					$.ajax({
+						url:"system/views/js1/xuly_province.php",
+						type:"post",
+						data:"province_id="+id,
+						async:true,
+						success:function(kq){
+							$("#district").html(kq);
+						}
+					});
+					return false;	
+				});	
+			});
+		</script>
+						<tr>
+							<td></td>
+							<td style="
+    padding-bottom: 14px;
+">
+							<select style="width:170px;    height: 31px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;" id="province" name="province">
+                	<option value="none">--Tỉnh/thành--</option>
+<?php
+						require("system/views/library/config.php");
+						mysql_set_charset('utf8');
+						$result=mysql_query("select province_id,province_name from provinces");
+						while($data=mysql_fetch_array($result)){
+                    		echo"<option value='$data[province_id]'>$data[province_name]</option>";
+						}
+						mysql_close($conn);
+					?>
+                </select>	
+ <select style="width:140px;    height: 31px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;"  id="district" name="district">
+                	<option value="none">--Quận/huyện--</option>
+					
+					
+                </select>
+				
+				
+	<input type="text"  maxlength="100" style="width:153px;    height: 31px;
+    padding: 0 10px;
+    border: 1px solid #cecece;
+    background-color: #fff;
+    border-radius: 3px;" value="<? echo $cust['address']; ?>" placeholder="Phường/Xã" name="address" /-->
+	<br>
+										
+
+							</td>
+				
+							
+							
+						</tr>
+						
+						<tr>
+							<td style="width:100px;"><b>Ghi chú thêm</b></td>
+							<td >
+								<textarea style="width:100%;height:80px;" name="ghichu" placeholder="" ></textarea>
+							</td>
+						</tr>
+					
+					</table>
+                </div>
+            </div>
+            <div class="d-box-cart" style="float:right;">
+                <div class="d-box-cart-title" style="
+    width: 438px;
+">
+                    <h3>BẢNG GIÁ PHÍ VẬN CHUYỂN GIAO HÀNG SHOPCANTHO.VN</h3>
+                </div>
+               <div class="d-box-cart-content" style="width: 416px;">
+                    <table cellspacing="0" cellpadding="3" border="0" style="width:100%;">
+					
+						<center><b>VẬN CHUYỂN TOÀN QUỐC - GIAO HÀNG VÀ THU TIỀN TẬN NƠI</b></center>
+						
+
+
+
+		
+		
+		</select> 
+		  </font>
+		  <br>
+		  
+		  
+		  
+		  
+		  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		  <center><b>Khách hàng chọn chính xác Khu Vực nhận hàng.Để chúng tôi giao hàng tốc hành cho quý khách</b></center>
+		  <br>
+		  		<b >Chọn khu vực nhận hàng: </b> 
+				<select   style="border: 1px solid #f00;" name="phivanchuyen" > 
+<option   value="" title="5.000đ" ><b>Vui lòng chọn khu vực nhận hàng</b></option>     
+
+
+<?php if($row_user_mem['hotrovanchuyen_tu'] == '')
+{?>
+	<?php if($pro['khoiluong']>='1'  & $pro['khoiluong']<='1000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="5000" title="5.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 5.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+
+                                                        
+<?}
+
+else{?>
+
+<?}?>		
+
+<?php if($pro['khoiluong']>'1000'  & $pro['khoiluong']<='5000')
+{?>
+
+			<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="10000" title="10.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 10.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>		
+<?php if($pro['khoiluong']>'5000'  & $pro['khoiluong']<='10000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="15000" title="15.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 15.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'10000'  & $pro['khoiluong']<='20000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="20000" title="20.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 20.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'20000'  & $pro['khoiluong']<='40000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="30000" title="30.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 30.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'40000'  & $pro['khoiluong']<='50000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="40000" title="40.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 40.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'50000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="200000" title="200.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 200.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+
+
+
+
+
+                                                    
+
+	
+	
+
+<!----------------Nhận Hàng Tại Nhà------------------->
+	
+	
+	
+<?php if(($pro['khoiluong']*$product['1']) >= '1'  & ($pro['khoiluong']*$product['1']) <= '150')
+{?>
+
+    <option   value="34000"  >Nhận Hàng Tại Nhà: với phí 34.000đ</option>
+
+<?}
+else{?>
+<?}?>		
+
+<?php if(($pro['khoiluong']*$product['1']) > '150'  & ($pro['khoiluong']*$product['1']) <= '250')
+{?>
+
+	    <option   value="36000"  >Nhận Hàng Tại Nhà: với phí 36.000đ</option>
+                                                  
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '250'  & ($pro['khoiluong']*$product['1']) <= '500')
+{?>
+
+       <option   value="40000"  >Nhận Hàng Tại Nhà: với phí 40.000đ</option>   
+
+<?}
+else{?>
+<?}?>
+
+			
+<?php if(($pro['khoiluong']*$product['1']) > '500'  & ($pro['khoiluong']*$product['1']) <= '1000')
+{?>
+
+          <option   value="47000"  >Nhận Hàng Tại Nhà: với phí 47.000đ</option>  
+                                              
+<?}
+else{?>
+<?}?>
+
+
+
+<?php if(($pro['khoiluong']*$product['1']) > '1000'  & ($pro['khoiluong']*$product['1']) <= '1500')
+{?>
+
+
+          <option   value="50000"  >Nhận Hàng Tại Nhà: với phí 50.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '1500'  & ($pro['khoiluong']*$product['1']) <= '2000')
+{?>
+
+
+          <option   value="87000"  >Nhận Hàng Tại Nhà: với phí 87.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '2000'  & ($pro['khoiluong']*$product['1']) <= '2500')
+{?>
+
+
+          <option   value="97000"  >Nhận Hàng Tại Nhà: với phí 97.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '2500'  & ($pro['khoiluong']*$product['1']) <= '3000')
+{?>
+
+
+          <option   value="106000"  >Nhận Hàng Tại Nhà: với phí 106.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '3000'  & ($pro['khoiluong']*$product['1']) <= '3500')
+{?>
+
+
+          <option   value="116000"  >Nhận Hàng Tại Nhà: với phí 116.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '3500'  & ($pro['khoiluong']*$product['1']) <= '4000')
+{?>
+
+
+          <option   value="128000"  >Nhận Hàng Tại Nhà: với phí 128.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '4000'  & ($pro['khoiluong']*$product['1']) <= '4500')
+{?>
+
+
+          <option   value="137000"  >Nhận Hàng Tại Nhà: với phí 137.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '4500'  & ($pro['khoiluong']*$product['1']) <= '5000')
+{?>
+
+
+          <option   value="148000"  >Nhận Hàng Tại Nhà: với phí 148.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '5000'  & ($pro['khoiluong']*$product['1']) <= '5500')
+{?>
+
+
+          <option   value="156000"  >Nhận Hàng Tại Nhà: với phí 156.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '5500'  & ($pro['khoiluong']*$product['1']) <= '6000')
+{?>
+
+
+          <option   value="167000"  >Nhận Hàng Tại Nhà: với phí 167.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '6000'  & ($pro['khoiluong']*$product['1']) <= '6500')
+{?>
+
+
+          <option   value="178000"  >Nhận Hàng Tại Nhà: với phí 178.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '6500'  & ($pro['khoiluong']*$product['1']) <= '7000')
+{?>
+
+
+          <option   value="192000"  >Nhận Hàng Tại Nhà: với phí 192.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '7000'  & ($pro['khoiluong']*$product['1']) <= '7500')
+{?>
+
+
+          <option   value="209000"  >Nhận Hàng Tại Nhà: với phí 209.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '7500'  & ($pro['khoiluong']*$product['1']) <= '8000')
+{?>
+
+
+          <option   value="225000"  >Nhận Hàng Tại Nhà: với phí 225.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+<?php if(($pro['khoiluong']*$product['1']) > '8000'  & ($pro['khoiluong']*$product['1']) <= '8500')
+{?>
+
+
+          <option   value="245000"  >Nhận Hàng Tại Nhà: với phí 245.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '8500'  & ($pro['khoiluong']*$product['1']) <= '9000')
+{?>
+
+
+          <option   value="265000"  >Nhận Hàng Tại Nhà: với phí 265.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '9000'  & ($pro['khoiluong']*$product['1']) <= '9500')
+{?>
+
+
+          <option   value="285000"  >Nhận Hàng Tại Nhà: với phí 285.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '9500'  & ($pro['khoiluong']*$product['1']) <= '9999')
+{?>
+
+
+          <option   value="300000"  >Nhận Hàng Tại Nhà: với phí 300.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+<?php if(($pro['khoiluong']*$product['1']) > '9999' )
+{?>
+
+     <option   value="0"  >Nhận Hàng Tại Nhà: Phí vận chuyển sẽ được thông báo sau</option>  
+
+
+<?}
+else{?>
+<?}?>
+
+
+
+
+<?}
+else{?>
+	<?php if($tongcong < $row_user_mem['hotrovanchuyen_tu'])
+{?>
+
+<?php if($pro['khoiluong']>='1'  & $pro['khoiluong']<='1000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="5000" title="5.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 5.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+
+                                                        
+<?}
+
+else{?>
+
+<?}?>		
+
+<?php if($pro['khoiluong']>'1000'  & $pro['khoiluong']<='5000')
+{?>
+
+			<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="10000" title="10.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 10.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>		
+<?php if($pro['khoiluong']>'5000'  & $pro['khoiluong']<='10000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="15000" title="15.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 15.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'10000'  & $pro['khoiluong']<='20000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="20000" title="20.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 20.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'20000'  & $pro['khoiluong']<='40000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="30000" title="30.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 30.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'40000'  & $pro['khoiluong']<='50000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="40000" title="40.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 40.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+<?php if($pro['khoiluong']>'50000')
+{?>
+	<?php if($row_user_mem['city']=='69' )
+{?>
+
+               <option   value="200000" title="200.000đ" ><b>Nội ô TP.Cần Thơ:</b> với phí 200.000đ</option>                                                       
+<?}
+
+else{?>
+
+<?}?>		
+                                                       
+<?}
+else{?>
+
+<?}?>
+
+
+
+
+
+                                                    
+
+	
+	
+
+<!----------------Nhận Hàng Tại Nhà------------------->
+	
+	
+	
+<?php if(($pro['khoiluong']*$product['1']) >= '1'  & ($pro['khoiluong']*$product['1']) <= '150')
+{?>
+
+    <option   value="34000"  >Nhận Hàng Tại Nhà: với phí 34.000đ</option>
+
+<?}
+else{?>
+<?}?>		
+
+<?php if(($pro['khoiluong']*$product['1']) > '150'  & ($pro['khoiluong']*$product['1']) <= '250')
+{?>
+
+	    <option   value="36000"  >Nhận Hàng Tại Nhà: với phí 36.000đ</option>
+                                                  
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '250'  & ($pro['khoiluong']*$product['1']) <= '500')
+{?>
+
+       <option   value="40000"  >Nhận Hàng Tại Nhà: với phí 40.000đ</option>   
+
+<?}
+else{?>
+<?}?>
+
+			
+<?php if(($pro['khoiluong']*$product['1']) > '500'  & ($pro['khoiluong']*$product['1']) <= '1000')
+{?>
+
+          <option   value="47000"  >Nhận Hàng Tại Nhà: với phí 47.000đ</option>  
+                                              
+<?}
+else{?>
+<?}?>
+
+
+
+<?php if(($pro['khoiluong']*$product['1']) > '1000'  & ($pro['khoiluong']*$product['1']) <= '1500')
+{?>
+
+
+          <option   value="50000"  >Nhận Hàng Tại Nhà: với phí 50.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '1500'  & ($pro['khoiluong']*$product['1']) <= '2000')
+{?>
+
+
+          <option   value="87000"  >Nhận Hàng Tại Nhà: với phí 87.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '2000'  & ($pro['khoiluong']*$product['1']) <= '2500')
+{?>
+
+
+          <option   value="97000"  >Nhận Hàng Tại Nhà: với phí 97.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '2500'  & ($pro['khoiluong']*$product['1']) <= '3000')
+{?>
+
+
+          <option   value="106000"  >Nhận Hàng Tại Nhà: với phí 106.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '3000'  & ($pro['khoiluong']*$product['1']) <= '3500')
+{?>
+
+
+          <option   value="116000"  >Nhận Hàng Tại Nhà: với phí 116.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '3500'  & ($pro['khoiluong']*$product['1']) <= '4000')
+{?>
+
+
+          <option   value="128000"  >Nhận Hàng Tại Nhà: với phí 128.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '4000'  & ($pro['khoiluong']*$product['1']) <= '4500')
+{?>
+
+
+          <option   value="137000"  >Nhận Hàng Tại Nhà: với phí 137.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '4500'  & ($pro['khoiluong']*$product['1']) <= '5000')
+{?>
+
+
+          <option   value="148000"  >Nhận Hàng Tại Nhà: với phí 148.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '5000'  & ($pro['khoiluong']*$product['1']) <= '5500')
+{?>
+
+
+          <option   value="156000"  >Nhận Hàng Tại Nhà: với phí 156.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '5500'  & ($pro['khoiluong']*$product['1']) <= '6000')
+{?>
+
+
+          <option   value="167000"  >Nhận Hàng Tại Nhà: với phí 167.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '6000'  & ($pro['khoiluong']*$product['1']) <= '6500')
+{?>
+
+
+          <option   value="178000"  >Nhận Hàng Tại Nhà: với phí 178.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '6500'  & ($pro['khoiluong']*$product['1']) <= '7000')
+{?>
+
+
+          <option   value="192000"  >Nhận Hàng Tại Nhà: với phí 192.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '7000'  & ($pro['khoiluong']*$product['1']) <= '7500')
+{?>
+
+
+          <option   value="209000"  >Nhận Hàng Tại Nhà: với phí 209.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '7500'  & ($pro['khoiluong']*$product['1']) <= '8000')
+{?>
+
+
+          <option   value="225000"  >Nhận Hàng Tại Nhà: với phí 225.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+<?php if(($pro['khoiluong']*$product['1']) > '8000'  & ($pro['khoiluong']*$product['1']) <= '8500')
+{?>
+
+
+          <option   value="245000"  >Nhận Hàng Tại Nhà: với phí 245.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '8500'  & ($pro['khoiluong']*$product['1']) <= '9000')
+{?>
+
+
+          <option   value="265000"  >Nhận Hàng Tại Nhà: với phí 265.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '9000'  & ($pro['khoiluong']*$product['1']) <= '9500')
+{?>
+
+
+          <option   value="285000"  >Nhận Hàng Tại Nhà: với phí 285.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+
+<?php if(($pro['khoiluong']*$product['1']) > '9500'  & ($pro['khoiluong']*$product['1']) <= '9999')
+{?>
+
+
+          <option   value="300000"  >Nhận Hàng Tại Nhà: với phí 300.000đ</option>  
+                                                    
+<?}
+else{?>
+<?}?>
+<?php if(($pro['khoiluong']*$product['1']) > '9999' )
+{?>
+
+     <option   value="0"  >Nhận Hàng Tại Nhà: Phí vận chuyển sẽ được thông báo sau</option>  
+
+
+<?}
+else{?>
+<?}?>
+<?}
+else{?>
+
+	      <option   value="0"  >Nhận Hàng Tại Nhà với phí 0đ</option>  
+
+
+<?}?>
+
+
+
+
+
+<?}?>
+
+		  
+		  
+		  
+
+<!-- KẾT THÚC-->
+
+
+
+
+
+
+		
+				
+		  		</select> 
+				
+		  <br>
+
+		  <br>		 <center> <b>HÌNH THỨC GIAO HÀNG CỦA SHOPCANTHO.VN</b>
+		  <img style="-webkit-user-select: none" src="/images/quytrinhs.png" width="400">
+		  <br> <br><br><br>
+
+
+
+
+			
+		 
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+<?php if(count($_SESSION['cart'])==2 )
+{?>
+<b> Mỗi đơn hàng chỉ cho phép mua 1 sản phẩm.Để mua sản phẩm này khách hàng vui lòng gửi đơn hàng hiện tại hoặc xóa sản phẩm trong giỏ hàng</b>
+
+<?}
+else{?>
+<center><input style="padding: 15px; background: #ea0707; color: #ffffff; border: 0px; padding-left: 13px; font-weight: bold; width: 414px; border-radius: 5px; font-size: 20px;" type=submit name=butSub value="GỬI ĐƠN HÀNG">
+
+<?}?>
+
+
+
+
+					</table>
+                </div>
+            </div>
+        </div>
+
+
+
+<input type="hidden" name="diemlua" value="<?php echo $pro['price_special']*$row_user_mem['diemlua']/100;?>    ">
+
+<TABLE border="0" cellpadding="10" cellspacing="1" width="100%" id="table1" style="
+    margin-left: -11px;
+    width: 1221px;
+">
+<TR><TD class="DialogBox">
+<!--<table border="1" bordercolor="#ddd" width="100%" cellspacing="0" cellpadding="4" id="table7" style="border-collapse: collapse">	
+ 
+
+
+<tr style="font-size:18px;font-weight:bold;height:40px;background:#FFFACD">	
+<td align="center" nowrap><font face="Tahoma" style="font-size: 16px">Hình ảnh</font></td>	
+<td align="center" nowrap><font face="Tahoma" style="font-size: 16px">S&#7843;n ph&#7849;m</font></td>		
+<td align="center" nowrap width="90"><font face="Tahoma" style="font-size: 16px">S&#7889; l&#432;&#7907;ng</font></td>		
+<td align="center" nowrap width="100"><font face="Tahoma" style="font-size: 16px">&#272;&#417;n giá</font></td>		
+<td align="center" nowrap width="120"><font face="Tahoma" style="font-size: 16px">Thành ti&#7873;n</font></td>	</tr>
+
+<?$cart=$_SESSION['cart'];$cnt=0;$tongcong=0;
+foreach ($cart as $product)
+{$sql = "select * from products where id='".$product[0]."'";
+$result = mysql_query($sql,$con);
+if (mysql_num_rows($result)>0)
+	{
+	$pro=mysql_fetch_assoc($result);
+    if($pro['price_special']=='0')
+        {
+            $price_p=$pro['price'];
+        }
+    else
+        {
+            $price_p=$pro['price_special'];
+        }
+    ?>	
+	
+<tr>		
+<td align="center" width="100">		
+<font face="Tahoma" style="font-size: 16px">
+<A href="./<?php echo doidau(mb_strtolower($pro['name'],"UTF8"));?>-pro-<?php echo $pro['id'];?>.html">
+<IMG id="" src="<? echo $pro['image']; ?>" alt="<? echo $pro['name']; ?>" border="0" width="100"></A></font></td>		
+<td align="left" style="padding:5px;"><span style="font-size: 16px"><? echo $pro['name']; ?></span></td>	
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo $product[1]; ?></span></td>	
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo number_format($price_p); ?>đ</span></td>		
+<td align="center" width="60" style="padding:5px;"><span style="font-size: 16px;color:#ff4400"><? echo number_format(($price_p*$product[1])); ?>đ</span></td></tr>
+
+<?}$tongcong=$tongcong+$price_p*$product[1];$cnt=$cnt+1;} ?>
+
+</table-->
+
+<!--TABLE border="0" width="100%" id="table2" style=" border: 1px solid #e7e7e7;">
+<TR><TD>
+<p align="right"><font face="Tahoma" style="font-size: 16px;color:#ff4400"><b>T&#7893;ng c&#7897;ng : <? echo number_format($tongcong); ?>đ	</b></font><TD></TR></TABLE-->
+<TABLE border="0" cellpadding="0" cellspacing="0" width="100%" id="table5">
+<TR><TD><p align="center"><font face="Verdana" size="3">
+
+
+<input type="hidden" name="menu" value="checkout"></FORM>
+
+<font face="Tahoma" style="font-size: 16px">&nbsp; </font></TD></TR></TABLE><?}?>
+
+<script language="javascript" type="text/javascript">
+function check()
+{
+if(document.cartform.name.value=="")
+{
+alert("Vui lòng nhập Họ và Tên");
+document.cartform.name.focus();
+return false;
+}
+if(document.cartform.phone.value=="")
+{
+alert("Bạn chưa điền số điện thoại");
+document.cartform.phone.focus();
+return false;
+}
+if(document.cartform.email.value=="")
+{
+alert("Bạn chưa nhập email");
+document.cartform.email.focus();
+return false;
+}
+if(document.cartform.address.value=="")
+{
+alert("Bạn chưa điền địa chỉ nhận hàng");
+document.cartform.address.focus();
+return false;
+}
+if(document.cartform.phivanchuyen.value =="")
+{
+alert("Vui lòng chọn khu vực nhận hàng");
+document.cartform.phivanchuyen.focus();
+return false;
+}
+
+
+
+for(i=0;i<document.cartform.mausac.length;i++)
+if(document.cartform.mausac[i].checked==true)
+{
+check="yes"
+}
+if(check=="yes")
+{
+return true;
+}
+else
+{
+alert("Vui lòng chọn màu sắc sản phẩm");
+return false;
+}
+
+
+
+
+
+
+return true;
+}
+</script>

@@ -1,0 +1,136 @@
+﻿
+ul.tabs
+{
+    padding: 7px 0;
+    font-size: 0;
+    margin:0;
+    list-style-type: none;
+    text-align: left; /*set to left, center, or right to align the tabs as desired*/
+	background-image:url('../../images/box_cat_pro.jpg');
+}
+        
+ul.tabs li
+{
+    display: inline;
+    margin: 0;
+    margin-right:3px; /*distance between tabs*/
+}
+        
+ul.tabs li a
+{
+    font: normal 12px tahoma;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    padding: 7px 5px;
+    color: #FFFFFF;
+    outline:none;
+}
+ul.tabs1
+{
+    padding: 7px 0;
+    font-size: 0;
+    margin:0;
+    list-style-type: none;
+    text-align: left; /*set to left, center, or right to align the tabs as desired*/
+	background-image:url('../../images/bg_box_news.png');
+}
+        
+ul.tabs1 li
+{
+    display: inline;
+    margin: 0;
+    margin-right:3px; /*distance between tabs*/
+}
+        
+ul.tabs1 li a
+{
+    font: normal 12px tahoma;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    padding: 7px 5px;
+    color: #FFFFFF;
+    outline:none;
+}
+.li_line
+{
+    font: normal 12px tahoma;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    padding: 7px 0px;
+    color: #FFFFFF;
+    outline:none;
+}
+        
+ul.tabs li a:visited
+{
+    font: normal 12px tahoma;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+        
+ul.tabs li a:hover
+{
+}
+        
+ul.tabs li.selected a
+{
+    /*selected tab style */
+    position: relative;
+    top: 0px;
+    font-weight:bold;
+	color:#97FF46
+}
+        
+        
+ul.tabs li.selected a:hover
+{
+    /*selected tab style */
+    text-decoration: none;
+}
+ul.tabs1 li a:visited
+{
+    font: normal 12px tahoma;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+        
+ul.tabs1 li a:hover
+{
+}
+        
+ul.tabs1 li.selected a
+{
+    /*selected tab style */
+    position: relative;
+    top: 0px;
+    font-weight:bold;
+	color:#97FF46
+}
+        
+        
+ul.tabs1 li.selected a:hover
+{
+    /*selected tab style */
+    text-decoration: none;
+}
+        
+div.tabcontent
+{
+    display: block;
+	padding-left:5px;
+	padding-bottom:5px;
+	overflow:hidden;
+}
+div.tabcontent a:visited
+{
+    color:#333333
+}
+div.tabcontents
+{
+    border: 1px solid #276864; padding: 0px;
+    background-color:#FFF;
+    border-radius: 0 2px 2px 2px;
+}

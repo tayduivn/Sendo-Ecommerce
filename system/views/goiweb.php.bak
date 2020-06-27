@@ -1,0 +1,389 @@
+<div class="d-path">
+        <ul class="ul-path" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><li itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Trang chủ" href="./"><span itemprop="title">Trang chủ</span></a></li><li><span class="s-icon"></span></li><li itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Các gói gian hàng" href="#"><span itemprop="title">Các gói gian hàng</span></a></li></ul>
+    </div>
+<div class="d-col-full">
+        <div class="div_container" style="margin-bottom:20px;"><!--=========================Goi Giai Phap=====================-->
+<!--=========================MUC GIA==========================-->
+
+<div style="float:left;width:100%;margin-bottom:20px;">
+<table border="0" cellpadding="3" cellspacing="1" style="background:#dddddd;" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="4" style="background:#0094da;color:#FFF;font-weight:bold;font-size:18px;height:35px;text-align:center;">MỨC PHÍ CỦA CÁC GÓI <a href="http://15giay.vn">GIAN HÀNG </a>TRÊN 15giay.vn</td>
+		</tr>
+		<tr>
+			<td style="font-size:15px;font-weight:bold;background:#ffd700;padding:7px 3px;text-align:center;">THỜI HẠN/GÓI GIAN HÀNG</td>
+			<td style="font-size:15px;font-weight:bold;background:#ffd700;padding:7px 3px;text-align:center;" width="200">GIAN HÀNG MIỄN PHÍ </td>
+			<td style="font-size:15px;font-weight:bold;background:#ffd700;padding:7px 3px;text-align:center;" width="200">GIAN HÀNG CƠ BẢN </td>
+			<td style="font-size:15px;font-weight:bold;background:#ffd700;padding:7px 3px;text-align:center;" width="200">GIAN HÀNG VIP</td>
+		</tr>
+		<tr>
+			<td class="center" style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;">1 Năm</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">0 VNĐ</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">Liên hệ</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">Liên hệ</td>
+		</tr> 
+		<tr>
+			<td class="center" style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;">2 năm </td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">0 VNĐ</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">Liên hệ</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">Liên hệ</td>
+		</tr>
+		<tr>
+			<td class="center" style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;">3 năm </td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">0 VNĐ</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">Liên hệ</td>
+			<td style="font-size:16px;color:#00F;font-weight:bold;background:#FFF;padding:7px 3px;text-align:center;">Liên hệ</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<br>
+<!--=========================Chuc nang & Dich vu==========================-->
+<table border="0" cellpadding="3" cellspacing="0" style="background:#FFF;" width="100%">
+	<tbody>
+		<tr>
+			<td style="color:#FFF;font-weight:bold;font-size:14px;height:35px;text-align:center;">&nbsp;</td>
+			<td style="background:#0094da;color:#FFF;font-weight:bold;font-size:14px;height:35px;text-align:center;" width="196px">GIAN HÀNG MIỄN PHÍ</td>
+			<td style="background:#0094da;color:#FFF;font-weight:bold;font-size:14px;height:35px;text-align:center;" width="196px">GIAN HÀNG CƠ BẢN</td>
+			<td style="background:#0094da;color:#FFF;font-weight:bold;font-size:14px;height:35px;text-align:center;" width="196px">GIAN HÀNG VIP</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="0" cellpadding="3" cellspacing="1" style="background:#dddddd;" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="4" style="font-size:14px;font-weight:bold;background:#ffd700;color:#1557a0;padding:7px;text-align:left;">1. Dịch vụ tặng kèm</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Đặt quảng cáo trên trang chủ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>5</b> ngày</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>10</b> ngày</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Đăng sản phẩm nổi bật trên trang chủ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>1 sản phẩm/5</b> ngày</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>1 sản phẩm/15</b> ngày</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Đăng sản phẩm giảm giá trên trang chủ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>1 sản phẩm/5</b> ngày</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>1 sản phẩm/15</b> ngày</td>
+		</tr>
+		<!--<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Hỗ trợ thiết kế banner</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>1</b> banner<br>
+			<i>(Áp dụng gói 1 năm trở lên)</i></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>1</b> banner<br>
+			<i>(Áp dụng gói 1 năm trở lên)</i></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Hỗ trợ đăng sản phẩm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>15</b> sản phẩm<br>
+			<i>(Áp dụng gói 1 năm trở lên)</i></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>35</b> sản phẩm<br>
+			<i>(Áp dụng gói 1 năm trở lên)</i></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Lượt UP</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>200</b> lượt<br>
+			<i>(Áp dụng gói 1 năm trở lên)</i></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>500</b> lượt<br>
+			<i>(Áp dụng gói 1 năm trở lên)</i></td>
+		</tr>-->
+		<tr>
+			<td colspan="4" style="font-size:14px;font-weight:bold;background:#ffd700;color:#1557a0;padding:7px;text-align:left;">2. Dịch vụ nổi bật</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Loại giao diện</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">Chuyên nghiệp</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">Chuyên nghiệp</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">Chuyên nghiệp</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Tích hợp tên miền riêng</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Hiện sản phẩm mới lên trang chủ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Ưu tiên hiển thị sản phẩm khi tìm kiếm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">Ngẫu nhiên</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">Ưu tiên 2</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">Ưu tiên 1</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="font-size:14px;font-weight:bold;background:#ffd700;color:#1557a0;padding:7px;text-align:left;">3. Khuyến mại khi mua dịch vụ</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Tặng thêm % khi mua lượt UP</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>10%</b> lượt</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>20%</b> lượt</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Giảm giá khi mua các vị trí banner trong trang danh mục</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>10%</b></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>25%</b></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Giảm giá khi mua các vị trí banner trong trang chủ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>10%</b></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><b>25%</b></td>
+		</tr>
+		<!--=========================Chinh sach==========================-->
+		<tr>
+			<td colspan="4" style="font-size:14px;font-weight:bold;background:#ffd700;color:#1557a0;padding:7px;text-align:left;">4. Chính sách</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số tài khoản hỗ trợ trực tuyến</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Liên kết website</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số lượng sản phẩm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">50</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">200</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số lượng tin rao vặt</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">100</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">300</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số lượng tin tức</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">50</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">200</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>		
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số trang (menu)</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">10</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số danh mục sản phẩm được tạo thêm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Số danh mục tin tức được tạo thêm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px">không giới hạn</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Gửi email báo đơn đặt hàng</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<!--=========================Chuc nang==========================-->
+		<tr>
+			<td colspan="4" style="font-size:14px;font-weight:bold;background:#ffd700;color:#1557a0;padding:7px;text-align:left;">5. Chức năng chính</td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thay đổi giao diện</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Cập nhật logo</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Cập nhật banner top</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Cập nhật Slide giữa</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Cập nhật hình nền website</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Chỉnh sửa chân trang</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý sản phẩm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý tin tức</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý các bài viết</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý trang</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý liên kết website</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Danh sách danh mục</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+				<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Đăng tin rao vặt</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thêm danh mục sản phẩm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thêm danh mục tin tức</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Cấu hình module trang chủ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý quảng cáo</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý đơn đặt hàng</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Quản lý thư liên hệ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Bản đồ đường đi &amp; địa điểm</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thông tin gian hàng</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thông tin tài khoản</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thay đổi mật khẩu</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Form liên hệ</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Thống kê</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Tạo Sitemap (Dành gian hàng có tên miền riêng)</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Chèn Google Analytics (Dành gian hàng có tên miền riêng)</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">Hỗ trợ trực tuyến</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+		<tr>
+			<td class="center" style="background:#F1F1F1;padding:6px;">SEO google</td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-uncheck.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+			<td style="background:#FFF;padding:6px;text-align:center;" width="190px"><img alt="" src="images/icon-check.png"></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<!--End container-->
+    </div>

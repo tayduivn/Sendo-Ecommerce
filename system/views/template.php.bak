@@ -1,0 +1,171 @@
+ <script type="text/javascript" src="js/jquery-1.js"></script>
+ <script type="text/javascript">    var $j = jQuery.noConflict();</script>
+
+	
+
+	
+<?
+$uri=$_SERVER['REQUEST_URI'];
+$url = explode("&", $uri);
+$row=121;
+$MAXPAGE=100;
+$name=$_GET['name'];
+$cat=0;
+if ($_REQUEST['cat']!='') $cat=killInjection($_REQUEST['cat']);
+$p=0;
+if ($_REQUEST['p']!='') $p=$_REQUEST['p'];
+$sql = "select * from template order by id desc limit ".$row*$p.",".$row;
+$result = @mysql_query($sql,$con);
+$total=CountRecord("template");
+?>
+    <div class="d-path">
+        <ul class="ul-path" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><li itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Trang chủ" href="http://gianhangso.com"><span itemprop="title">Trang chủ</span></a></li><li><span class="s-icon"></span></li><li itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Đăng ký gian hàng" href="#"><span itemprop="title">Đăng ký gian hàng</span></a></li></ul>
+    </div>
+
+<div style="background-color: #FFFFFF;">
+ <div class="d-shoppingcart"  id="divStepSkins">
+
+        <div class="d-step">
+            <span class="s-title-step icon-shop">Đăng ký gian hàng miễn phí</span>
+            <div class="d-item-step first">
+                <p class="p-step">Bước 3</p>
+                <p class="p-text-step">HOÀN TẤT</p>
+            </div>
+            <div class="d-item-step">
+                <p class="p-step">Bước 2</p>
+                <p class="p-text-step">NHẬP THÔNG TIN</p>
+            </div>
+            <div class="d-item-step">
+                <p class="p-step">Bước 1</p>
+                <p class="p-text-step selected">CHỌN MẪU GIAO DIỆN</p>
+            </div>
+        </div>
+
+<br/>
+</div>
+  
+<?if($total>0)
+{?>
+<?
+	for($j=1;$j<=$row&&$pro=mysql_fetch_array($result);$j++)
+	{
+		if ($j%4) $class="<div class=\"skin\">"; else $class="<div class=\"skin_2\">";
+?>
+
+<!-- begin cac website da tao -->
+
+
+
+        
+                <?php echo $class;?>
+
+   <div class="d-contain-content">
+            <ul class="ul-templates">
+
+                <li>
+                    <div class="d-template-img" skin="#Web<? echo $pro['id'];?>" >
+                        <a id="various3" href="<? echo $pro['demo'];?>" class="fancybox-templates"><img alt="<? echo $pro['name'];?>" src="<? echo $pro['image'];?>" width="274" height="280"/></a>
+                    </div>
+                    <div class="d-template-bottom">
+                        <span class="s-template-name"><? echo $pro['name'];?></span>
+                        <a href="./?home=regestry&id=<? echo $pro['id'];?>" class="btndangky" style="float:right;width:40px;" title="Chọn mẫu giao diện">Chọn</a>
+                        <a id="various3" href="<? echo $pro['demo'];?>" class="btndangky1" style="float:right;width:40px;margin-right:5px;">Xem</a>
+                    </div>
+                </li>
+                      
+                  
+              
+
+
+            
+ 
+    </div>
+ </div>
+
+<!--div id="store">
+
+    <div class="skins">
+        
+                <?php echo $class;?>
+
+                    <div class="image" skin="#Web<? echo $pro['id'];?>">
+                        <img src="<? echo $pro['image'];?>" width="274" height="280" alt="">
+                    </div>
+                    <div style="display: none;" id="Web<?echo $pro['id'];?>" class="control">
+                        <h3><?echo $pro['name'];?></h3>
+						 
+                        <a id="various3" href="<? echo $pro['demo'];?>" target="_blank" class="zoom button_v">
+                            <img src="images/zoom-button.png" alt="<? echo $pro['name'];?>">
+                        </a>
+						
+                        <a href="./?home=regestry&id=<? echo $pro['id'];?>" title="Đăng ký dùng thử website miễn phí" class="button_dk register" data-fancybox-type="iframe">
+                            <img src="images/register.png" alt="Đăng ký dùng thử website miễn phí">
+                        </a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="<? echo $pro['demo'];?>" target="_blank" title="Xem chi tiết" class="detail">
+                            <img src="images/demo-button.png" alt="Chi tiết">
+                        </a>
+                    </div>
+                </div>
+
+
+            
+ 
+    </div>
+ </div>
+<!-- end cac website da tao -->
+<?
+	}
+?>
+<?}else{?>
+Mẫu giao diện đang được cập nhật !
+<?}?>
+<br>
+<? if ($total>0) { ?>
+<hr style="color:#E9E9E9; clear:both" width="100%" SIZE=1 align="center">
+<TABLE cellSpacing=10 cellPadding=0 width="100%" border=0 id="table35" style="line-height: 120%; color: #000000; text-align: justify" align="center">
+<?
+$pages=count_page($total,($row));
+echo '<td align="right"><div class="page">';
+$param="";
+if ($p>1) echo '<a class="button" title="&#272;&#7847;u tiên" href="'.$url[0].'&p=0#index">Đầu tiên</a> ';
+if ($p>0) echo '<a class="button" title="V&#7873; tr&#432;&#7899;c" href="'.$url[0].'&p='.($p-1).'">Về trước</a> ';
+$from=($p-10>0?$p-10:0);
+$to=($p+10<$pages?$p+10:$pages);
+for ($i=$from;$i<$to;$i++)
+{
+	if ($i!=$p) echo '<a class="button_num" href="'.$url[0].'&p='.$i.'">'.($i+1).'</a> ';
+	else echo '<a class="active_tem">'.($i+1).'</a> ';
+}
+if ($p<$i-1) echo '<a class="button" title="Ti&#7871;p theo" href="'.$url[0].'&p='.($p+1).'">Tiếp theo »</a> ';
+if ($p<$pages-1) echo '<a class="button" title="Cu&#7889;i cng" href="'.$url[0].'&p='.($pages-1).'">Cuối »</a>'; 
+echo '</div></td></tr></table>';
+?><?
+}
+?>
+</div>
+<script type="text/javascript">
+$j(function () {
+    $j(".skins .control").mouseleave(function () {
+        $j(this).hide(); 
+    });
+    $j(".skins .image").mouseover(function () {
+        $j(".skins .control").hide();
+        var skin = $j(this).attr("skin");
+        $j(skin).show();
+    });
+    $j(".button_dk").fancybox({
+        maxWidth: 800, maxHeight: 600, width: '100%', height: '95%',
+        autoSize: false, closeClick: false, fitToView: false,
+        openEffect: 'fade', closeEffect: 'fade'
+    });
+    $j(".button_v").click(function () {
+        var img = $j(this).attr("image-source");
+        var html = "<img src='" + img + "' alt='' />"
+        $j("#zoom").html(html);
+    });
+    $j(".button_v").fancybox({
+        autoSize: false, closeClick: false, fitToView: true, openEffect: 'fade', closeEffect: 'fade'
+    });
+});
+</script>

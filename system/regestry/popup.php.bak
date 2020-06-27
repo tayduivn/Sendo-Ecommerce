@@ -1,0 +1,127 @@
+<html>
+
+ <head>
+  <title>Lựa chọn giao diện</title>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<?php
+mysql_connect("localhost","shopct16_data","");
+mysql_select_db("muaban");?>
+<script type="text/javascript" src="js/jquery-1.js"></script>
+<script type="text/javascript">    var $j = jQuery.noConflict();</script>
+  <script language="JavaScript">
+<!--
+function selectItem(){
+	var select_options=document.popUpForm.myselect;
+	var len=select_options.length;
+	var selindex=0;
+	for (var i=0;i<len;i++){
+		if (select_options[i].checked) {selindex=select_options[i].value;}
+	}
+	if (selindex!=0) {
+		window.close();
+		var opener_form=window.opener.document.mydk;
+		var opener_options=opener_form.myselect;
+		var len=opener_options.length;
+		for (var i=0;i<len;i++){
+			if (opener_options[i].checked) {opener_options[i].checked=false;}
+		}
+		window.opener.document.mydk.template.value=selindex;
+	}
+}
+//-->    
+  </script>
+ </head>
+
+ <body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+<style>
+#store{ margin: 0px auto 0; width: 100%;}
+#store label{ font-weight:bold;color:#FFFFFF;cursor:pointer}
+#store h1{ margin: 0 0 10px; padding: 0; font-size: 16px; color: #115F8A; text-align: center; font-weight: bold; }
+#store h2{ margin: 0 0 20px; padding: 0; font-size: 16px; color: #8C8C8C; text-align: center; font-weight: normal; }
+#store p{ padding-top: 10px; font-size: 16px; color: #8C8C8C; text-align: center; font-weight: normal; }
+#store .clear{ clear: both; }
+#store .skins a{ text-decoration: none; }
+#store .skins a img{ border: none; }
+#store .skins .skin{ background: url('../images/bg-item.png') center top no-repeat transparent; text-align: center; }
+#store .skins .skin_2{ background: url('../images/bg-item.png') center top no-repeat transparent; text-align: center; }
+#store .skins .skin{ float: left;border:1px solid #C0C0C0;  width: 274px; height: 280px; overflow: hidden; margin-bottom: 10px;margin-left:10px; margin-right:0px; position: relative; }
+#store .skins .skin_2{ float: left;border:1px solid #C0C0C0;  width: 274px; height: 280px; overflow: hidden; margin-bottom: 10px;margin-left:10px; margin-right:0px; position: relative; }
+#store .skins .image{ margin: 0px auto 0; width: 274px; height: 280px; overflow: hidden; border-radius: 2px; }
+#store .skins .control{ background: url('../images/bg-item-hover.png') center center repeat transparent; border-radius: 2px; }
+#store .skins .control{ background-image:url('../../images/light.png'); width: 274px; height: 280px; overflow: hidden; position: absolute; left: 0px; top: 0px; display: none; }
+#store .skins .control h3{ margin: 55px 0 15px; padding: 0; font-family: Arial; color: #FFF; font-size: 16px; text-transform: uppercase; }
+#store .skins .control .zoom{ display: block; margin: 0 0 25px; }
+.button_dungthu
+{
+border:0px;
+width:106px;
+height:31px;
+cursor:pointer;
+background-image: url('css/register.png');
+}
+ </style>
+ <br>
+ <form name="popUpForm">
+ <?php
+$sql=mysql_query("SELECT * FROM template order by id DESC");
+$j=1;
+while($pro=mysql_fetch_array($sql))
+{
+	$j++;
+	if ($j%3) $class="<div class=\"skin\">"; else $class="<div class=\"skin_2\">";
+	?>
+ <!-- begin cac website da tao -->
+<div id="store">
+
+    <div class="skins">
+        
+                <?php echo $class;?>
+
+                    <div class="image" skin="#Web<? echo $pro['id'];?>">
+                        <img src="../../<? echo $pro['image'];?>" width="274" height="280" alt="<? echo $pro['company'];?>">
+                    </div>
+                    <div style="display: none;" id="Web<?echo $pro['id'];?>" class="control">
+                        <h3><?echo $pro['name'];?></h3>
+<div style="margin-top:50px;padding:5px;background-color:#0E65E6">
+<input type="radio" value="<?php echo $pro['id'];?>" name="myselect" onChange="selectItem();" id="id<?php echo $pro['id'];?>">
+<label for="id<?php echo $pro['id'];?>">Lựa chọn giao diện</label>
+</div>
+                    </div>
+					   
+                </div>
+
+       
+ 
+    </div>
+</div>
+<!-- end cac website da tao -->
+ <?}?>
+ </form>
+   <script type="text/javascript">
+$j(function () {
+    $j(".skins .control").mouseleave(function () {
+        $j(this).hide(); 
+    });
+    $j(".skins .image").mouseover(function () {
+        $j(".skins .control").hide();
+        var skin = $j(this).attr("skin");
+        $j(skin).show();
+    });
+    $j(".button_dk").fancybox({
+        maxWidth: 800, maxHeight: 600, width: '100%', height: '95%',
+        autoSize: false, closeClick: false, fitToView: false,
+        openEffect: 'fade', closeEffect: 'fade'
+    });
+    $j(".button_v").click(function () {
+        var img = $j(this).attr("image-source");
+        var html = "<img src='" + img + "' alt='' />"
+        $j("#zoom").html(html);
+    });
+    $j(".button_v").fancybox({
+        autoSize: false, closeClick: false, fitToView: true, openEffect: 'fade', closeEffect: 'fade'
+    });
+});
+</script>
+ </body>
+
+</html>

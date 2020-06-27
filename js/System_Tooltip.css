@@ -1,0 +1,59 @@
+/*Tooltip*/
+#osdhtmltooltip
+{
+	padding: 4px;
+	font-size: 8pt;
+	z-index: 100;
+	left: -300px;
+	visibility: hidden;
+	font-family: Arial;
+	position: absolute;
+	text-align: left;
+}
+#osdhtmltooltip img
+{
+	float: left;
+}
+#osdhtmltooltip font
+{
+color: #FF000B; font-weight: bold;
+}
+#osdhtmltooltip h3
+{
+	color: #FFFFFF;
+	font-size:8px;
+	margin: 0px;
+	padding:0px;
+	font-weight: bold;
+	text-transform: none;
+	text-decoration: none;
+}
+#osdhtmltooltip center{font-size:8px;width:250px;}
+#osdhtmltooltip span
+{
+	color: #FFFFFF;
+	font-style: italic;
+}
+#osdhtmltooltip div
+{	
+    max-width: 800px;
+	padding:5px;
+    background-color:#FFFFFF;
+	padding:0px;
+	color: #000000;
+	max-height:500px;
+	border-color:#C0C0C0;
+	border-radius:10px 10px 10px 10px;
+	box-shadow: 5px 5px 10px 10px #A0A0A0;
+}
+#osdhtmlpointer
+{
+	z-index: 101;
+	left: -300px;
+	visibility: hidden;
+	position: absolute;
+}
+.cuaxo
+{
+
+}

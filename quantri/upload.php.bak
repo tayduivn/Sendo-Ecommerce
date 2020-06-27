@@ -1,0 +1,37 @@
+<?
+if(!session_id()) session_start();
+
+if(!isset($_SESSION["session_message"])){
+//	session_register("session_message");
+	$_SESSION["session_message"] = "";
+}	
+
+if(isset($_GET['page']))
+$page = $_GET['page'];
+if ($_REQUEST['act']=='logout') session_unregister('log');
+if ($_SESSION['log']=='')
+{
+header("Location: login");
+}
+
+?>
+	<?
+	$path = "../thanhvien/".$_SESSION['log']."/products";
+	$ok1=array("",);
+	$fieldname = $_REQUEST['fieldname'];
+    $uploaddir = $path;
+    $uploadfile = $uploaddir .time(). basename($_FILES[$fieldname]['name']);
+    if ( $_FILES[$fieldname]["size"] > 1024*250 ) {
+    echo "Quan dung luong";
+    }
+	else
+	{
+    if (move_uploaded_file($_FILES[$fieldname]['tmp_name'], $uploadfile)) {
+    echo $path.time().basename($_FILES[$fieldname]['name']); // "success"
+    } else {
+    // WARNING! DO NOT USE "FALSE" STRING AS A RESPONSE!
+    // Otherwise onSubmit event will not be fired
+    echo "error";
+    }
+	}
+	?>

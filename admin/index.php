@@ -1,0 +1,544 @@
+<? 
+if(!session_id()) session_start();
+
+if(!isset($_SESSION["session_message"])){
+//	session_register("session_message");
+	$_SESSION["session_message"] = "";
+}	
+
+if(isset($_GET['page']))
+$page = $_GET['page'];
+if (isset($_REQUEST['act']) && $_REQUEST['act']=='logout') $_SESSION['user'] = $tên;;
+if (! isset($_SESSION['user']) )
+{
+header("Location: login.php");
+}
+
+?>
+<?  
+include("../system/language/admin.php");
+require("config/config.php");
+require("config/common_start.php");
+require("../system/model/function.php");
+include("admin_func.php");
+
+?>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK href="style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../js/System_Tooltip.css" />
+    <script type="text/javascript" src="../js/System_Tooltip.js"></script>
+ 
+<!-- kết thúc chuyển biến code-->
+<script type="text/javascript" language="javascript" src="/quantri/js/jquery.dropdownPlain.js"></script>
+    <script type="text/javascript" src="/quantri/js/jquery.min.js"></script>
+ 
+<script src="/quantri/ckeditor/ckeditor.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			 
+			
+			$("#quanlyfile").fancybox({
+				'width'				: '70%',
+				'height'			: '70%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			$("#xemdonhang").fancybox({
+				'width'				: '70%',
+				'height'			: '70%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			
+			$("#doimatkhau").fancybox({
+				'width'				: '40%',
+				'height'			: '50%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			 $("#dangkydichvu").fancybox({
+				'width'				: '40%',
+				'height'			: '50%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			$("#danhmuc").fancybox({
+				'width'				: '40%',
+				'height'			: '50%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			$("#dangkyquangcao").fancybox({
+				'width'				: '60%',
+				'height'			: '50%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+				$("#xembanner").fancybox({
+
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			
+				$("#xemnhanhsp").fancybox({
+
+				'width'				: '1100px',
+				'height'			: '1100px',
+				'autoScale'			: true,
+				'transitionIn'		: '11',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+		});
+	</script>
+<script type="text/javascript">
+function BrowseServer()
+{
+// You can use the "CKFinder" class to render CKFinder in a page:
+var finder = new CKFinder();
+finder.basePath = 'ckeditor/'; // The path for the installation of CKFinder (default = "/ckfinder/").
+finder.selectActionFunction = SetFileField;
+finder.popup();
+
+}
+
+// This is a sample function which is called when a file is selected in CKFinder.
+function SetFileField( fileUrl )
+{
+document.getElementById( 'xFilePath' ).value = fileUrl;
+}
+
+</script>
+<title>Hệ thống quản trị</title>
+</head>
+
+<body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0">
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+	<tr>
+		<td colspan="3">
+<!-- Start Top -->							
+<? include("admin_panel_top.php"); ?>							
+<!-- End Top -->		
+		</td>
+	</tr>
+	<tr>
+		<td width="1%" valign="top">
+<!-- Start Left -->							
+<? include("admin_panel_left.php"); ?>							
+<!-- End left -->		
+		</td>
+		<td valign="top">
+<!-- Start Content -->							
+<table border="0" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+<tr>
+<td width="10"></td>
+<td>
+<?
+	switch ($_REQUEST['act'])
+	{
+		case "ykien":
+			include("ykien.php");
+			break;
+		case "themsp":
+			include("themsp.php");
+			break;
+		case "thongke":
+			include("admin_thongke_ykien.php");
+			break;
+
+		case "donvi":
+			include("admin_donvi.php");
+			break;
+		case "donvi_m":
+			include("admin_donvi_m.php");
+			break;
+       case "menu_footer":
+			include("menu_footer.php");
+			break;
+		case "menu_footer_m":
+			include("menu_footer_m.php");
+			break;
+		case "price":
+			include("price.php");
+			break;
+		case "price_m":
+			include("price_m.php");
+			break;
+
+		case "link_website":
+			include("admin_link_website.php");
+			break;
+		case "link_website_m":
+			include("admin_link_website_m.php");
+			break;
+		case "link_website_category":
+			include("admin_link_website_category.php");
+			break;
+		case "link_website_category_m":
+			include("admin_link_website_category_m.php");
+			break;	
+		case "slider":
+			include("admin_slider.php");
+			break;
+		case "slider_m":
+			include("admin_slider_m.php");
+			break;
+		case "faq":
+			include("admin_faq.php");
+			break;
+		case "faq_m":
+			include("admin_faq_m.php");
+			break;
+		case "edoc_category":
+			include("admin_edoc_category.php");
+			break;
+		case "edoc_category_m":
+			include("admin_edoc_category_m.php");
+			break;	
+		case "edoc":
+			include("admin_edoc.php");
+			break;			
+		case "edoc_m":
+			include("admin_edoc_m.php");
+			break;
+		case "tailieu":
+			include("admin_tailieu.php");
+			break;			
+		case "tailieu_m":
+			include("admin_tailieu_m.php");
+			break;
+
+		case "online":
+			include("admin_online.php");
+			break;			
+		case "online_m":
+			include("admin_online_m.php");
+			break;
+		case "currency":
+			include("currency.php");
+			break;			
+		case "currency_m":
+			include("currency_m.php");
+			break;	
+		case "email":
+			include("admin_email.php");
+			break;
+		case "news_category":
+			include("admin_news_category.php");
+			break;
+		case "news_category_m":
+			include("admin_news_category_m.php");
+			break;	
+		case "news":
+			include("admin_news.php");
+			break;
+		case "news_m":
+			include("admin_news_m.php");
+			break;	
+		case "news_hot":
+			include("admin_news_hot.php");
+			break;
+		case "news_hot_m":
+			include("admin_news_hot_m.php");
+			break;	
+		case "help_category":
+			include("help_category.php");
+			break;
+		case "help_category_m":
+			include("help_category_m.php");
+			break;	
+		case "help":
+			include("help.php");
+			break;
+		case "help_m":
+			include("help_m.php");
+			break;	
+
+		case "album_category":
+			include("admin_album_category.php");
+			break;
+		case "album_category_m":
+			include("admin_album_category_m.php");
+			break;
+		case "album_image":
+			include("admin_album_image.php");
+			break;
+		case "album_image_m":
+			include("admin_album_image_m.php");
+			break;
+		case "content":
+			include("admin_content.php");
+			break;
+		case "customer":
+			include("admin_customer.php");
+			break;
+		case "pro_good":
+			include("admin_pro_good.php");
+			break;
+		case "pro_new":
+			include("admin_pro_new.php");
+			break;
+		case "pro_saleoff":
+			include("admin_pro_saleoff.php");
+			break;
+		case "pro_good_m":
+			include("admin_pro_good_m.php");
+			break;
+		case "pro_new_m":
+			include("admin_pro_new_m.php");
+			break;
+		case "pro_saleoff_m":
+			include("admin_pro_saleoff_m.php");
+			break;			
+		case "category":
+			include("admin_category.php");
+			break;			
+		case "quangcao":
+			include("admin_quangcao.php");
+			break;
+		case "category_m":
+			include("admin_category_m.php");
+			break;
+		case "cat_adv":
+			include("cat_adv.php");
+			break;
+			case "suaquangcao":
+			include("admin_quangcao_m.php");
+			break;
+		case "cat_adv_m":
+			include("cat_adv_m.php");
+			break;
+		case "cat_job":
+			include("cat_job.php");
+			break;
+		case "cat_job_m":
+			include("cat_job_m.php");
+			break;
+		case "job":
+			include("job.php");
+			break;
+		case "job_m":
+			include("job_m.php");
+			break;
+		case "cat_company":
+			include("cat_company.php");
+			break;
+		case "cat_company_m":
+			include("cat_company_m.php");
+			break;
+		case "company":
+			include("company.php");
+			break;
+		case "company_m":
+			include("company_m.php");
+			break;
+		case "category_dc":
+			include("admin_category_dc.php");
+			break;
+		case "category_dc_m":
+			include("admin_category_dc_m.php");
+			break;
+
+		case "provider":
+			include("admin_provider.php");
+			break;
+		case "provider_m":
+			include("admin_provider_m.php");
+			break;
+		case "product":
+			include("admin_product.php");
+			break;
+		case "option_m":
+			include("option_m.php");
+			break;
+		case "option":
+			include("option.php");
+			break;
+		case "hangsx_m":
+			include("hangsx_m.php");
+			break;
+		case "hangsx":
+			include("hangsx.php");
+			break;
+		case "adv":
+			include("adv.php");
+			break;
+		case "product_trogia":
+			include("admin_product_trogia.php");
+			break;
+		case "product_m":
+			include("admin_product_m.php");
+			break;
+		case "product_dc":
+			include("admin_product_dc.php");
+			break;
+		case "product_dc_m":
+			include("admin_product_dc_m.php");
+			break;
+		case "adv_m":
+			include("adv_m.php");
+			break;
+		case "order":
+			include("admin_order.php");
+			break;
+		case "login":
+			include("admin_login.php");
+			break;
+		case "changepass":
+			include("admin_changepass.php");
+			break;
+		case "customer":
+			include("admin_customer.php");
+			break;
+		case "order":
+			include("admin_order.php");
+			break;
+		case "orderdetail":
+			include("admin_orderdetail.php");
+			break;
+		case "special":
+			include("admin_special.php");
+			break;
+		case "special_m":
+			include("admin_special_m.php");
+			break;
+		case "users":
+			include("users.php");
+			break;
+		case "ngansach":
+			include("ngansach.php");
+			break;
+		case "users_vip":
+			include("users_vip.php");
+			break;
+		case "users_shop":
+			include("users_shop.php");
+			break;
+		case "users_active":
+			include("users_active.php");
+			break;
+		case "users_sell":
+			include("users_sell.php");
+			break;
+		case "users_add":
+			include("users_add.php");
+			break;
+		case "users_pay":
+			include("users_pay.php");
+			break;
+		case "admin_config":
+			include("admin_config.php");
+			break;
+		case "config_views":
+			include("config_views.php");
+			break;
+		case "config_user":
+			include("config_user.php");
+			break;
+		case "template":
+			include("template.php");
+			break;
+		case "template_m":
+			include("template_m.php");
+			break;
+		case "city":
+			include("city.php");
+			break;
+		case "city_add":
+			include("city_add.php");
+			break;
+		case "pro_noibat":
+			include("pro_noibat.php");
+			break;
+		case "pro_banchay":
+			include("pro_banchay.php");
+			break;
+		case "pro_moi":
+			include("pro_moi.php");
+			break;
+		case "link":
+			include("link.php");
+			break;
+		case "link_m":
+			include("link_m.php");
+			break;
+		case "search" :
+		    include("search_pro.php"); 
+		    break;
+	    case "search_pro" :
+		    include("search_pro.php"); 
+		    break;
+		case "search_adv" :
+		    include("search_adv.php"); 
+		    break;
+		case "search_job" :
+		    include("search_job.php"); 
+		    break;
+		case "search_company" :
+		    include("search_company.php"); 
+		    break;
+		case "admin" :
+		    include("admin.php"); 
+		    break;
+	    case "admin_add" :
+		    include("admin_add.php"); 
+		    break;
+	}
+?>
+</td></tr></table>
+
+<!-- End Content -->		
+		</td>
+		<td width="0%" valign="top">
+<!-- Start Right -->							
+<? include("admin_panel_right.php"); ?>							
+<!-- End Right -->		
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+<!-- Start Bottom -->							
+<? include("admin_panel_bottom.php"); ?>							
+<!-- End Bottom -->		
+		</td>
+	</tr>
+</table>
+
+<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="/quantri/source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/quantri/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+</body>
+
+</html>
+<? require("config/common_end.php") ?>

@@ -1,0 +1,201 @@
+<div class="d-path">
+        <ul class="ul-path" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+        <li itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Trang chủ" href="./"><span itemprop="title">Trang chủ</span></a></li><li><span class="s-icon"></span></li><li itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Hình thức thanh toán" href="./?home=thanhtoan"><span itemprop="title">Hình thức thanh toán</span></a></li></ul>
+</div>
+<div id="ctl00_MainContent_left_module" class="d-col-1">
+
+    <ul class="ul-menu-horizontal">
+
+        <li><a class="active" title="" href="./?home=thanhtoan">Hình thức thanh toán</a></li>
+
+        <li><a title="Báo giá tên miền" href="./?home=baogiadomain">Báo giá tên miền</a></li>
+        <li><a title="Báo giá dịch vụ" href="./?home=baogiadichvu">Báo giá dịch vụ</a></li>
+
+        <li><a title="" href="./help">Trợ giúp</a></li>
+
+        <li><a title="" href="lien-he.html">Liên hệ</a></li>
+
+    </ul>
+</div>
+<div class="d-col-2">
+        <div class="d-a-content">
+            <h1 class="h1-content-title">Hình thức thanh toán</h1>
+            <div class="d-a-content-content">
+                <div style="font-family: 'Times New Roman', Times, serif; font-size: 16px; line-height: 20px;
+text-align: justify;">
+<p style="font-size: 18px; font-weight: bold; margin: 20px 0 10px 0; color: #900;
+background: #B9C7D3; line-height: 30px; text-indent: 10px;">1. Thanh toán trực tiếp tại văn phòng đại diện công ty</p>
+
+<p style="margin: 20px 0;padding-left:20px;">Quý khách vui lòng thanh toán trực tiếp tại văn phòng của Công ty theo thông tin sau :<br>
+<br>
+<span style="padding-left:50px;"><b>CÔNG TY TNHH DASUN</b></span><br>
+<span style="padding-left:50px;">- VPĐD: Số 75 - Lê Ngân - Phường Khuê Trung - Quận Cẩm Lệ - TP Đà Nẵng</span><br>
+<span style="padding-left:50px;">- Hotline : 0905 800 288</span><br>
+<span style="padding-left:50px;">- Email: <a href="mailto:hotro@15giay.vn" style="color:Blue;text-decoration:underline;">hotro@15giay.vn</a></span><br>
+<span style="padding-left:50px;">- Giờ làm việc từ 8h-17h00 từ Thứ 2 đến Thứ 6, riêng Thứ 7 làm việc buổi sáng (8h-11h30)</span></p>
+
+<p style="font-size: 18px; font-weight: bold; margin: 20px 0 10px 0; color: #900;
+background: #B9C7D3; line-height: 30px; text-indent: 10px;">2. Thanh toán chuyển khoản qua ngân hàng , Internet Banking hoặc máy ATM</p>
+<p style="margin: 20px 0;padding-left:40px;"><b>* Chuyển khoản về tài khoản Công Ty:</b><br>
+<span style="padding-left:50px;">- Tên tài khoản: CÔNG TY TNHH DASUN</span><br>
+<span style="padding-left:50px;">- Số tài khoản : 0041000227567</span><br>
+<span style="padding-left:50px;">- Tại Ngân hàng Ngoại Thương Việt Nam - CN Đà Nẵng</span><br>
+
+<p style="margin: 20px 0; text-indent: 20px;">Quý khách có thể đến bất kỳ ngân hàng nào ở Việt Nam để chuyển khoản theo thông tin bên dưới (bạn không nhất thiết phải có tài khoản ngân hàng) hoặc sử dụng tính năng Internet Banking</p>
+
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/logo-techcombank.jpg" style="width: 250px;"></td>
+			<td><strong>Ngân hàng Techcombank - Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <b>9704 0788 0702 0991</b></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/logo-vietcombank.jpg" style="width: 250px;"></td>
+			<td><strong>Ngân hàng Vietcombank - Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>004 100 011 9135</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/logo-acb.jpg" style="width: 250px;"></td>
+			<td><strong>Ngân Hàng Á Châu ( ACB ) – Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>163 935 379</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/logo-donga.jpg" style="height: 120px; width: 250px;"></td>
+			<td><strong>Ngân Hàng Đông Á – Chi nhánh Hòa Khánh – Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>0103933412</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/logo-agribank.jpg" style="width: 250px; height: 120px;"></td>
+			<td><strong>Ngân Hàng Nông Nghiệp & PT Nông Thôn Việt Nam ( Agribank) – Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>200 220 610 4280</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/bidv.jpg" style="width: 250px; height: 120px;"></td>
+			<td><strong>Ngân Hàng Đầu Tư & Phát Triển Việt Nam ( BIDV) – Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>560 10000 329 026</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/Eximbank.jpg" style="width: 250px; height: 120px;"></td>
+			<td><strong>Ngân Hàng Xuất Nhập Khẩu Việt Nam (EXIMBANK) – Chi Nhánh Hùng Vương – Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>1600 148 491 571 20</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<table border="0" cellpadding="3" cellspacing="0" class="tblcontainer" width="100%">
+	<tbody>
+		<tr>
+			<td rowspan="3" width="250px"><img alt="" src="images/sacombank.jpg" style="width: 250px; height: 120px;"></td>
+			<td><strong> Ngân Hàng Sài Gòn Thường Tín (Sacombank) – Đà Nẵng</strong></td>
+		</tr>
+		<tr>
+			<td>Chủ tài khoản : <b>Nguyễn Duy Quốc</b></td>
+		</tr>
+		<tr>
+			<td>Số tài khoản : <strong>04 000 855 2268</strong></td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;
+
+<div style="width: 100%; font-style: italic;"><span style="font-weight:bold;text-decoration:underline;">Ghi chú</span>
+
+<div style="padding-left:20px;margin-top:10px;"><span style="font-weight:bold;">- Đối với chuyển khoản qua ngân hàng và Internet Banking :</span>
+
+<div style="padding-left:20px;">+ Khi Quý khách tiến hành chuyển khoản, Quý khách vui lòng ghi rõ trong nội dung thanh toán bao gồm: <b>tên gian hàng, gói gian hàng</b> cần thanh toán để bộ phận kế toán tiến hành đăng ký hoặc gia hạn chính xác gian hàng của Quý khách</div>
+
+<div style="padding-left:20px;">+ Ví dụ: Quý khách có gian hàng là <span style="color:Blue;text-decoration:underline;">http://gianhang.15giay.vn</span>&nbsp;và cần nâng cấp thành gói gian hàng VIP 1 năm. Nội dung thanh toán Quý khách có thể ghi như sau:<br>
+<span style="padding-left:55px;"><span style="font-weight:bold;font-size:18px;">Gian hang camera dang ky goi GH VIP (1 năm)</span></span></div>
+<span style="font-weight:bold;">- Đối với chuyển khoản qua ATM :</span>
+
+<div style="padding-left:20px;">Sau khi Quý khách chuyển khoản, vui lòng gọi điện hoặc gửi mail để chúng tôi xác nhận thông tin.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Email : <a href="mailto:hotro@15giay.vn" style="color:Blue;text-decoration:underline;"><b>hotro@15giay.vn</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Hotline: <b>0983 055 588 ( Mr. Quốc )</b></div>
+</div>
+</div>
+
+<p style="font-size: 18px; font-weight: bold; margin: 20px 0 10px 0; color: #900;
+background: #B9C7D3; line-height: 30px; text-indent: 10px;">3. Thu phí tận nơi</p>
+
+<p style="margin: 20px 0; text-indent: 20px;">Nhân viên 15giay.vn sẽ liên lạc và hẹn quý khách thời gian để thu phí tận nơi. Hình thức này áp dụng trong phạm vi nội thành TP.Đà Nẵng .</p>
+
+<p style="margin: 20px 0; text-indent: 20px;"><i><b>Lưu ý : Hình thức thu phí tận nơi chỉ áp dụng với các gói phí có thời gian duy trì <span style="color: rgb(255, 0, 0);">1 năm</span> trở lên</b></i></p>
+</div>
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,213 @@
+<?php
+$uri=$_SERVER['REQUEST_URI'];
+$url = explode("&", $uri);
+$row=35;
+$col=1;
+$MAXPAGE=5;
+$p=0;
+$name=$_GET['name'];
+$cat=0;
+if ($_REQUEST['id']!='') $cat=killInjection($_REQUEST['id']);
+if($_REQUEST['by']=='')
+{
+    $by="id";
+}
+else
+{
+    $by=$_REQUEST['by'];
+}
+if($_REQUEST['order']=='')
+{
+    $order="desc";
+}
+else
+{
+    $order=$_REQUEST['order'];
+}
+$city=$_REQUEST['city'];
+if($_REQUEST['city']=='')
+{
+$where="";
+}
+else
+{
+$where="and city=".$city;
+}
+$catallsub=GetCatHang($cat);
+if ($_REQUEST['p']!='') $p=$_REQUEST['p'];
+$sql_pro = "select * from products where hangsx in (".$catallsub."-1) $where order by ".$by." ".$order." limit ".$row*$col*$p.",".$row*$col;
+$result = @mysql_query($sql_pro,$con);
+$total=CountRecord("products","hangsx in (".$catallsub."-1)");
+$sql_cat=@mysql_query("SELECT name,id FROM hangsx where id='".$cat."' ");
+$row_cat=mysql_fetch_assoc($sql_cat);
+?>
+<div class="space"></div>
+<div id="left">
+<?php include("system/home/menu_left.php");?>
+<div class="space"></div>
+<?php include("class/home/box_shop.php");?>
+</div>
+<div id="right">
+<div id="content_center">
+<div id="row_cat_sub_div">
+<?php 
+$sql_catsub=@mysql_query("SELECT * FROM hangsx where cat='".$row_cat['cat']."' ");
+$i=0;
+while($row_catsub=@mysql_fetch_array($sql_catsub))
+{
+    if($i%5)
+    {
+        $div="<div style=\"float: left;padding-top:10px;width:170px;padding-left:15px;margin-left:5px;background-image:url('./images/icon_news.png');background-repeat:no-repeat;background-position:0px 10px\">";
+    }
+    else
+    {
+        $div="<div style=\"float: left;padding-top:10px;width:150px;padding-left:20px;background-image:url('./images/icon_news.png');background-repeat:no-repeat;background-position:5px 10px\">";
+    }
+    ?>
+<?php echo $div;?>
+<a href="./<?php echo doidau(mb_strtolower($row_catsub['name'],"UTF8"));?>-ct-<?php echo $row_catsub['id'];?>.html"><?php echo $row_catsub['name'];?></a>
+</div>
+<?
+$i++;
+}?>
+</div>
+<div>
+<?php 
+$sql_ads=@mysql_query("SELECT * FROM ads where cat_id='".$row_cat['id']."' ");
+while($row_ads=@mysql_fetch_assoc($sql_ads))
+{?>
+<a href="<?php echo $row_ads['link'];?>" target="_blank">
+<img src="<?php echo $row_ads['image'];?>"></a>
+<?}?>
+</div>
+<div id="list_cat">
+<div style="float: left;">
+<div style="float:left;width:6px;height:27px;background-image: url('images/bg_cat_left.png');"></div>
+<div style="float:left;line-height:240%;padding-left:10px;padding-right:10px;height:27px;background-image: url('images/bg_cat_center.png');">
+<a href="./<?php echo doidau(mb_strtolower($row_cat['name'],"UTF8"));?>-ct-<?php echo $row_cat['id'];?>.html">Mới cập nhật</a>
+</div>
+<div style="float:left;width:6px;height:27px;background-image: url('images/bg_cat_right.png');"></div>
+</div>
+<div style="float: left;">
+<div style="float:left;width:6px;height:27px;background-image: url('images/bg_cat_left.png');"></div>
+<div style="float:left;line-height:240%;padding-left:10px;padding-right:10px;height:27px;background-image: url('images/bg_cat_center.png');">
+<a href="<?php echo $url[0];?>&by=price&order=asc">Giá rẻ nhất</a>
+</div>
+<div style="float:left;width:6px;height:27px;background-image: url('images/bg_cat_right.png');"></div>
+</div>
+<div style="float: left;">
+<div style="float:left;width:6px;height:27px;background-image: url('images/bg_cat_left.png');"></div>
+<div style="float:left;line-height:240%;padding-left:10px;padding-right:10px;height:27px;background-image: url('images/bg_cat_center.png');">
+<a href="<?php echo $url[0];?>&by=price&order=desc">Giá cao nhất</a>
+</div>
+<div style="float:left;width:6px;height:27px;background-image: url('images/bg_cat_right.png');"></div>
+</div>
+<div style="float: right;padding-top:5px">
+	<select style="width:160px;" onchange="window.open(this.options[this.selectedIndex].value,'_self');" class="Normal" id="dnn_ctr424_Links_cboLinks" name="ddCat">
+<?
+	$ms=GetListCity(0);
+	echo "<option value=".$url[0].">[Tất cả khu vực]</option>";
+	foreach ($ms as $m)
+		if ($m[0]!=$_REQUEST['city'])
+			echo "<option value=".$url[0]."&city=".$m[0].">".$m[1]."</option>";
+		else
+			echo "<option selected value=".$url[0]."&city=".$m[0].">".$m[1]."</option>";
+?>
+	</select>
+</div>
+</div>
+<div id="list_cat_content">
+<div style="margin:0 auto;width:97%;padding-top:15px;border-bottom: 1px solid #C0C0C0;">
+<h3>Danh sách sản phẩm: <?php echo $row_cat['name'];?></h3>
+</div>
+<?php
+for($i=1;$i<=$row&&$row_pro=@mysql_fetch_array($result);$i++)
+{
+    $sql_user=@mysql_query("SELECT user,company,level_shop FROM user_shop where user='".$row_pro['user']."' ");
+    $row_user=@mysql_fetch_assoc($sql_user);
+    $sql_city=@mysql_query("SELECT id,name FROM city where id='".$row_pro['city']."' ");
+    $row_city=@mysql_fetch_assoc($sql_city);
+    if($i%2)
+    {
+        $color="#EAEAEA";
+    }
+    else
+    {
+        $color="#FFFFFF";
+    }
+?>
+<div class="row_pro_cat">
+<?php
+$goc=$row_pro['price']; 
+$km=$row_pro['price_special'];
+$phantram=(($goc-$km)/$goc)*100;
+if(($goc-$km)==$goc)
+{?><?}else{?>
+<div style="position: absolute;color:#FFFFFF;margin-left:-5px;font-size:12px;width:80px;height:25px;text-align:center;line-height:20px;background-image: url('images/giamgia.png');">Giảm <?php echo number_format($phantram,1);?>%</div>
+<?}?>
+<div style="padding-top:0px">
+<a onmouseover='showtip("<div><table><tr><td style=\"padding-left:20px;padding-top:10px;height:10px\"><? echo $row_pro['name'];?><br>Giá bán: <? if ($row_pro['price']<=0) echo 'Liên hệ'; else echo number_format($row_pro['price']); ?></td></tr><tr><td valign=\"top\"><img src=\"<? echo str_replace("_thumbnail","",$row_pro['image']);?>\" width=\"350px\" border=\"0px\"></td></td></tr></table></div>");' onmouseout="hidetip();" href="./<?php echo doidau(mb_strtolower($row_pro['name'],"UTF8"));?>-pro-<?php echo $row_pro['id'];?>.html">
+<img src="<?php echo $row_pro['image'];?>" width="160" height="130">
+</a>
+</div>
+<div style="padding-top:5px">
+<a href="./<?php echo doidau(mb_strtolower($row_pro['name'],"UTF8"));?>-pro-<?php echo $row_pro['id'];?>.html">
+<?php echo $row_pro['name'];?>
+</a>
+</div>
+<?php if($row_pro['price_special']=='0')
+                {?>
+				<div style="padding-top:5px;color:#ff3200;font-size:11px;font-weight:bold">Giá: <?php if($row_pro['price']=='0'){?>Liên hệ<?}else{?><?php echo number_format($row_pro['price'],0);?> VNĐ <?}?></div>
+                <?}else{?>
+                <div style="padding-top:5px;color:#ff3200;font-size:11px;font-weight:bold">Giá KM: <?php echo number_format($row_pro['price_special'],0);?> VNĐ</div>
+				<div style="padding-top:5px;color:#333333;font-size:11px;font-weight:bold">Giá cũ: <s><?php echo number_format($row_pro['price'],0);?> VNĐ</s></div>
+                <?}?>
+<div class="row_pro_cat_store">
+<?php if($row_user['level_shop']=='0')
+{?>
+<span style="float: left;">
+<a href="http://<?php echo $domain_config;?>/<?php echo $row_user['user'];?>" target="_blank">
+<img src="images/vip-icon.png" width="25">
+</a>
+</span>
+<?}else{?><?}?>
+<span style="float: left;width:133px"><a href="http://<?php echo $domain_config;?>/<?php echo $row_user['user'];?>" target="_blank">
+<?php echo $row_user['company'];?>
+</a>
+</span>
+</div>
+</div>
+<?}?>
+
+<? if ($total>0) { ?>
+<div style="clear:both;height:10px;padding-top:5px">
+<hr color="#E9E9E9" width="100%" SIZE=1 align="center">
+</div>
+<div class="pagination">
+<TABLE bgcolor="#FFFFFF" cellSpacing=10 cellPadding=0 width="100%" border=0 id="table35" style="line-height: 120%; text-align: justify" align="center">
+<?
+$pages=count_page($total,($row*$col));
+echo '<tr><td class="smallfont" align="left" >
+'.$total.'</b> Sản phẩm</td>';
+echo '<td class="smallfont" align="right">';
+$param="";
+if ($p>1) echo '<a class="buton_timkiem" title="&#272;&#7847;u tiên" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-0.html">&lt;</a> ';
+if ($p>0) echo '<a class="buton_timkiem" title="V&#7873; tr&#432;&#7899;c" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($p-1).'.html">&lt;&lt;</a> ';
+$from=($p-10>0?$p-1:0);
+$to=($p+10<$pages?$p+10:$pages);
+for ($i=$from;$i<$to;$i++)
+{
+	if ($i!=$p) echo '<a href="'.$url[0].'&p='.$i.'">'.($i+1).'</a> ';
+	else echo '<a class="active1">'.($i+1).'</a> ';
+}
+if ($p<$i-1) echo '<a class="buton_timkiem" title="Ti&#7871;p theo" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($p+1).'.html">&gt;&gt;</a> ';
+if ($p<$pages-1) echo '<a class="buton_timkiem" title="Cu&#7889;i cùng" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($pages-1).'.html">&gt;</a>'; 
+echo '</td></tr></table>';
+?>
+
+</div>
+<?
+}
+?>
+</div>
+</div>

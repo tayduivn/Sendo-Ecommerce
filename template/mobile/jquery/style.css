@@ -1,0 +1,116 @@
+
+a { text-decoration:none; color:#004276; }
+a:hover { color:#B8240D; text-decoration:none; }
+:focus { outline:0; }
+h1 { font-size:22px; }
+h2 { font-size:18px; }
+h3 { font-size:16px; }
+h4 { font-size:13px; }
+h5,h6 { font-size:12px; }
+h1,h2,h3,h4,h5,h6 { font-family:Arial,Helvetica,Sans-serif; font-weight:bold; }
+
+/*---------------------------------------------------------------------------------*/
+/* LAYOUT */
+/*---------------------------------------------------------------------------------*/
+#wrapper { border-left:0px solid #ddd; width:771px; margin:0px auto 0px auto; }
+#main { background:#FFF url(images/dot.gif) repeat-y 330px 0; border-bottom:0px solid #E2E1CD; }
+#container { float:right; margin:0 0px 0 0; width:100%; }
+#content { margin:0 0px 0 0; overflow:hidden; }
+
+
+/*---------------------------------------------------------------------------------*/
+/* CAROUSEL POSTS */
+/*---------------------------------------------------------------------------------*/
+#carousel {width:786px; background:#FAFAFA;margin-left:-5px; padding:0px 0px 10px 0px; border-bottom:0px solid #FFF; border-top:0px solid #ECEDE8; }
+.carousel-posts {
+visibility: visible; overflow: 
+hidden; position: relative;
+z-index: 3 !important; left: 0px; width: 771px;
+}
+#carousel .cat_title { margin:0 8px 10px 8px; border-bottom:1px solid #FFF; color:#333; font-size:14px; }
+#carousel .cat_title span { display:block; border-bottom:1px solid #DDD; }
+#carousel .item { width:136px; background:#FFF; overflow:hidden; float:left; margin:0 7px; border:1px solid #ECEDE8; display:inline; }
+#carousel .item img { padding:0px; border-bottom:1px solid #DDD; display:block; }
+#carousel .item .title { padding:5px 8px 8px 8px; height:60px; display:block; }
+#carousel .item .title span { height:60px; display:block; font-family:Arial,serif; font-size:12px; font-weight:bold; line-height:1.3; overflow:hidden; }
+#carousel .item .title:hover { text-decoration:none; }
+.pc-next,.pc-prev,.pc-next:hover,.pc-prev:hover { float:right; padding-right:5px; cursor:pointer; background:url(arrow_carousel.png) no-repeat left top; width:27px; height:27px; display:inline-block; text-indent:-5555em; border:0 !important; margin:-2px 0px 0; overflow:hidden; }
+.pc-next { background-position:right 0px }
+.pc-prev { background-position:0 0; }
+.pc-next:hover { background-position:right -36px; }
+.pc-prev:hover { background-position:0 -36px; }
+.catbox-title { border-top:1px solid #ECEDE8; background:#FAFAFA url(images/bg-title.jpg) repeat-x left center; border-bottom:1px solid #ECEDE8; padding:8px 15px 7px 15px; text-transform:uppercase; line-height:1.25; font-family:Arial,serif; font-size:13px; }
+.catbox-title a { color:#333; }
+.catbox-title a:hover { color:#333; text-decoration:none; }
+.cat-feedlink a { margin-top:10px; }
+
+
+
+
+
+
+/* CAROUSEL POSTS */
+/*---------------------------------------------------------------------------------*/
+#carousel {width:786px; background:#FAFAFA;margin-left:-5px; padding:0px 0px 10px 0px; border-bottom:0px solid #FFF; border-top:0px solid #ECEDE8; }
+.carousel-posts_banchay {
+visibility: visible; overflow: 
+hidden; position: relative;
+z-index: 3 !important; left: 0px; width: 771px;
+}
+#carousel_banchay .cat_title { margin:0 8px 10px 8px; border-bottom:1px solid #FFF; text-transform:uppercase; color:#333; font-size:14px; }
+#carousel .cat_title span { display:block; border-bottom:1px solid #DDD; }
+#carousel .item { width:136px; background:#FFF; overflow:hidden; float:left; margin:0 7px; border:1px solid #ECEDE8; display:inline; }
+#carousel .item img { padding:4px; border-bottom:1px solid #DDD; display:block; }
+#carousel .item .title { padding:5px 8px 8px 8px; height:60px; display:block; }
+#carousel .item .title span { height:60px; display:block; font-family:Arial,serif; font-size:12px; font-weight:bold; line-height:1.3; overflow:hidden; }
+#carousel .item .title:hover { text-decoration:none; }
+.pc-next_banchay,.pc-prev_banchay,.pc-prev_banchay:hover { float:right; padding-right:5px; cursor:pointer; background:url(arrow_carousel.png) no-repeat left top; width:27px; height:27px; display:inline-block; text-indent:-5555em; border:0 !important; margin:-2px 0px 0; overflow:hidden; }
+.pc-next_banchay { background-position:right 0px; }
+.pc-prev_banchay { background-position:0 0; }
+.pc-next:hover_banchay { background-position:right -36px; }
+.pc-prev:hover_banchay { background-position:0 -36px; }
+.catbox-title_banchay { border-top:1px solid #ECEDE8; background:#FAFAFA url(images/bg-title.jpg) repeat-x left center; border-bottom:1px solid #ECEDE8; padding:8px 15px 7px 15px; text-transform:uppercase; line-height:1.25; font-family:Arial,serif; font-size:13px; }
+.catbox-title a { color:#333; }
+.catbox-title a:hover { color:#333; text-decoration:none; }
+.cat-feedlink a { margin-top:10px; }
+
+
+
+
+
+
+
+/* CAROUSEL POSTS */
+/*---------------------------------------------------------------------------------*/
+#carousel {width:786px; background:#FAFAFA;margin-left:-5px; padding:0px 0px 10px 0px; border-bottom:0px solid #FFF; border-top:0px solid #ECEDE8; }
+.carousel-posts_moinhat {
+visibility: visible; overflow: 
+hidden; position: relative;
+z-index: 3 !important; left: 0px; width: 771px;
+}
+#carousel_moinhat .cat_title { margin:0 8px 10px 8px; border-bottom:1px solid #FFF; text-transform:uppercase; color:#333; font-size:14px; }
+#carousel .cat_title span { display:block; border-bottom:1px solid #DDD; }
+#carousel .item { width:136px; background:#FFF; overflow:hidden; float:left; margin:0 7px; border:1px solid #ECEDE8; display:inline; }
+#carousel .item img { padding:0px; border-bottom:0px solid #DDD; display:block; }
+#carousel .item .title { padding:5px 8px 8px 8px; height:60px; display:block; }
+#carousel .item .title span { height:60px; display:block; font-family:Arial,serif; font-size:12px; font-weight:bold; line-height:1.3; overflow:hidden; }
+#carousel .item .title:hover { text-decoration:none; }
+.pc-next_moinhat,.pc-prev_moinhat,.pc-prev_moinhat:hover { float:right; padding-right:5px; cursor:pointer; background:url(arrow_carousel.png) no-repeat left top; width:27px; height:27px; display:inline-block; text-indent:-5555em; border:0 !important; margin:-2px 0px 0; overflow:hidden; }
+.pc-next_moinhat { background-position:right 0px; }
+.pc-prev_moinhat { background-position:0 0; }
+.pc-next:hover_moinhat { background-position:right -36px; }
+.pc-prev:hover_moinhat { background-position:0 -36px; }
+.catbox-title_moinhat { border-top:1px solid #ECEDE8; background:#FAFAFA url(images/bg-title.jpg) repeat-x left center; border-bottom:1px solid #ECEDE8; padding:8px 15px 7px 15px; text-transform:uppercase; line-height:1.25; font-family:Arial,serif; font-size:13px; }
+.catbox-title a { color:#333; }
+.catbox-title a:hover { color:#333; text-decoration:none; }
+.cat-feedlink a { margin-top:10px; }
+.cat_title
+{
+padding-top:7px;
+padding-right:5px;
+background-image: url('cat_home.jpg');
+width:770px;
+height:27px;
+color:#FFFFFF;
+}
+/*---------------------------------------------------------------------------------*/

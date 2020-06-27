@@ -1,0 +1,29 @@
+<?php
+$sql_compase=mysql_query("SELECT * FROM products where name='".$row_pro['name']."' and id!='".$row_pro['id']."'");
+while($row_compase=mysql_fetch_array($sql_compase))
+{
+$sql_city1=mysql_query("SELECT * FROM city where id='".$row_compase['city']."' ");
+$row_city1=mysql_fetch_assoc($sql_city1);
+$sql_user1=mysql_query("SELECT * FROM user_shop where user='".$row_compase['user']."' ");
+$row_user1=mysql_fetch_assoc($sql_user1);
+    ?>
+<div style="border: 1px solid #C0C0C0;overflow:hidden;padding-top: 5px;padding-bottom:5px;">
+<div style="float: left;padding-left:10px;padding-top:10px;width:190px">
+               <?php if($row_compase['price_special']=='0')
+                {?>
+				<div style="padding-top:2px;padding-bottom:10px;">
+                <?php if($row_compase['price']=='0'){?><font color="red"><b>Liên hệ</b></font><?}else{?>Giá bán: <font color="red"><b><?php echo str_replace(",",".",number_format($row_compase['price'],0));?> VNĐ </b></font><?}?>
+                </div>
+                <?}else{?>
+                <div style="padding-top:2px;">Giá khuyến mại: <font color="red"><b><?php echo str_replace(",",".",number_format($row_compase['price_special'],0));?> VNĐ</b></font></div>
+				<div style="padding-top:2px;">Giá gốc: <s><?php echo str_replace(",",".",number_format($row_compase['price'],0));?> VNĐ </s></div>
+                <?}?>
+</div>
+<div style="float: left;padding-top:12px;width:390px;color:#0B75D3">
+<?php if($row_compase['city']=='0'){?>Toàn quốc<?}else{?><?php echo $row_city1['name'];?><?}?>: <a href="<?php echo $domain_home;?><?php echo $row_user1['user'];?>"><?php echo $row_user1['company'];?>(<?php echo $row_user1['user'];?>)</a>
+</div>
+<div style="float: left;width:143px">
+<button id="button1" onclick="window.location='./?home=cart&p=<?php echo $row_pro['id'];?>'"></button>
+</div>
+</div>
+<?}?>

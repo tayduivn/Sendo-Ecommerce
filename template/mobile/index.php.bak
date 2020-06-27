@@ -1,0 +1,807 @@
+<? if(!session_id()) session_start(); ?>
+<?include("template/mobile/module/online.php");?>
+<?
+$sql_ct=mysql_query("SELECT * FROM cat_mem where user='".$user."' and parent=17 ");
+$sql1=mysql_query("SELECT * FROM user_shop where user='".$user."'");
+$sql_visit=mysql_query("update user_shop set visit=visit+1 where user='".$user."' ");
+$row1=mysql_fetch_assoc($sql1);
+$sql_config_mem=mysql_query("SELECT * FROM config_mem where user='".$user."' ");
+$row_config_mem=mysql_fetch_assoc($sql_config_mem);
+$sql_popup=mysql_query("SELECT * FROM popup where user='".$user."' ");
+$row_popup=mysql_fetch_assoc($sql_popup);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi">
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<META name=keywords content="<? echo $row1['company'];?>">
+<META name=description content="<? echo $row1['mieuta'];?>">
+<META name=abstract content="qq">
+<META name=robots content="index, follow">
+<META name=copyright content="<? echo $row1['company'];?>">
+<META name=Title content="<? echo $row1['google_seo'];?>">
+<META content=General http-equiv=audience>
+<META name=resource-type content=Document>
+<META name=distribution content=Global>
+<META name=revisit-after content="1 day">
+<META name=reply-to content=nhantaimuathu@gmail.com>
+<base href="http://<? echo $_SERVER['SERVER_NAME'];?>"/>
+<link rel="stylesheet" href="template/mobile/images/style.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="js/System_Tooltip.css" />
+<script type="text/javascript" src="js/System_Tooltip.js"></script>
+<title><? echo $row1['company'];?> - <? include("template/mobile/module/tittle.php");?></title>
+</head>
+<body background="<? echo $row1['background'];?>">
+<?if($row_config_mem['popup_center']=='1')
+{?>
+<?include("popup/popup.php");?>
+<?}else{?>
+<?}?>
+<?if($row_config_mem['popup_slider']=='1')
+{?>
+<?include("popup/ads_slider.php");?>
+<?}else{?>
+<?}?>
+<div id="page">
+
+
+<div id="banner">
+<!-- begin cart ---->
+<div style="background-image:url('template/mobile/images/bg_cart.png');background-color:transparent;width:254px;height:62px;position:absolute; font-size:12px;color:#FFFFFF; top:118px;left:882px; z-index:365">
+
+<div style="padding-top:8px;padding-left:10px">
+Bạn có <font color="#F07100"><b><? echo count($_SESSION['cart']); ?></b></font> sản phẩm trong giỏ hàng
+</div>
+<div style="padding-top:15px;padding-left:10px">
+<span style="float:left;padding-left:30px;color:#F07100;font-weight:bold"><? echo number_format($_SESSION['tongcong']); ?>VNĐ</span>
+<span style="float:right;padding-right:50px;margin-top:-2px"><a href="<?if($domain=='')
+{?>./<? echo $user;?>/cart.html<?}else{?>./cart.html<?}?>"><font color="#FFFFFF"><b>Xem</b></font></a></span>
+</div>
+
+
+</div>
+
+<!-- end cart ---->
+<? if($row1['banner']=='')
+{?>
+<img src="upload/banner/haiquang.jpg" width="1007" height="180">
+<?} else{?>
+<? if(substr($row1['banner'],-4,4)=='.swf')
+	{?>
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"
+width="994" id="banner" align="">
+<param name=movie value="<? echo $row1['banner'];?>"><param name=quality value=high>
+<embed src="<? echo $row1['banner'];?>" quality=high  width="<?echo $row1['w'];?>" height="<?echo $row1['h'];?>" name="banner" align="center"
+type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+</embed></object>
+<?} else{?>
+<img src="<? echo $row1['banner'];?>" width="1007" height="180">
+<?}?>
+
+<?}?>
+</div>
+
+<div id="menu_top">
+<!--begin menu top-->
+<?if($domain=='')
+{?>
+<li class="menu_top_active">
+<a <? if($_REQUEST['user']=='.$user.')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./<?echo $user;?>">Trang chủ</a>
+</li>
+<li class="menu_top_li_gt">
+<a <? if($_REQUEST['home']=='about')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./<?echo $user;?>/gioi-thieu.html">Giới thiệu</a>
+</li>
+<?
+	$sql_menu=mysql_query("SELECT * FROM menu_mem where user='".$user."' order by thutu asc ");
+while($row_menu=mysql_fetch_array($sql_menu))
+	{?>
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['id']==$row_menu['id'])
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./<?echo $user;?>/<?if($row_menu['link']==''){?>./<? echo $row_menu['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_menu['name']);?>.html<?}else{?>./<?echo $user;?>/<? echo $row_menu['link'];?><?}?>"><? echo $row_menu['name'];?></a>
+</li>
+<?}?>
+
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['home']=='map')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./<?echo $user;?>/ban-do.html">Bản đồ</a>
+</li>
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['home']=='request')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./<?echo $user;?>/hoi-dap.html">Hỏi đáp</a>
+</li>
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['home']=='contact')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./<?echo $user;?>/lien-he.html">Liên hệ</a>
+</li>
+
+
+
+
+
+
+
+<?}else{?>
+<li class="menu_top_active">
+<a <? if($_REQUEST['user']=='.$user.')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="http://<? echo $_SERVER["SERVER_NAME"];?>">Trang chủ</a>
+</li>
+<li class="menu_top_li_gt">
+<a <? if($_REQUEST['home']=='about')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./gioi-thieu.html">Giới thiệu</a>
+</li>
+<?
+	$sql_menu=mysql_query("SELECT * FROM menu_mem where user='".$user."' order by thutu asc ");
+while($row_menu=mysql_fetch_array($sql_menu))
+	{?>
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['id']==$row_menu['id'])
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="<?if($row_menu['link']==''){?>./<? echo $row_menu['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_menu['name']);?>.html<?}else{?><? echo $row_menu['link'];?><?}?>"><? echo $row_menu['name'];?></a>
+</li>
+<?}?>
+
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['home']=='map')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./ban-do.html">Bản đồ</a>
+</li>
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['home']=='request')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./hoi-dap.html">Hỏi đáp</a>
+</li>
+<li class="menu_top_li_bd">
+<a <? if($_REQUEST['home']=='contact')
+{
+	echo "class=menu_top_li_active";
+} 
+else
+{
+	echo "class=menu_top_li_link";
+}?> href="./lien-he.html">Liên hệ</a>
+</li>
+<?}?>
+<!-- end menu top-->
+</div>
+
+
+<div class="space"></div>
+
+<div id="page_in">
+<div id="content">
+
+<div id="left">
+
+<div id="category_home">
+<div class="category_title">DANH MỤC SẢN PHẨM</div>
+<style type="text/css">
+
+.sidebarmenu ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+font: 7px tahoma;
+width: 209px; /* Main Menu Item widths */
+border:0px solid #C0C0C0;
+border-top: 0px solid #ccc;
+}
+ 
+.sidebarmenu ul li{
+position: relative;
+height:34px;
+}
+
+/* Top level menu links style */
+.sidebarmenu ul li a{
+display: block;
+overflow: auto; /*force hasLayout in IE7 */
+color: #FFFFFF;
+text-decoration: none;
+padding:0 0 0 20px;
+line-height:230%;
+border-bottom: 0px solid #F5F5F5;
+border-right: 0px solid #F5F5F5;
+border-left: 0px solid #F5F5F5;
+}
+
+.sidebarmenu ul li a:link, .sidebarmenu ul li a:visited, .sidebarmenu ul li a:active{
+background-image: url('template/mobile/images/bg_tieude.jpg');color: #FFFFFF; height:34px;/*background of tabs (default state)*/
+}
+
+.sidebarmenu ul li a:visited{
+color: #FFFFFF;
+}
+
+.sidebarmenu ul li a:hover{
+background-color: black;
+}
+
+/*Sub level menu items */
+.sidebarmenu ul li ul{
+position: absolute;
+width: 209px; /*Sub Menu Items width */
+top: 0;
+visibility: hidden;
+z-index:365;
+}
+
+.sidebarmenu a.subfolderstyle{
+background: url(right.gif) no-repeat 97% 50%;
+}
+
+ 
+/* Holly Hack for IE \*/
+* html .sidebarmenu ul li { float: left; height: 1%; }
+* html .sidebarmenu ul li a { height: 1%; }
+/* End */
+
+</style>
+
+<script type="text/javascript">
+
+//Nested Side Bar Menu (Mar 20th, 09)
+//By Dynamic Drive: http://www.dynamicdrive.com/style/
+
+var menuids=["sidebarmenu1"] //Enter id(s) of each Side Bar Menu's main UL, separated by commas
+
+function initsidebarmenu(){
+for (var i=0; i<menuids.length; i++){
+  var ultags=document.getElementById(menuids[i]).getElementsByTagName("ul")
+    for (var t=0; t<ultags.length; t++){
+    ultags[t].parentNode.getElementsByTagName("a")[0].className+=" subfolderstyle"
+  if (ultags[t].parentNode.parentNode.id==menuids[i]) //if this is a first level submenu
+   ultags[t].style.left=ultags[t].parentNode.offsetWidth+"px" //dynamically position first level submenus to be width of main menu item
+  else //else if this is a sub level submenu (ul)
+    ultags[t].style.left=ultags[t-1].getElementsByTagName("a")[0].offsetWidth+"px" //position menu to the right of menu item that activated it
+    ultags[t].parentNode.onmouseover=function(){
+    this.getElementsByTagName("ul")[0].style.display="block"
+    }
+    ultags[t].parentNode.onmouseout=function(){
+    this.getElementsByTagName("ul")[0].style.display="none"
+    }
+    }
+  for (var t=ultags.length-1; t>-1; t--){ //loop through all sub menus again, and use "display:none" to hide menus (to prevent possible page scrollbars
+  ultags[t].style.visibility="visible"
+  ultags[t].style.display="none"
+  }
+  }
+}
+
+if (window.addEventListener)
+window.addEventListener("load", initsidebarmenu, false)
+else if (window.attachEvent)
+window.attachEvent("onload", initsidebarmenu)
+
+</script>
+
+
+
+
+<div class="sidebarmenu">
+<ul id="sidebarmenu1">
+<?
+
+while($row_ct=mysql_fetch_array($sql_ct))
+
+{
+?>
+<li><a href="<?if($domain=='')
+{?>./<?echo $user;?>/category/<? echo $row_ct['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_ct['name']); ?>.html<?}else{?>./danh-muc/<? echo $row_ct['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_ct['name']); ?>.html<?}?>"><? echo $row_ct['name'];?></a>
+  <ul>
+  <? $sql_ct1=mysql_query("SELECT * FROM cat_mem where parent='".$row_ct['id']."' ");
+	while($row_ct1=mysql_fetch_array($sql_ct1))
+	{?>
+  <li><a href="<?if($domain=='')
+{?>./<?echo $user;?>/category/<? echo $row_ct1['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_ct1['name']); ?>.html<?}else{?>./danh-muc/<? echo $row_ct1['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_ct1['name']); ?>.html<?}?>"><? echo $row_ct1['name'];?></a></li>
+ <?}?>
+  </ul>
+</li>
+<?}?>
+</ul>
+</div>
+<div class="cat_bottom"></div>
+
+</div>
+
+<div class="space"></div>
+<!-- begin danh muc tin -->
+<?if($row_config_mem['news_cat']=='0')
+{?>
+<div id="category_home">
+<div class="category_title">DANH MỤC TIN TỨC</div>
+<div class="sidebarmenu">
+<ul id="sidebarmenu1">
+<?
+$sql_cat_news=mysql_query("SELECT * FROM news_cat where user='".$user."' and parent=1 ");
+while($row_cat_new=mysql_fetch_array($sql_cat_news))
+
+{
+?>
+<li><a href="<?if($domain=='')
+{?>./<?echo $user;?>/tin-tuc/<? echo $row_cat_new['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_cat_new['name']); ?>.html<?}else{?>./tin-tuc/<? echo $row_cat_new['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_cat_new['name']); ?>.html<?}?>"><? echo $row_cat_new['name'];?></a>
+  <ul>
+  <? $sql_cat_news1=mysql_query("SELECT * FROM news_cat where parent='".$row_cat_new['id']."' ");
+	while($row_cat_news1=mysql_fetch_array($sql_ct1))
+	{?>
+  <li><a href="<?if($domain=='')
+{?>./<?echo $user;?>/tin-tuc/<? echo $row_cat_news1['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_cat_news1['name']); ?>.html<?}else{?>./tin-tuc/<? echo $row_cat_news1['id'];?>/<? echo str_replace($marTViet,$marKoDau,$row_cat_news1['name']); ?>.html<?}?>"><? echo $row_cat_news1['name'];?></a></li>
+ <?}?>
+  </ul>
+</li>
+<?}?>
+</ul>
+</div>
+
+</div>
+<div class="cat_bottom"></div>
+<div class="space"></div>
+<?}else{?>
+<?}?>
+<!-- end danh muc tin -->
+
+<!-- begin tim kiem -->
+<?if($row_config_mem['search']=='0')
+{?>
+<div id="timkiem">
+<div style="height:34px;padding-left:7px;line-height:150%;color:#FFFFFF">
+TÌM KIẾM
+</div>
+<?if($domain=='')
+	{?>
+<form name="form_select" method="GET" action="./store.aspx?user=<? echo $user;?>">
+<?}else{?>
+<form name="form_select" method="GET" action="./Default.aspx">
+<?}?>
+<?if($domain=='')
+{?>
+<input type="hidden" name="user" value="<? echo $user;?>">
+<?}else{?>
+<?}?>
+<input name="keywords" type="text" id="input_timkiem" value="">
+<br><br>
+		<select style="width:190px;" name="cat_id" >
+		<option value="">Tất cả danh mục</option>
+<?
+		$cats=GetListCatemem(17,$user);
+		foreach ($cats as $cat)
+		{
+
+				echo "<option value=".$cat[0].">".$cat[1]."</option>";
+		}
+?>		
+		</select>
+<br><br>
+<span style="width:200px;color:#FFFFFF;font-size:13px">
+Tìm theo giá
+</span>
+<br><br>
+<span style="width:200px">
+<input name="tu" type="text" style="width:89px;border:0px" value="">
+<input name="den" type="text" style="width:89px;border:0px" value="">
+</span>
+<br><br>
+<span style="float:right">
+<input type="hidden" name="act" value="search">
+<input type="hidden" name="home" value="search">
+<input name="search" type="submit" id="button_search" value="Tìm kiếm">
+</span>
+</form>
+</div>
+<div class="space"></div>
+<?}else{?>
+<?}?>
+<!-- end tim kiem -->
+
+<div id="left_conlai">
+<!--begin ho tro -->
+<?if($row_config_mem['online']=='0')
+{?>
+<div id="category_hotro">
+<div class="category_title">Hỗ trợ trực tuyến</div>
+<div id="div_hotro">
+<table border="0" id="table21" cellspacing="0" cellpadding="0">
+<tr><td>
+<?
+$sql3=mysql_query("SELECT * FROM support_mem where user='".$user."'");
+while($row3=mysql_fetch_array($sql3))
+{?>
+<table border="0" id="table21" style="background-image:url('template/mobile/images/bg_hotro.jpg')">
+<tr>
+<td colspan="2" style="padding-left:10px">
+<? echo $row3['name'];?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-left:30px">
+<? echo $row3['phone'];?>
+</td>
+<td>
+<a href="ymsgr:sendIM?<? echo $row3['yahoo'];?>"><img src="http://mail.opi.yahoo.com/online?u=<? echo $row3['yahoo'];?>&amp;m=g&amp;t=1"></a>
+</td>
+</tr>
+
+<tr>
+<td colspan="2" style="padding-left:30px">
+<? echo $row3['email'];?>
+</td>
+</tr>
+
+<tr>
+<td colspan="2" height="4" style="background-image:url('template/mobile/images/line_hotro.jpg');background-repeat: no-repeat">
+</td>
+</tr>
+</table>
+<?}?>
+</td></tr>
+</table>
+</div>
+</div>
+<div class="space"></div>
+<?}else{?>
+<?}?>
+<!--end ho tro -->
+<!-- begin news_top-->
+<? include("template/mobile/module/news_top.php");?>
+<div class="space"></div>
+<!-- end news_top-->
+<!--begin thong ke -->
+<?if($row_config_mem['static']=='0')
+{?>
+<div id="category_thongke">
+<div class="category_title">Thống kê truy cập</div>
+<div id="div_thongke">
+<table border="0" id="table21" background="template/chamhong/images/bg_thongke.jpg" height="70">
+<tr>
+<td style="padding-left:30px;padding-top:0px" height="25">
+Hôm nay: <?php echo today(); ?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-left:30px;padding-top:0px;" height="25">
+Hôm qua: <?php echo yesterday(); ?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-left:30px;padding-top:0px;">
+Đang online: <?php echo online(); ?>
+</td>
+</tr>
+<tr>
+<td style="padding-left:30px;padding-top:0px;" height="25">
+Tổng truy cập: <?php total(); ?>
+</td>
+</tr>
+<tr>
+<td style="padding-left:30px;padding-top:0px;">
+Trung bình: <?php avg(); ?>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="space"></div>
+<?}else{?>
+<?}?>
+<!--end thong ke-->
+
+
+<!--begin quang cao -->
+<?if($row_config_mem['ads_left']=='0')
+{?>
+<div id="category_quangcao">
+<div id="div_quangcao">
+<table border="0" id="table21" cellspacing="0" cellpadding="0">
+<? $sql4=mysql_query("SELECT * FROM ads_mem where user='".$user."' and cat_id=0");
+while($row4=mysql_fetch_array($sql4))
+{?>
+<tr>
+<td>
+<a href="<? echo $row4['link'];?>" target="_blank" title="<? echo $row4['name'];?>"><img src="<? echo $row4['image'];?>" width="205"></a>
+</td>
+</tr>
+<?}?>
+</table>
+</div>
+</div>
+<?}else{?>
+<?}?>
+<!--end quang cao-->
+</div>
+
+</div>
+
+
+<div id="right">
+<?if($row_config_mem['slider']=='0')
+{?>
+<div id="slider_show">
+<? include("slider_show/1/index.php");?>
+</div>
+<?}else{?>
+<?}?>
+
+<div class="space"></div>
+<? if($_REQUEST['home']=='')
+{?>
+<div id="pro_home">
+<!-- begin san pham home-->
+<?if($row_config_mem['pro_featured']=='0')
+{?>
+<div class="pro_home_cat">
+<? include("template/mobile/module/pro_noibat.php");?>
+</div>
+<?}else{?>
+<?}?>
+
+<?if($row_config_mem['pro_selling']=='0')
+{?>
+<div class="pro_home_cat">
+<? include("template/mobile/module/pro_banchay.php");?>
+</div>
+<?}else{?>
+<?}?>
+
+<?if($row_config_mem['pro_new']=='0')
+{?>
+<div class="pro_home_cat">
+<? include("template/mobile/module/pro_moinhat.php");?>
+</div>
+<?}else{?>
+<?}?>
+
+
+<div class="space_home_pro">
+</div>
+
+<div class="pro_home_cat">
+<? include("template/mobile/module/home_code.php");?>
+</div>
+<div class="space_home_pro">
+</div>
+<!-- end san pham home -->
+</div>
+
+
+<?} else{?>
+<div id="pro_home">
+<? include("template/mobile/module/frame.php");?>
+</div>
+<?}?>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- begin popup login-->
+
+<style type="text/css">
+#wrapper{
+    width: 100%;
+    margin: 0px auto;
+    border: 1px solid #C0C0C0;
+	background-color:#FFFFFF;
+}
+.show_hiden{
+    margin: 0px;
+	padding-bottom:0px;
+}
+.show_hiden .bang{
+    display: none;
+}
+.show_hiden .tr{
+	padding-top:2px;
+	width:120px;
+	float:left;
+	font-size:11px;
+}
+.show_hiden .td{
+	width:130px
+}
+.button
+{
+width:120px;
+padding-left:40px;
+height:31px;
+background-image: url('./images/up.jpg');
+background-repeat: no-repeat;
+color:#0054CB;
+cursor:pointer;
+background-color: transparent;
+border:0px;
+}
+.aquenmatkhau
+	{
+	font-size:7px;
+	color:#0055CC;
+	text-decoration:none;
+    }
+.dangnhap
+{
+	width:86px;
+	height:25px;
+	background-image: url('./images/login.jpg');
+	background-color: transparent;
+	border:0px;
+	cursor: pointer;
+}
+</style>
+
+    <!-- Popup Footer -->
+	<?php
+if(isset($_POST['ok']))
+{
+$u=$p="";
+ if($_POST['username'] == NULL)
+ {
+  echo "Chưa nhập tên đăng nhập<br />";
+ }
+ else
+ {
+  $u=$_POST['username'];
+ }
+ if($_POST['password'] == NULL)
+ {
+  echo "Chưa nhập mật khẩu<br />";
+ }
+ else
+ {
+  $p=$_POST['password'];
+ }
+ if($u && $p)
+ {
+  $sql="select * from user_shop where user='".$u."' and pass='".$p."'";
+  $query=mysql_query($sql);
+  if(mysql_num_rows($query) == 0)
+  {
+   echo "Tên đăng nhập hoặc mật khẩu chưa đúng";
+  }
+  else
+  {
+   $row=mysql_fetch_array($query);
+   $_SESSION['log'] = $row['user'];
+   $_SESSION['level'] = $row['level_shop'];
+ 
+  }
+ }
+}
+?>
+    <div style="position: fixed; width: 350px; z-index: 2000; left: 61.8%; bottom: 0pt; border-top: 0px solid rgb(192, 192, 192); padding: 0px; background-color: rgb(243, 243, 243); font-family: tahoma; font-size: 10pt;">
+
+<div id="wrapper">
+    <div class="show_hiden">
+    <div style="color:#0054CB; font-size:15px">
+<input type="button" value="Đăng nhập" class="button" onclick="if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = '';this.innerText = 'Đăng nhập'; this.value = 'Đăng nhập'; } else { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; this.innerText = ''; this.value = 'Đăng nhập'; }">
+| <a href="#top"><font color="#0054CB">Trang chủ gian hàng</font></a>
+</div>
+<div>
+<div style="display: none; padding-left:10px;padding-bottom:7px">
+<? if($_SESSION['log']=='') {?>
+
+
+		<form action='' method='post'>
+		<br>
+     <span class="tr"><input type="text" class="textbox" style="width:110px;" id="txtTenDangNhap" name="username"/></span>
+	 <span class="tr"><input type="password" class="textbox" style="width:110px;" name="password"/></span>
+	 <span class="td"><input class="dangnhap" type='submit' name='ok' value=' ' /></span>
+	 <br><br>
+	 <span class="tr"><input type="checkbox" name="">Nhớ mật khẩu</span>
+	 <span class="td">
+	 <a class="aquenmatkhau" href="./?home=forgotpass"><font size="2px">Quên mật khẩu</font></a> | 
+	 <a class="aquenmatkhau" href="./?home=regestry"><font size="2px">Đăng ký mới</font></a>
+	 </span>
+	 </form>
+						<?}
+						else
+						{
+						?>
+<font color="#0054CB">Chào bạn: <? echo $_SESSION['log']; ?></font>
+<br>
+<a href="./?member=account" target="_blank"><font color="#0054CB">Tài khoản</font></a> | <a href="./?home=logout"><font color="#0054CB">Thoát</font></a>
+<?}?>
+</div>
+</div>
+    </div>
+</div>
+
+
+
+    </div>
+
+
+<!-- end popup login-->
+
+
+
+
+</div>
+<div id="footer">
+<? echo $row1['company'];?>
+<br>
+Điện thoại: <? echo $row1['phone'];?> - Email: <? echo $row1['email'];?>
+<br>
+<? echo $row1['address'];?>
+<br>
+<span style="float:right; padding-right:10px">
+Design by Haiquang.Net
+</span>
+</div>
+</div>
+
+</body>
+</html>

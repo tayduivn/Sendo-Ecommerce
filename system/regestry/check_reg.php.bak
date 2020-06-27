@@ -1,0 +1,93 @@
+<?php
+mysql_connect("localhost","chohanvi_tuan","quangphuong0226");
+mysql_select_db("chohanvi_tuan");?>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<?php
+$action = $_POST['action']; // Lấy giá trị action
+if(!empty($_POST['user_name']) && $action == 'check_user')
+{
+    // Lấy giá trị user_name
+    $user = $_POST['user_name'];
+   
+    // Chuyển giá trị user_name thành chữ thường & gọi hàm kiểm tra
+    username_exist(strtolower($user));
+}
+ 
+function username_exist($user)
+{
+	$sql=mysql_query("SELECT * FROM user_shop where user='".$user."' ");
+    // Mảng giá trị user_name đã tồn tại
+	$row=mysql_fetch_assoc($sql);
+	$user_arr = array($row['user']);
+
+    // Kiểm tra user_name mình nhập vào có nằm trong mảng đó hay không?
+    // User_name thuộc 1 giá trị trong mảng => user_name tồn tại
+    if(in_array($user, $user_arr))
+    {
+        echo "<span class=\"error\"><strong>{$user}</strong> đã tồn tại, Vui lòng chọn tên khác</span>";
+    }
+    else // Ngược lại user_name Ko tồn tại
+    {
+        echo "<span class=\"success\"><strong>{$user}</strong> có thể đăng ký</span>".$row['user'];   
+    }
+}
+
+
+if(!empty($_POST['email']) && $action == 'check_email')
+{
+    // Lấy giá trị user_name
+    $email = $_POST['email'];
+   
+    // Chuyển giá trị user_name thành chữ thường & gọi hàm kiểm tra
+    email_exist(strtolower($email));
+}
+ 
+function email_exist($email)
+{
+	$sql=mysql_query("SELECT * FROM user_shop where email='".$email."' ");
+    // Mảng giá trị user_name đã tồn tại
+	$row=mysql_fetch_assoc($sql);
+	$email_arr = array($row['email']);
+
+    // Kiểm tra user_name mình nhập vào có nằm trong mảng đó hay không?
+    // User_name thuộc 1 giá trị trong mảng => user_name tồn tại
+    if(in_array($email, $email_arr))
+    {
+        echo "<span class=\"error\"><strong>{$email}</strong> đã tồn tại, Vui lòng chọn Email khác</span>";
+    }
+    else // Ngược lại user_name Ko tồn tại
+    {
+        echo "<span class=\"success\"><strong>{$email}</strong> có thể đăng ký</span>";   
+    }
+}
+
+
+
+if(!empty($_POST['domain']) && $action == 'check_domain')
+{
+    // Lấy giá trị user_name
+    $tenmien = $_POST['domain'];
+   
+    // Chuyển giá trị user_name thành chữ thường & gọi hàm kiểm tra
+    domain_exist(strtolower($tenmien));
+}
+ 
+function domain_exist($tenmien)
+{
+	$sql=mysql_query("SELECT * FROM user_shop where domain='".$tenmien."' ");
+    // Mảng giá trị user_name đã tồn tại
+	$row=mysql_fetch_assoc($sql);
+	$domain_arr = array($row['domain']);
+
+    // Kiểm tra user_name mình nhập vào có nằm trong mảng đó hay không?
+    // User_name thuộc 1 giá trị trong mảng => user_name tồn tại
+    if(in_array($tenmien, $domain_arr))
+    {
+        echo "<span class=\"error\">Domain: <strong>{$tenmien}</strong> đã tồn tại trên hệ thống, bạn hãy chọn tên miền khác</span>";
+    }
+    else // Ngược lại user_name Ko tồn tại
+    {
+        echo "<span class=\"success\">Domain: <strong>{$tenmien}</strong> có thể đăng ký được...</span>";   
+    }
+}
+?>

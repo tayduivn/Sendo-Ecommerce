@@ -1,0 +1,22 @@
+ <?php switch($_REQUEST['act'])
+{
+    case "pro_tick" :
+        include("class/pro_tick/index.php");
+         break;
+    case "infomation" :
+        include("class/member/infomation.php");
+         break;
+    case "change_pass" :
+        include("class/member/change_pass.php");
+         break;
+    case "change_account" :
+        include("class/member/change_account.php");
+         break;
+    case "dkshop" :
+        include("class/member/dkshop.php");
+         break;
+default :
+include("class/member/index.php");
+break;
+}
+?>
