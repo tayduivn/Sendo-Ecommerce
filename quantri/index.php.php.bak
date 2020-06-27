@@ -1,0 +1,345 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?
+if(!session_id()) session_start();
+
+if(!isset($_SESSION["session_message"])){
+//	session_register("session_message");
+	$_SESSION["session_message"] = "";
+}	
+
+if(isset($_GET['page']))
+$page = $_GET['page'];
+if ($_REQUEST['act']=='logout') $_SESSION['log'] = $log;
+if ($_SESSION['log']=='')
+{
+header("Location: login");
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?  
+
+require("../system/model/config.php");
+require("../system/model/common_start.php");
+require("../system/model/function.php");
+include("../system/inc/function.php");
+include("box/admin_func.php");
+include("visitor.php");
+
+?>
+<? include ("../news/news_func.php"); ?>
+<?php 
+$sql_user_mem=mysql_query("SELECT * FROM user_shop where user='".$_SESSION['log']."' ");
+$row_user_mem=mysql_fetch_assoc($sql_user_mem);?>
+<?
+$sql_config=mysql_query("SELECT * FROM config_mem where user='".$_SESSION['log']."' ");
+$row_config=mysql_fetch_assoc($sql_config);
+$sql_menu_left=mysql_query("SELECT * FROM menu_left where user='".$_SESSION['log']."' ");
+$row_menu_left=mysql_fetch_assoc($sql_menu_left);
+$sql_popup=mysql_query("SELECT * FROM popup where user='".$_SESSION['log']."' ");
+$row_popup=mysql_fetch_assoc($sql_popup);
+?>
+<?if($row_config['user']!==$_SESSION['log'])
+{?>
+<?
+$sql_config_up="insert into config_mem(user) value('".$_SESSION['log']."')";
+if(mysql_query($sql_config_up,$con))
+	{
+	echo '<script>window.location="./home"</script>';
+	}
+?>
+<?}elseif($row_popup['user']!==$_SESSION['log'])
+{?>
+<?
+$sql_popup_up="insert into popup(user_id,user) value('".$user_id."','".$_SESSION['log']."')";
+if(mysql_query($sql_popup_up,$con))
+	{
+	echo '<script>window.location="./home"</script>';
+	}
+?>
+<?}elseif($row_menu_left['user']!==$_SESSION['log'])
+{?>
+
+<?
+for($i=1;$i<=5;$i++)
+	{
+$sql_config_up="insert into menu_left(id_name,user) value('".$i."','".$_SESSION['log']."')";
+if(mysql_query($sql_config_up,$con))
+	{
+	echo '<script>window.location="./home"</script>';
+	}
+}
+?>
+
+<?}else{?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Quản Trị Gian Hàng</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<?php if($row_user_mem['domain']=='')
+	{?>
+<base href="http://localhost/quantri/" />
+<?}
+elseif($_SERVER["SERVER_NAME"]=='localhost')
+		{?>
+<base href="http://localhost/quantri/" />
+<?}else{?>
+<base href="http://<? echo $row_user_mem['domain'];?>/quantri/" />
+<?}?>
+<link rel="stylesheet" href="CSS/Style.css" type="text/css" media="all"/>
+<script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>	
+<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+<meta name="robots" content="none" /><link href="CSS/Style2.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+	<script type="text/javascript" src="/filemanage/ckfinder/ckfinder.js"></script>
+	<script type="text/javascript" >
+	
+	
+	function BrowseServer()
+{
+	// You can use the "CKFinder" class to render CKFinder in a page:
+	var finder = new CKFinder();
+	finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
+	finder.selectActionFunction = SetFileField;
+	finder.popup();
+
+	// It can also be done in a single line, calling the "static"
+	// popup( basePath, width, height, selectFunction ) function:
+	// CKFinder.popup( '../', null, null, SetFileField ) ;
+	//
+	// The "popup" function can also accept an object as the only argument.
+	// CKFinder.popup( { basePath : '../', selectActionFunction : SetFileField } ) ;
+}
+
+// This is a sample function which is called when a file is selected in CKFinder.
+function SetFileField( fileUrl )
+{
+	document.getElementById( 'imagefield1' ).value = fileUrl;
+}
+	
+	
+	</script>
+
+
+    <script type="text/javascript" src="JS/jquery.fancybox.js"></script>
+
+    <script type="text/javascript" src="JS/CommonFunction.js"></script>
+
+
+
+
+
+  
+
+<script src="ckeditor/ckeditor.js"></script>
+<!-- manager files -->
+<script type="text/javascript" src="/filemanage/ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+
+function BrowseServer()
+{
+// You can use the "CKFinder" class to render CKFinder in a page:
+var finder = new CKFinder();
+finder.basePath = 'ckeditor/'; // The path for the installation of CKFinder (default = "/ckfinder/").
+finder.selectActionFunction = SetFileField;
+finder.popup();
+
+}
+
+// This is a sample function which is called when a file is selected in CKFinder.
+function SetFileField( fileUrl )
+{
+document.getElementById( 'xFilePath' ).value = fileUrl;
+}
+
+</script>
+<!-- end manager filies -->
+
+
+
+
+ <script type="text/javascript" src="css/jquery-1.js"></script>
+ <script type="text/javascript">    var $j = jQuery.noConflict();</script>
+
+
+</head>
+<body>
+
+
+
+<!-- begin menu_top-->
+<div id="menu_top">
+<? include("box/menu_top.php");?>
+</div>
+<!-- end menu_top-->
+    
+<div id="path">
+    	        
+    <ul class="ul_path">
+	
+        <li class="current" href="thoat" >Ngân sách đang có: <font color="red"><? echo number_format($row_user_mem['tien'],0);?> </font>VNĐ</li>
+    </ul>
+
+                <div class="div_view_website" style="width:334px;">
+                    <div class="div_view_website_icon">
+            	        <img src="CSS/Image/icon_driver.png" />
+                    </div>
+                    <a href="javascript:OpenFancyBoxSize('/filemanage/ckfinder/ckfinder.html?langCode=vi',920,'100%')">Quản lý hình ảnh</a>
+                    <div class="div_view_website_icon">
+            	        <img src="CSS/Image/icon_driver.png" />
+                    </div>
+                    <!--a href="FilesList.aspx">Xóa video tạm</a>
+        	        <div class="div_view_website_icon">
+            	        <img src="CSS/Image/icon_cache.png" />
+                    </div-->
+                    <a href="javascript:clearCaches();">Xóa cache</a>
+                    <div class="div_view_website_icon">
+            	        <img src="CSS/Image/icon_web.png" />
+                    </div>
+                    <a href="http://<? echo $row_user_mem['user'];?>.shopcantho.vn" target="_blank">Xem gian hàng</a>
+                </div>
+				
+				
+            </div>    
+
+     
+
+
+						<td><span >		
+
+
+						
+<?php
+$a=$row_user_mem['pay_time'];
+$target = mktime(0, 0, 0, substr($a,3,2), substr($a,0,2), substr($a,6,4)+1) ;
+$today = time () ;
+$difference =($target-$today) ;
+$days =(int) ($difference/86400) ;
+?>
+
+<div id="content">
+
+<?if($days>=0) {?>
+<? if($_REQUEST['act']=='')
+{?>
+<?include("thongke.php");?>
+<?} else {?>
+<? include("box/frame.php");?>
+<?}?>
+<?}else{?>
+<div style="padding-top:30px;text-align:center;font-weight:bold;font-size:20px;color:red">
+<img src="images/alert.jpg" border="0">
+<br><br>
+Website của bạn đã hết thời gian sử dụng !
+</div>
+<br>
+<div style="padding-top:0px;text-align:center;font-weight:bold;font-size:18px;color:blue">
+Bạn vui lòng đóng cước phí để sử dụng dịch vụ
+<br>
+Mọi chi tiết xin liên hệ Email: hotro@15giay.vn hoặc Hotline: 0983 055 588
+<br>
+Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi trong thời gian qua chúc bạn luôn thành công trong cuộc sống !
+</div>
+<?}?>
+</div>
+
+
+<!-- content_footer-->
+
+<!-- end content_footer-->
+<!-- begin footer-->
+<div id="copyright">
+                <p class="p_copyright">Copyright © 2014 - 2016 Công Ty TNHH MTV Thương Mại Dịch Vụ Quảng Cáo KEYMOU</p>
+            </div> 
+
+        </div>
+    </form>
+
+    <form id="frmClearCaches" name="frmClearCaches" method="post">
+        <input type="hidden" id="hdClearCaches" name="hdClearCaches"/>
+    </form>
+
+    <iframe src="RefreshConnect.aspx" style="display:none;"></iframe>   
+    
+<script type="text/javascript">
+    function fileOnclick(){
+        $FileManager.OpenFileManager();
+    }
+
+    function clearCaches() {
+        document.getElementById("hdClearCaches").value = 'true';
+        document.getElementById("frmClearCaches").submit();
+    }
+
+    $(document).ready(function () {
+        MemberID = 22393;
+        switch (0) {
+            case 1: // ThongTinTaiKhoan.aspx
+                OpenFancyBoxSize("ThongTinTaiKhoan.aspx", 720, "100%");
+                break;
+                
+        }
+    });
+
+</script>
+
+<!-- end footer-->
+</div>
+<!-- end content-->
+
+</div>
+</body>
+</html>
+<?}?>
+<? require("../system/model/common_end.php") ?>

@@ -1,0 +1,111 @@
+<div id="raovat">
+<!-- rao vat cat left-->
+<div id="raovat_cat">
+<?php include("class/raovat/menu_adv.php");?>
+<div>
+<?php 
+$sql_ads=@mysql_query("SELECT * FROM ads where cat_id=1000000000");
+while($row_ads=@mysql_fetch_array($sql_ads))
+{?>
+<a href="<?php echo $row_ads['link'];?>" target="_blank"><img src="<?php echo $row_ads['image'];?>" width="200"></a>
+<?}?>
+</div>
+<?php include("class/views/tab_pro_vip_new.php");?>
+</div>
+<!-- raovat content-->
+<div id="cat_left_title">
+<div style="float: left;padding-left:10px;"><img src="images/home.jpg"></div>
+<div style="float: left;padding-left:10px;line-height:230%"><a href="./index.html">Trang chủ</a> »</div>
+<div style="float: left;padding-left:10px;line-height:230%"><a href="./?home=adv">Rao vặt</a></div>
+<?php if(!$_REQUEST['cat']=='')
+{?>
+<div style="float: left;padding-left:10px;line-height:230%"> » 
+<?php $sql_cat_adv=@mysql_query("SELECT id,name FROM adv_cat where id='".$_REQUEST['cat']."' ");
+$row_cat_adv=@mysql_fetch_assoc($sql_cat_adv);?>
+<a href="?home=adv&act=cat&cat=<?php echo $row_cat_adv['id'];?>"><?php echo $row_cat_adv['name'];?></a>
+</div>
+<?}else{?>
+<?}?>
+<?php if(!$_REQUEST['id']=='')
+{?>
+ <div style="float: left;padding-left:10px;line-height:230%"> » 
+<?php $sql_adv_adv=@mysql_query("SELECT id,name,adv_cat FROM avd where id='".$_REQUEST['id']."' ");
+$row_adv_adv=@mysql_fetch_assoc($sql_adv_adv);?>
+<a href="./?home=adv&act=views&id=<?php echo $row_adv_adv['id'];?>&cat=<?php echo $row_adv_adv['adv_cat'];?>"><?php echo $row_adv_adv['name'];?></a>
+</div>
+<?}else{?>
+<?}?>
+</div>
+<!--box seach-->
+<div id="raovat_content">
+<?php if($_REQUEST['id']=='')
+{?>
+<div id="raovat_search">
+<form name="myform" method="GET" action="./">
+<div>
+<input type="hidden" name="home" value="adv">
+<input type="hidden" name="act" value="search">
+<input type="text" id="raovat_search_input" name="keywords" placeholder="Nhập tiêu đề rao vặt !">
+<input id="raovat_search_submit" type="submit" name="search" value="Tìm kiếm" />
+</div>
+<div style="padding-top: 10px;">
+<div style="float: left;">
+		<select name="city" style="width:100px;height:25px;color:#ABABAB;">
+		<option value="" selected>--Tất cả--</option>
+<?
+		$cats=GetListCity(0);
+		foreach ($cats as $cat)
+		{
+			if ($cat[0]==$city)
+				echo "<option value=".$cat[0]." selected>".$cat[1]."</option>";
+			else
+				echo "<option value=".$cat[0].">".$cat[1]."</option>";
+		}
+?>		
+		</select>
+  </div>
+  <div style="float:left;padding-left: 10px;">
+  		<select name="cat"  style="width:196px;height:25px;color:#ABABAB;">
+        <option value="" selected>Tất cả Danh mục</option>
+<?
+		$cats=GetListAdv(0);
+		foreach ($cats as $cat)
+		{
+			if ($cat[0]==$cat)
+				echo "<option value=".$cat[0]." selected>".$cat[1]."</option>";
+			else
+				echo "<option value=".$cat[0].">".$cat[1]."</option>";
+		}
+?>		
+		</select>
+  </div>
+  <div style="float:left;padding-left: 10px;">
+  		<select name="nhucau"  style="width:100px;height:25px;color:#ABABAB;">
+        <option value="" selected>Chọn nhu cầu</option>	
+		<option value="0">Cần bán</option>	
+		<option value="1">Cần mua</option>	
+		</select>
+  </div>
+</div>
+</form>
+</div>
+<?}else{?><?}?>
+<div class="space"></div>
+<div>
+<?php 
+$sql_ads=@mysql_query("SELECT * FROM ads where cat_id=1000000005");
+while($row_ads=@mysql_fetch_array($sql_ads))
+{?>
+<a href="<?php echo $row_ads['link'];?>" target="_blank"><img src="<?php echo $row_ads['image'];?>" width="200"></a>
+<?}?>
+</div>
+<div class="space"></div>
+<?php if($_REQUEST['act']=='')
+{?>
+<?php include("class/raovat/adv_news.php");?>
+<?}else{?>
+<?php include("class/include/frame_adv.php");?>
+<?}?>
+</div>
+</div>
+</div>

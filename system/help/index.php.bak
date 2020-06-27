@@ -1,0 +1,83 @@
+<div style="overflow: hidden;">
+<div style="float: left;width:200px">
+<?php include("class/help/sub_cat_help.php");?>
+<div class="space"></div>
+<!--end email sale-->
+<!--begin store vip-->
+<div>
+<div id="category_store">
+Gian hàng Vip
+</div>
+<?php include("class/home/store_vip.php");?>
+</div>
+<!--end store vip-->
+</div>
+<div style="float: left;width: 1040px;">
+<!--contener_1_right_top-->
+<div id="contener_1_right_top_store">
+<div style="float: left;width:260px;padding-left: 50px;padding-top:10px;font-size:13px">
+<div style="float: left;margin-top:-10px"><a href="./?home=cart"><img src="images/icon_cart.png"></a></div>
+<div style="float: left;"><font color="#004E52">(<? echo count($_SESSION['cart']); ?>)</font></div>
+<div>
+<div style="float: left;padding-left:10px;margin-top:-10px"><a href="./?home=products_tick"><img src="images/pro_tick.png"></a></div>
+<div style="float: left;"><font color="#004E52">(<?php echo count($giohang);?>)</font></div>
+</div>
+</div>
+<div>
+<div id="div_currency">
+</div>
+<div style="float: left;padding-top:5px">
+<a href="ymsgr:sendIM?<?php echo $row_footer['hotro'];?>">
+<img src="images/live-support.jpg" height="24px">
+</a>
+<a href="ymsgr:sendIM?<?php echo $row_footer['yahoo'];?>">
+<img src="images/yahoo_support.jpg" height="24px">
+</a>
+<a href="ymsgr:sendIM?<?php echo $row_footer['skype'];?>">
+<img src="images/skype_support.gif" height="24px">
+</a>
+</div>
+<div style="float: left;margin-top:4px;width:118px;text-align:center;line-height:26px;height:26px;background-image:url('images/help.png')">
+<a href="./?home=help">
+<font color="#FFFFFF"><b>Hỗ trợ</b></font>
+</a>
+</div>
+<?php include("class/views/menu_post_cat.php");?>
+</div>
+</div>
+<!-- end contener_1_right_top-->
+<div class="space"></div>
+<!-- raovat content-->
+<div style="float: right;width:1040px">
+<div id="cat_left_help">
+<div style="float: left;padding-left:10px;"><img src="images/home.jpg"></div>
+<div style="float: left;padding-left:10px;line-height:230%"><a href="./index.html">Trang chủ</a> »</div>
+<div style="float: left;padding-left:10px;line-height:230%"><a href="./?home=help">Trung tâm trợ giúp</a></div>
+<?php if(!$_REQUEST['cat']=='')
+{?>
+<div style="float: left;padding-left:10px;line-height:230%"> » 
+<?php $sql_cat_adv=@mysql_query("SELECT id,name FROM help_cat where id='".$_REQUEST['cat']."' ");
+$row_cat_adv=@mysql_fetch_assoc($sql_cat_adv);?>
+<a href="./?home=help&cat=<?php echo $row_cat_adv['id'];?>"><?php echo $row_cat_adv['name'];?></a>
+</div>
+<?}else{?>
+<?}?>
+<?php if(!$_REQUEST['id']=='')
+{?>
+ <div style="float: left;padding-left:10px;line-height:230%"> » 
+<?php $sql_adv_adv=@mysql_query("SELECT id,name FROM news where id='".$_REQUEST['id']."' ");
+$row_adv_adv=@mysql_fetch_assoc($sql_adv_adv);?>
+<a href="./?home=help&cat=<?php echo $row_adv_adv['id'];?>"><?php echo $row_adv_adv['name'];?></a>
+</div>
+<?}else{?>
+<?}?>
+</div>
+
+<?php if($_REQUEST['act']=='')
+{?>
+<?php include("class/help/news_news.php");?>
+<?}else{?>
+<?php include("class/include/frame_help.php");?>
+<?}?>
+</div>
+</div>

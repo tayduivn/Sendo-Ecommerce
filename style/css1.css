@@ -1,0 +1,117 @@
+
+/*===============BO CUC==================*/
+
+#footer{
+	width:100%;
+
+	height:auto;
+}
+
+
+
+
+.d-footer{
+	width:1200px;
+	margin:0 auto;
+	text-align:left;
+}
+
+
+.d-footer:after{
+	content:"";
+	display:table;
+	border-collapse:collapse;
+	clear:both;
+}
+#footer{
+	margin-top:10px;
+	background:#f9f7f7;
+	border-top:2px solid #ff4400;
+}
+
+/*===========Footer==========*/
+.ul-footer{
+	list-style:none;
+	display:block;
+	padding:0;
+	margin:10px 0 0 0 0;
+}
+.ul-footer li{
+	float:left;
+	width:299px;
+	border-left:1px solid #ddd;
+	min-height:130px;
+}
+.ul-footer li.first{
+	border-left:none;
+}
+.ul-footer li h4{
+	font-size: 110%;
+	font-weight: bold;
+	line-height: 24px;
+	text-indent:10px;
+	padding:0;
+	margin:0;
+	color: black;
+}
+.ul-footer li.first h4{
+	text-indent:0;
+}
+.ul-footer .ul-group-footer{
+	list-style:disc;
+	padding:0;
+	margin:5px 0 0 25px;
+}
+.ul-footer .ul-group-footer.first{
+	margin:5px 0 0 15px;
+}
+.ul-footer .ul-group-footer li{
+	float:left;
+	width:100%;
+	border-left:none;
+	min-height:inherit;
+	color: black;
+}
+.ul-footer .ul-group-footer li a{
+	color:#555;
+	line-height:24px;
+	text-decoration:none;
+}
+.ul-footer .ul-group-footer li a:hover{
+	text-decoration:underline;
+}
+/*======Copyright======*/
+.d-copyright{
+	float:left;
+	width:100%;
+	margin-top:10px;
+	border-top:1px solid #ddd;
+	padding:10px 0;
+}
+.d-copyright .d-copyright-left{
+	float:left;
+	width:80%;
+}
+.d-copyright .d-copyright-left p{
+	color:#555;
+	line-height:18px;
+	padding:0;
+	margin:0;
+}
+
+.d-copyright .d-copyright-right{
+	float:left;
+	width:20%;
+	text-align:right;
+}
+/*======Path link======*/
+
+/*======Bo cuc======*/
+
+/*======Filter======*/
+
+/*=======Top categories=======*/
+
+/*========Product list==========*/
+
+/*=========Paging===========*/

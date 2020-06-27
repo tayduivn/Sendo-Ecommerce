@@ -1,0 +1,97 @@
+<? if($_SESSION['level']=='0' or $_SESSION['level']=='3')
+{?>
+<?include("online.php");?>
+<?$sql_tong=mysql_query("SELECT * FROM user_shop where user='".$_SESSION['log']."' ");
+$row_tong=mysql_fetch_assoc($sql_tong);
+$user=$_SESSION['log'];
+?>
+<table height="28" cellSpacing="0" cellPadding="0" width="100%" border="0">
+      <tr align=center>
+        <td class="title" width="100%">Thống kê Website
+	</td>
+      </tr>
+    </table>
+
+
+<table border="1" cellpadding="2" align="center" style="border-collapse: collapse" bordercolor="#EDEDED" width="97%" id="AutoNumber1">
+  <tr>
+    <td align="left" colspan="2" nowrap class="title">
+	<table border="0" id="table21" background="template/chamhong/images/bg_thongke.jpg" height="70" width="90%">
+<tr>
+<td style="padding-left:30px;padding-top:0px" height="25">
+Hôm nay: <?php echo today(); ?>
+</td>
+<td rowspan="5" style="color:red;font-weight:bold">
+<?include("dungluong.php");?>
+</td>
+
+</tr>
+
+<tr>
+<td style="padding-left:30px;padding-top:0px;" height="25">
+Hôm qua: <?php echo yesterday(); ?>
+</td>
+</tr>
+
+<tr>
+<td style="padding-left:30px;padding-top:0px;">
+Đang online: <?php echo online(); ?>
+</td>
+</tr>
+<tr>
+<td style="padding-left:30px;padding-top:0px;" height="25">
+Tổng truy cập: <?php total(); ?>
+</td>
+</tr>
+<tr>
+<td style="padding-left:30px;padding-top:0px;">
+Trung bình: <?php avg(); ?>
+</td>
+</tr>
+</table>
+	</td>
+  </tr>
+
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Ngày tham gia</b></td>
+	<td align="left" nowrap class="title"><b><? echo $row_tong['re_time'];?></b></td>
+  </tr>
+    <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Tên miền bạn đang dùng</b></td>
+	<td align="left" nowrap class="title"><b>http://<? echo $row_tong['domain'];?></b> Hoặc dạng gian hàng <b>http://taoweb30s.vn/<? echo $row_tong['user'];?></b></td>
+  </tr>
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Số sản phẩm đã đăng</b></td>
+	<td align="left" nowrap class="title"><b><? echo mysql_num_rows(mysql_query("SELECT * FROM products where user='".$_SESSION['log']."' "));?></b></td>
+  </tr>
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Số tin đã đăng</b></td>
+	<td align="left" nowrap class="title"><b><? echo mysql_num_rows(mysql_query("SELECT * FROM news where user='".$_SESSION['log']."' "));?></b></td>
+  </tr>
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Số liên hệ</b></td>
+	<td align="left" nowrap class="title"><b><? echo mysql_num_rows(mysql_query("SELECT * FROM contact where user='".$_SESSION['log']."' "));?></b></td>
+  </tr>
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Tổng số đơn hàng</b></td>
+	<td align="left" nowrap class="title"><b><? echo mysql_num_rows(mysql_query("SELECT * FROM orders where orders_user='".$_SESSION['log']."' "));?></b></td>
+  </tr>
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Tổng liên kết website</b></td>
+	<td align="left" nowrap class="title"><b><? echo mysql_num_rows(mysql_query("SELECT * FROM ads_mem where user='".$_SESSION['log']."' "));?></b></td>
+  </tr>
+  <tr class="dash-sub-menu">
+    <td align="left" nowrap class="title" style="padding-left:34px"><b>Tổng Slider</b></td>
+	<td align="left" nowrap class="title"><b><? echo mysql_num_rows(mysql_query("SELECT * FROM slider_show where user='".$_SESSION['log']."' "));?></b></td>
+  </tr>
+  
+
+</table>
+</form>
+
+
+<?} else
+{?>
+
+Shop của bạn chưa được phép với quyền hạn này !
+<?}?>

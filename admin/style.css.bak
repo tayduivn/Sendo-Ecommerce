@@ -1,0 +1,124 @@
+BODY
+{
+	font-family: Tahoma; 
+	color: #000000;
+}
+.textbox
+{
+font-family: Tahoma; 
+font-size: 8.5pt; 
+color: #000000;
+}
+
+.smallfont
+{
+font-family: Tahoma; 
+font-size: 8.5pt; 
+color: #000000;
+}
+
+.smallfontbold
+{
+font-family: Tahoma; 
+font-size: 8.5pt; 
+color: #ED008C;
+font-weight: bold;
+}
+
+.midfont
+{
+font-family: Tahoma; 
+font-size: 10pt; 
+color: #ED008C;
+}
+
+.midfontbold
+{
+font-family: Tahoma; 
+font-size: 10pt; 
+color: #ED008C;
+font-weight: bold;
+}
+
+A:hover {
+	TEXT-DECORATION: none; font-family:Tahoma}
+A:link {
+	FONT-FAMILY: Tahoma; TEXT-DECORATION: none; 
+}
+A {
+	FONT-FAMILY: Tahoma; TEXT-DECORATION: none;
+	color: #121513;
+}
+
+.normalfont
+{
+background-color:#FFFFFF;
+font-family: Tahoma; 
+font-size: 8.5pt; 
+color: #006AAA;
+font-weight: bold;
+}
+.table_a
+{
+}
+.table_a:hover
+{
+background-color:#F9F8A3;
+}
+#content_footer
+{
+width:90%;
+height:30px;
+margin: 0 auto;
+background-color:#FFFFFF;
+clear:both;
+}
+.button
+{
+background-color:#149B31;
+font-family: Tahoma; 
+font-weight:bold;
+font-size: 12px; 
+color: #FFFFFF;
+border-style: solid; 
+border-width: 1px;
+cursor:pointer;
+padding:5px;
+}
+.button:hover
+{
+background-color:#149B31;
+font-family: Tahoma; 
+font-weight:bold;
+font-size: 12px; 
+color: red;
+border-style: solid; 
+border-width: 1px;
+cursor:pointer;
+padding:5px;
+}
+
+.title
+{
+background-color:#149B31;
+font-family: Tahoma; 
+font-size: 8.5pt; 
+color: #FFFFFF;
+font-weight: bold;
+}
+
+.err
+{
+font-family: Tahoma; 
+font-size: 8.5pt; 
+color: #FF0000;
+}
+
+.midtitle
+{
+background-color:#149B31;
+font-family: Tahoma; 
+font-size: 12pt; 
+color: #FFFFFF;
+font-weight: bold;
+}

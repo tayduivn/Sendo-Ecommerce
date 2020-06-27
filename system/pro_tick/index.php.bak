@@ -1,0 +1,136 @@
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$('div#delTable div a.delete').click(function()
+		{
+			if (confirm("Bạn có muốn xóa sản phẩm này khỏi dánh sách đánh dấu không?"))
+			{
+				var id = $(this).parent().parent().attr('id');
+				var data = 'id=' + id ;
+				var parent = $(this).parent().parent();
+
+				$.ajax(
+				{
+					   type: "POST",
+					   url: "class/pro_tick/delete_row.php?id="+id,
+					   data: data,
+					   cache: false,
+					
+					   success: function()
+					   {
+							parent.fadeOut('slow', function() {$(this).remove();});
+					   }
+				 });				
+			}
+		});
+		
+		// style the table with alternate colors
+		// sets specified color for every odd row
+		$('div#delTable div:odd').css('background',' #FFFFFF');
+	});
+	
+</script>
+<div id="delTable">
+<?php
+$o=20;
+$col=1;
+$MAXPAGE=5;
+$p=0;
+$user=$_SESSION['log'];
+$sql_t=mysql_query("SELECT * FROM po_tick where user='".$user."'");
+while($row_t=mysql_fetch_array($sql_t))
+{
+    $ok.=$row_t['pro_id'].",";
+}
+if ($_REQUEST['p']!='') $p=$_REQUEST['p'];
+$sql = "select * from products where id in (".$ok."0) order by id desc limit ".$o*$col*$p.",".$o*$col;
+$result = @mysql_query($sql,$con);
+$total=CountRecord("products","id in (".$ok."0)");?>
+<?php if($total=='0')
+{?>
+<div style="padding-top:20px;padding-bottom:20px;text-align:center;color:red;font-weight:bold">
+<img src="images/alert.jpg">
+<br><br>
+Chưa có sản phẩm nào được đánh dấu
+</div>
+<?}else{?>
+<?php echo $ok;?>
+<?php 
+while($row_pro=mysql_fetch_array($result))
+{
+    $sql_user=@mysql_query("SELECT user,company,level_shop FROM user_shop where user='".$row_pro['user']."' ");
+    $row_user=@mysql_fetch_assoc($sql_user);
+    ?>
+<div id="<?php echo $row_pro['id'];?>" class="row_pro_cat">
+<div style="position: absolute;margin-left: 105px;margin-top:2px">
+<a href="#" class="delete" style="color:#FF0000;"><img src="images/delete.png">
+</a>
+</div>
+<div style="padding-top:0px">
+<a onmouseover='showtip("<div><table><tr><td style=\"padding-left:20px;padding-top:10px;height:10px\"><? echo $row_pro['name'];?><br>Giá bán: <? if ($row_pro['price']<=0) echo 'Liên hệ'; else echo number_format($row_pro['price']).$ma_tien; ?></td></tr><tr><td valign=\"top\"><img src=\"<? echo str_replace("_thumbnail","",$row_pro['image']);?>\" width=\"350px\" border=\"0px\"></td></td></tr></table></div>");' onmouseout="hidetip();" href="./san-pham-<?php echo doidau(mb_strtolower($row_pro['name'],"UTF-8"));?>-<?php echo $row_pro['cat'];?>-<?php echo $row_pro['id'];?>.html">
+<img src="<?php echo $row_pro['image'];?>" width="127" height="130" style="border:1px solid #C0C0C0;">
+</a>
+</div>
+<div style="padding-top:5px">
+<a href="./san-pham-<?php echo doidau(mb_strtolower($row_pro['name'],"UTF-8"));?>-<?php echo $row_pro['cat'];?>-<?php echo $row_pro['id'];?>.html">
+<?php echo $row_pro['name'];?>
+</a>
+</div>
+<?php if($row_pro['price_special']=='0')
+                {?>
+				<div style="padding-top:5px;color:#ff3200;font-size:11px;font-weight:bold">Giá: <?php if($row_pro['price']=='0'){?>Liên hệ<?}else{?><?php echo number_format($row_pro['price']);?> VND <?}?></div>
+                <?}else{?>
+                <div style="padding-top:5px;color:#ff3200;font-size:11px;font-weight:bold">Giá KM: <?php echo number_format($row_pro['price_special']);?> VND</div>
+				<div style="padding-top:5px;color:#333333;font-size:11px;font-weight:bold">Giá cũ: <s><?php echo number_format($row_pro['price'],0);?> VND</s></div>
+                <?}?>
+<div class="row_pro_cat_store">
+<?php if($row_user['level_shop']=='0')
+{?>
+<span style="float: left;">
+<a href="http://<?php echo $row_user['user'];?>.<?php echo $domain_config;?>" target="_blank">
+<img src="images/vip-icon.png" width="25">
+</a>
+</span>
+<?}else{?><?}?>
+<span style="float: left;width:100px"><a href="http://<?php echo $row_user['user'];?>.<?php echo $domain_config;?>" target="_blank">
+<?php echo $row_user['company'];?>
+</a>
+</span>
+</div>
+</div>
+<?}
+?>
+</div>
+<?}?>
+<? if ($total>0) { ?>
+<div style="clear:both;height:10px;padding-top:5px">
+<hr color="#E9E9E9" width="100%" SIZE=1 align="center">
+</div>
+<div class="pagination">
+<TABLE bgcolor="#FFFFFF" cellSpacing=10 cellPadding=0 width="100%" border=0 id="table35" style="line-height: 120%; text-align: justify" align="center">
+<?
+$pages=count_page($total,($o*$col));
+echo '<tr><td class="smallfont" align="left" >
+'.$total.'</b> Sản phẩm đã đánh dấu</td>';
+echo '<td class="smallfont" align="right">';
+$param="";
+if ($p>1) echo '<a class="buton_timkiem" title="&#272;&#7847;u tiên" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-0.html">&lt;</a> ';
+if ($p>0) echo '<a class="buton_timkiem" title="V&#7873; tr&#432;&#7899;c" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($p-1).'.html">&lt;&lt;</a> ';
+$from=($p-10>0?$p-1:0);
+$to=($p+10<$pages?$p+10:$pages);
+for ($i=$from;$i<$to;$i++)
+{
+	if ($i!=$p) echo '<a href="'.$_SERVER['REQUEST_URI'].'&p='.$i.'">'.($i+1).'</a> ';
+	else echo '<a class="active1">'.($i+1).'</a> ';
+}
+if ($p<$i-1) echo '<a class="buton_timkiem" title="Ti&#7871;p theo" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($p+1).'.html">&gt;&gt;</a> ';
+if ($p<$pages-1) echo '<a class="buton_timkiem" title="Cu&#7889;i cùng" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($pages-1).'.html">&gt;</a>'; 
+echo '</td></tr></table>';
+?>
+
+</div>
+<?
+}
+?>
+</div>

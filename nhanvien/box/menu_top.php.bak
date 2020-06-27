@@ -1,0 +1,81 @@
+	<div id="page-wrap">  
+
+        <ul class="dropdown">
+		    <li class="home_hover"><a href="./home">Trang chủ</a></li>
+        	<li><a href="#">Sản phẩm</a>
+        		<ul class="sub_menu">
+        			 <li><a href="add_cat">Thêm mới danh mục</a></li>
+					 <li><a href="./add_products">Thêm sản phẩm</a></li>
+					 <li><a href="./multiple-products/5">Thêm nhiều sản phẩm cùng lúc</a></li>
+        			 <li><a href="./cat" >Danh mục</a></li>
+        			 <li><a href="./sanpham" >Sản phẩm</a></li>
+        			 <li><a href="./sanphamnoibat" >Sản phẩm nổi bật</a></li>
+        			 <li><a href="./sanphambanchay" >Sản phẩm bán chạy</a></li>
+        			 <li><a href="./sanphammoi" >Sản phẩm mới</a></li>
+					 <li><a href="./?act=comment" >Quản lý Coment</a></li>
+        		</ul>
+        	</li>
+			<li><a href="#">Đăng tin</a>
+        		<ul class="sub_menu">
+        			 <li><a href="./?act=adv">Rao vặt</a></li>
+					 <li><a href="./?act=job">Tuyển dụng</a></li>
+					 <li><a href="./?act=company">Danh bạ doanh nghiệp</a></li>
+        		</ul>
+        	</li>
+			<li><a href="#">Tuyển dụng</a>
+        		<ul class="sub_menu">
+        			 <li><a href="./?act=job_m">Đăng tuyển dụng</a></li>
+        			 <li><a href="./?act=job" >Danh sách tuyển dụng</a></li>
+        		</ul>
+        	</li>
+        	<li><a href="#">Tin tức</a>
+        		<ul class="sub_menu">
+        			<li><a href="./add_news_cat" >Thêm mới danh mục tin</a></li>
+        			<li><a href="./add_news" >Thêm mới tin</a></li>
+        			 <li><a href="./news_cat" >Danh mục tin</a></li>
+        			 <li><a href="./news" >Danh sách tin</a></li>
+        			 <li><a href="./news_top" >Tin nổi bật</a></li>
+        		</ul>
+        	</li>
+        	<li><a href="#">Giao diện & Module</a>
+        		<ul class="sub_menu">
+        			 <li><a href="./thaydoitem" >Cài đặt mẫu giao diện</a></li>
+					 <li><a href="./mobile-setup" >Cài đặt giao diện Mobile</a></li>
+					 <li><a href="./module_menu" >Module menu Top</a></li>
+					 <li><a href="./module" >Cài đặt module trên trang</a></li>
+        		</ul>
+        	</li>
+        	<li><a href="#">Đơn hàng</a>
+        		<ul class="sub_menu">
+        			 <li><a href="./donhang" >Tất cả đơn hàng</a></li>
+        			 <li><a href="./order-pending">Đơn hàng đã xử lý</a></li>
+        			 <li><a href="./order-ok">Đơn hàng đang chờ</a></li>
+        		</ul>
+        	</li>
+			<li><a href="#">Liên kết & Slider</a>
+        		<ul class="sub_menu">
+        			 <li><a href="./linkweb" >Danh sánh liên kết</a></li>
+        			 <li><a href="#">Liên kết bên trái</a></li>
+        			 <li><a href="#">Liên kết bên phải</a></li>
+        			 <li><a href="./slider">Quản lý Slider show</a></li>
+        		</ul>
+        	</li>
+			<li><a href="./popup">Quảng cáo & Popup</a>
+        	</li>
+        	<li><a href="#">Hệ thống</a>
+        		<ul class="sub_menu">
+        			 <li><a href="./thaydoimatkhau" >Thay đổi mật khẩu</a></li>
+					 <li><a href="./change_domain">Quản trị tên miền</a></li>
+					 <li><a href="./hotro" >Hỗ trợ trực tuyến</a></li>
+        			 <li><a href="./web_config" >Cấu hình Website</a></li>
+					 <li><a href="./setting-map" >Cài đặt bản đồ</a></li>
+					 <li><a href="./google_analytics" >Chèn google analytics</a></li>
+					 <li><a href="./create_sitemap" >Tạo Sitemap</a></li>
+        			 <li><a href="./lienhe" >Quản lý liên hệ</a></li>
+					 <li><a href="#" onclick="BrowseServer();">Quản lý Files</a></li>
+					 <li><a href="./thoat" >Thoát khỏi hệ thống</a></li>
+        		</ul>
+        	</li>
+        </ul>
+		
+	</div>

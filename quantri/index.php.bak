@@ -1,0 +1,251 @@
+<?
+if(!session_id()) session_start();
+
+if(!isset($_SESSION["session_message"])){
+//	session_register("session_message");
+	$_SESSION["session_message"] = "";
+}	
+
+if(isset($_GET['page']))
+$page = $_GET['page'];
+if ($_REQUEST['act']=='logout') session_unregister('log');
+if ($_SESSION['log']=='')
+{
+header("Location: login");
+}
+
+?>
+<?if ($_REQUEST['user']=='admin2')
+{?>
+<a href="home">B&#7845;m v&#224;o &#273;&#226;y &#273;&#7875; ti&#7871;p t&#7909;c</a>
+<?} else{?>
+<?}?>
+<?  
+
+require("../class/include/config.php");
+require("../class/include/common_start.php");
+require("../class/include/module_func.php");
+include("../class/inc/function.php");
+include("box/admin_func.php");
+include("visitor.php");
+
+?>
+<? include ("../news/news_func.php"); ?>
+<?php 
+$sql_user_mem=mysql_query("SELECT user,domain,fullname,email,re_time,currency FROM user_shop where user='".$_SESSION['log']."' ");
+$row_user_mem=mysql_fetch_assoc($sql_user_mem);?>
+<?
+$sql_config=mysql_query("SELECT * FROM config_mem where user='".$_SESSION['log']."' ");
+$row_config=mysql_fetch_assoc($sql_config);
+$sql_menu_left=mysql_query("SELECT * FROM menu_left where user='".$_SESSION['log']."' ");
+$row_menu_left=mysql_fetch_assoc($sql_menu_left);
+$sql_popup=mysql_query("SELECT * FROM popup where user='".$_SESSION['log']."' ");
+$row_popup=mysql_fetch_assoc($sql_popup);
+?>
+<?if($row_config['user']!==$_SESSION['log'])
+{?>
+<?
+$sql_config_up="insert into config_mem(user) value('".$_SESSION['log']."')";
+if(mysql_query($sql_config_up,$con))
+	{
+	echo '<script>window.location="./home"</script>';
+	}
+?>
+<?}elseif($row_popup['user']!==$_SESSION['log'])
+{?>
+<?
+$sql_popup_up="insert into popup(user_id,user) value('".$user_id."','".$_SESSION['log']."')";
+if(mysql_query($sql_popup_up,$con))
+	{
+	echo '<script>window.location="./home"</script>';
+	}
+?>
+<?}elseif($row_menu_left['user']!==$_SESSION['log'])
+{?>
+
+<?
+for($i=1;$i<=5;$i++)
+	{
+$sql_config_up="insert into menu_left(id_name,user) value('".$i."','".$_SESSION['log']."')";
+if(mysql_query($sql_config_up,$con))
+	{
+	echo '<script>window.location="./home"</script>';
+	}
+}
+?>
+
+<?}else{?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Administrator</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<?php if($row_user_mem['domain']=='')
+	{?>
+<base href="http://localhost/web36/quantri/" />
+<?}
+elseif($_SERVER["SERVER_NAME"]=='chohanviet.vn')
+		{?>
+<base href="http://localhost/web36/quantri/" />
+<?}else{?>
+<base href="http://<? echo $row_user_mem['domain'];?>/quantri/" />
+<?}?>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+<script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>	
+<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+
+
+<!-- manager files -->
+<script type="text/javascript" src="../ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+function BrowseServer()
+{
+// You can use the "CKFinder" class to render CKFinder in a page:
+var finder = new CKFinder();
+finder.basePath = 'ckeditor/'; // The path for the installation of CKFinder (default = "/ckfinder/").
+finder.selectActionFunction = SetFileField;
+finder.popup();
+
+}
+
+// This is a sample function which is called when a file is selected in CKFinder.
+function SetFileField( fileUrl )
+{
+document.getElementById( 'xFilePath' ).value = fileUrl;
+}
+
+</script>
+<!-- end manager filies -->
+
+
+ <script type="text/javascript" src="css/jquery-1.js"></script>
+ <script type="text/javascript">    var $j = jQuery.noConflict();</script>
+</head>
+<body>
+<div id="page_home">
+<!-- begin header-->
+<div id="header">
+		<div id="status">
+			<div id="livestats">
+				<div id="infobar" align="center">
+					<table cellspacing="1" cellpadding="0" border="0">
+					<tr>
+						<td>Tên đầy đủ: <span class="infovalue"><? echo $row_user_mem['fullname'];?></span></td>
+						<td width="20">&nbsp;</td>
+						<td>E-mail: <span class="infovalue"><? echo $row_user_mem['email'];?></span></td>
+<td style="padding-left:10px"><div style="float:left"><a href="./lienhe"><img src="images/new-message.png"></a><div style="float:right"><font color="red"><b>(<? echo mysql_num_rows(mysql_query("SELECT * FROM contact where user='".$_SESSION['log']."' and status=0 "));?>)</b></font></div></td>
+						<td><span class="infovalue">						
+<?php
+$a=$row_user_mem['re_time'];
+$target = mktime(0, 0, 0, substr($a,3,2), substr($a,0,2), substr($a,6,4)+1) ;
+$today = time () ;
+$difference =($target-$today) ;
+$days =(int) ($difference/86400) ;
+?>
+<?if($days>=20)
+	{?>
+Bạn còn <font color="blue"><b>(<?echo $days;?>)</b></font> Ngày sử dụng
+<?}elseif($days<=19&&$days>=0){?>
+Bạn còn <blink><font color="red"><b>(<?echo $days;?>)</b></font></blink> Ngày sử dụng - Vui lòng đóng thêm cước phí
+<?}else{?>
+<?}?>
+</span></td>
+<td><span class="infovalue">
+| Bạn có: 
+<a href="./?act=currency"><font color="red"><? echo number_format($row_user_mem['currency'],0);?> VNĐ</font></a></span></td>					
+ <td><span class="infovalue">
+ <a href="http://<? echo $row_user_mem['domain'];?>" target="_blank">Xem Website</a> |
+ <a href="http://chohanviet.vn/<? echo $row_user_mem['user'];?>" target="_blank">Xem dạng gian hàng</a></span></td>
+<td><span class="infovalue"><a href="./thoat">Thoát</a></span></td>
+					</tr>
+
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="headersearch">
+		</div>
+		<div id="logo">
+		<br />
+			HỖ TRỢ KỸ THUẬT: -  Tri: 0933.725.999 <br />
+		</div>
+		
+		<div id="welcomebar">
+			<div id="welcomedate">Hôm nay là <span class="lowlight">			<script language="javascript"> var mydate=new Date()   
+				var year=mydate.getYear()   
+				if (year < 1000)   
+				year+=1900   
+				var day=mydate.getDay()   
+				var month=mydate.getMonth()   
+				var daym=mydate.getDate()   
+				if (daym<10)   
+				daym="0"+daym   
+				var dayarray=new Array("Chủ nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy")   
+				var montharray=new Array("-1","-2","-3","-4","-5","-6","-7","-8","-9","-10","-11","-12")   
+				document.write(""+dayarray[day]+", Ngày "+daym+" "+montharray[month]+"-"+year+"")   
+			</script> 
+</span></div>
+			<div id="welcomeuser">Chào mừng, <span class="highlight"><b><? echo $_SESSION['log'];?></b></span> đã trở lại trang quản lý hệ thống <b>CHOHANVIET.VN</b> chúc <b><? echo $row_user_mem['fullname'];?></b> một ngày vui vẻ.</div>
+		</div>
+</div>
+<!-- end header-->
+
+
+<!-- begin content-->
+<div id="center">
+
+<!-- begin menu_top-->
+<div id="menu_top">
+<? include("box/menu_top.php");?>
+</div>
+<!-- end menu_top-->
+
+<div id="content">
+<?if($days>=0)
+	{?>
+<? if($_REQUEST['act']=='')
+{?>
+<?include("thongke.php");?>
+<?} else {?>
+<? include("box/frame.php");?>
+<?}?>
+<?}else{?>
+<div style="padding-top:30px;text-align:center;font-weight:bold;font-size:20px;color:red">
+<img src="images/alert.jpg" border="0">
+<br><br>
+Website của bạn đã hết thời gian sử dụng !
+</div>
+<br>
+<div style="padding-top:0px;text-align:center;font-weight:bold;font-size:18px;color:blue">
+Bạn vui lòng đóng cước phí để sử dụng dịch vụ
+<br>
+Mọi chi tiết xin liên hệ: -  Tại Việt Nam : 0164.898.6789 - 0936.15.10.89 / -  Tại Hàn Quốc : 0120.2632.1368 
+<br>
+Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi trong thời gian qua chúc bạn luôn thành công trong cuộc sống !
+</div>
+<?}?>
+</div>
+
+
+<!-- content_footer-->
+<div id="content_footer">
+</div>
+<!-- end content_footer-->
+<!-- begin footer-->
+<div id="footer">
+Cpanel by Công Ty Cổ Phần Cong Nghe Hai Quang
+<br>
+Ho tro: 0933.725.99
+<br>
+Địa chỉ: Số nhà 94/68 - Triều Khúc - Tân Triều - Thanh Trì - Hà Nội 
+</div>
+<!-- end footer-->
+</div>
+<!-- end content-->
+
+</div>
+</body>
+</html>
+<?}?>
+<? require("../class/include/common_end.php") ?>

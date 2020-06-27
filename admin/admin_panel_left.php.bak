@@ -1,0 +1,253 @@
+<table border="0" width="161" cellspacing="0" cellpadding="0" id="table19">
+	<tr>
+		<td><table border="0" style="border-collapse: collapse" width="161" id="table20" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center">
+					<font style="font-weight: 700" color="#FFFFFF">Sản phẩm</font></td>
+                </tr>
+
+
+
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=category">Danh m&#7909;c sản phẩm</a></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+										<a href="./?act=product">Danh sách sản phẩm</a></td>
+                </tr>
+
+				
+		
+				<tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+					<a href="./?act=pro_moi">Sản phẩm mới</a></td>
+                </tr>
+                </table>
+		<table border="0" style="border-collapse: collapse" width="161" id="table20" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center">
+					<font style="font-weight: 700" color="#FFFFFF">Rao vặt</font></td>
+                </tr>
+
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=cat_adv">Danh mục rao vặt</a></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+										<a href="./?act=adv">Danh sách rao vặt</a></td>
+                </tr>
+         </table>
+		 <table border="0" style="border-collapse: collapse" width="161" id="table20" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center">
+					<font style="font-weight: 700" color="#FFFFFF">Tuyển dụng</font></td>
+                </tr>
+
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=cat_job">Danh mục tuyển dụng</a></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+										<a href="./?act=job">Danh sách tuyển dụng</a></td>
+                </tr>
+         </table>
+		 <table border="0" style="border-collapse: collapse" width="161" id="table20" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center">
+					<font style="font-weight: 700" color="#FFFFFF">Danh bạ doanh nghiệp</font></td>
+                </tr>
+
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=cat_company">Danh mục danh bạ</a></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+										<a href="./?act=company">Danh sách danh bạ</a></td>
+                </tr>
+         </table>
+
+			 <table border="0" style="border-collapse: collapse" width="161" id="table21" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center"><font color="#FFFFFF">
+					<span style="font-weight: 700">Tin t&#7913;c & s&#7921; ki&#7879;n</span></font></td>
+                </tr>
+                 <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=news_category">Danh m&#7909;c</a></td>
+                </tr>
+
+                  <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=news">Danh sách tin</a></td>
+                </tr>
+
+			</table>
+
+
+<tr>
+		<td>
+ <table border="0" style="border-collapse: collapse" width="161" id="table20" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center">
+					<font style="font-weight: 700" color="#FFFFFF">Trung tâm trợ giúp</font></td>
+                </tr>
+
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=help_category">Danh mục trợ giúp</a></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+										<a href="./?act=help">Danh sách trợ giúp</a></td>
+                </tr>
+         </table>
+	</td>
+	</tr>
+
+	<tr>
+		<td>
+
+
+
+
+
+
+
+               <table border="0" style="border-collapse: collapse" width="161" id="table21" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center"><font color="#FFFFFF">
+					<span style="font-weight: 700">Online</span></font></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=online">C&#7853;p nh&#7853;t</a></td>
+                </tr>
+                </table>
+
+
+                 <table border="0" style="border-collapse: collapse" width="161" id="table22" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center"><font color="#FFFFFF">
+					<span style="font-weight: 700">Liên k&#7871;t website </span></font></td>
+                </tr>
+				<tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+							<a href="./?act=slider">Slider</a>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+							<a href="./?act=link_website">Liên kết trang</a>&nbsp;</td>
+                </tr>
+				                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+							<a href="./?act=link">Mạng xã hội</a>&nbsp;</td>
+                </tr>
+                </table>      
+
+              <table border="0" style="border-collapse: collapse" width="161" id="table21" cellpadding="0">
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center"><font color="#FFFFFF">
+					<span style="font-weight: 700">&#272;&#7863;t hàng</span></font></td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=order">&#272;&#417;n hàng</a></td>
+                </tr>
+                </table>
+
+              <table border="0" style="border-collapse: collapse" width="161" id="table22" cellpadding="0">
+
+                <tr>
+                  <td width="161" height="20" bgcolor="#0069A8" class="title">
+                  <p align="center"><font color="#FFFFFF">
+					<span style="font-weight: 700">H&#7879; th&#7889;ng</span></font></td>
+                </tr>
+							  			    <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=admin">Danh sách quản trị </a> 
+							</td>
+                </tr>
+			    <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=template">Template </a> 
+							</td>
+                </tr>
+			    <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=users">Thành viên </a> 
+							</td>
+                </tr>
+				<tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=users_pay">Lịch sử T.Toán hoa hồng </a> 
+							</td>
+                </tr>
+				<tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=email">Email nhận tin </a> 
+							</td>
+                </tr>
+				<tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=currency">Quản lý tiền tệ </a> 
+							</td>
+                </tr>
+			    <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=city">Tỉnh thành </a> 
+							</td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=changepass">Thay &#273;&#7893;i m&#7853;t kh&#7849;u </a> 
+							</td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=admin_config">C&#7845;u h&#236;nh website </a> 
+							</td>
+                </tr>
+				<tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="./?act=config_views">Cài đặt hiển thị </a> 
+							</td>
+                </tr>
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</b><a href="#" onclick="BrowseServer();">Quản lý File </a> 
+							</td>
+                </tr>
+
+                <tr>
+                  <td background="bg_button_L.gif" width="161" height="25" class="normalfont">
+                  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+							<a href="./?act=logout">Thoát </a> 
+							</td>
+                </tr>
+              </table>
+              
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,184 @@
+
+body {
+	padding: 0;
+	margin: 0;
+	height:auto;
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#111;
+	background:#0471a4 url(Image/bg.jpg) repeat-x;
+}
+
+input, textarea, select{
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
+
+.textbox{
+	-moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #C0C0C0 #D9D9D9 #D9D9D9;
+    border-radius: 1px 1px 1px 1px;
+    border-right: 1px solid #D9D9D9;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    margin: 0;
+    padding:5px;
+}
+
+.textbox:hover, .textarea:hover{
+	-moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #0094da #bababa #bababa;
+    border-right: 1px solid #bababa;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+}
+
+.textbox:focus, .textarea:focus{
+	border: 1px solid #0094da;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
+    outline: medium none;
+}
+
+.textbox_dangnhap{
+	padding-left:30px;
+	background: url(Image/icon_dangnhap.png) no-repeat left center;
+}
+
+.textbox_matkhau{
+	padding-left:30px;
+	background: url(Image/icon_matkhau.png) no-repeat left center;
+}
+
+a{
+	color:#1b1b1b;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#a0522d;
+	text-decoration:none;
+}
+
+.a_quenmatkhau{
+	float:right;
+	padding-right:30px;
+	margin-top:15px;
+}
+
+.a_quenmatkhau:hover{
+	text-decoration:underline;
+}
+
+img{
+	border:none;
+}
+
+/*====================================Button===================================*/
+.btn{
+	float:left;
+	background-color: #0094da;
+	cursor: pointer !important;
+	color:#FFF;
+	padding:12px 22px;
+	line-height:16px;
+	font-weight:bold;
+	font-size:125%;
+	text-decoration:none;
+	text-align:center;
+}
+
+.btn:hover{
+	color:#FFF;
+	background-color:#a0522d;
+}
+
+/*==============================BO CUC=======================================*/
+#content{
+	width:100%;
+	height:auto;
+}
+
+.clear{
+	clear:both;
+}
+
+.div_content{
+	margin:0 auto;
+	width:1000px;
+}
+
+.div_login{
+	float:left;
+	width:518px;
+	margin:120px 0 0 241px;
+}
+
+.div_copyright{
+	float:left;
+	width:100%;
+	margin-top:50px;
+}
+
+.div_login_top{
+	float:left;
+	width:100%;
+	height:20px;
+	background:url(Image/bg_top.png) no-repeat;
+}
+
+.div_login_center{
+	float:left;
+	width:450px;
+	height:310px;
+	padding:0 34px;
+	background:url(Image/bg_center.png) repeat-y;
+}
+
+.div_login_bottom{
+	float:left;
+	width:100%;
+	height:20px;
+	background:url(Image/bg_bottom.png) no-repeat;
+}
+
+
+.div_title{
+	float:left;
+	width:100%;
+	height:68px;
+	margin:30px 0 20px 0;
+	background:url(Image/title.png) no-repeat;
+}
+
+.span_text{
+	margin-left:20px;
+	font-weight:bold;
+}
+
+.p_copyright{
+	margin:0;
+	padding:0;
+	color:#FFF;
+	text-align:center;
+	font-size:12px;
+	line-height:18px;
+}
+
+
+
+
+
+
+

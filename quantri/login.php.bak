@@ -1,0 +1,104 @@
+<? if(!session_id()) session_start(); ?>
+<? require("../class/include/config.php") ?>
+<? require("../include/common_start.php") ?>
+<?
+if (isset($_POST['butSub'])) {
+	$user=$_POST['txtUser'];
+	$pass=$_POST['txtPwd'];
+	$sql = "select * from user_shop where user='".$user."' and pass='".$pass."' limit 1";
+	$bang=mysql_query($sql);
+	$xuat=mysql_fetch_array($bang);
+	$level=$xuat['level_shop'];
+	$capcha = $_POST['txtCaptcha'];
+		if($user!==$xuat['user'] or $pass!==$xuat['pass'])
+	{
+		$err="Tên đăng nhập hoặc mật khẩu không đúng";	
+	}
+elseif($capcha==NULL)
+	    {
+			$err="Chưa nhập mã bảo mật";
+		}
+elseif($capcha!==$_SESSION['security_code'])
+	    {
+			$err="Không đúng mã bảo mật";
+		}
+elseif (mysql_num_rows(mysql_query($sql,$con))>0)
+	{
+$quyen=$level;
+$log=$user;
+session_register("log");
+$_SESSION['log']=$user;
+session_register("quyen");
+$_SESSION['level']=$level;
+echo "<script>window.location='home'</script>";
+
+	}
+else
+	{
+}
+} 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Administrator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="style.css" title="style" media="screen" />
+
+<script type="text/javascript">
+/* <![CDATA[ */
+	$(document).ready(function(){
+			$(".block").fadeIn(1000);				   
+			$(".idea").fadeIn(1000);
+			$('.idea').supersleight();
+			$('#username').example('Tên đăng nhập');	
+			$('#password').example('Mật khẩu');
+			$('#codepost').example('Nhập mã bảo mật');
+	});
+/* ]]> */
+</script>
+</head>
+
+<body>
+    <div id="wrap">
+     <div class="idea">
+            <img src="images/message.png" alt=""/>
+            <p>Nh&#7853;p th&#244;ng tin!
+			<font color="red"><b>
+<?
+if ($err!='')
+{
+	echo $err;
+}
+?></b></font>
+			</p>
+        </div>
+        
+<div class="block">
+            <form method="post" name="FormLoaiSP">
+            <div class="left"></div>
+            <div class="right">
+                <div class="div-row">
+                	<input type="text" id="username" name="txtUser"  onfocus="this.value='';" onblur="if (this.value=='') {this.value='T&#234;n &#273;&#259;ng nh&#7853;p';}" value="T&#234;n &#273;&#259;ng nh&#7853;p" />
+                                    </div>
+                <div class="div-row">
+                     <input type="password" id="password" name="txtPwd" onfocus="this.value='';" onblur="if (this.value=='') {this.value='************';}" value="************" />
+                </div>
+				<div class="div-row">
+                     <input type="text" id="codepost" name="txtCaptcha" onfocus="this.value='';" onblur="if (this.value=='') {this.value='Nh&#7853;p m&#227; b&#7843;o m&#7853;t';}" value="Nh&#7853;p m&#227; b&#7843;o m&#7853;t b&#234;n d&#432;&#7899;i" />
+                </div>
+                <div class="rm-row">
+                    <img src="random_image.php" />
+                </div>
+                <div class="send-row">
+                    <button id="login" value="&#272;&#259;ng nh&#7853;p" type="submit" name="butSub"></button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<? require("../include/common_end.php") ?>

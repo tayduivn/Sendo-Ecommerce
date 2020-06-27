@@ -1,0 +1,65 @@
+
+.header-left .box-ship{
+  float: left;
+  margin-top: 5px;
+  position: relative;
+  line-height: 22px;
+  padding-left: 28px;
+  cursor: help;
+  padding-right: 20px;
+}
+.header-left .box-ship:before*{
+    content: '';
+    background: url("//static.scdn.vn/images/ecom/ic-home.png") -308px -227px no-repeat;
+    width: 28px;
+    height: 22px;
+    left: 0;
+    position: absolute;
+	-webkit-transform:scale(0.8,0.8);
+	-moz-transform:scale(0.8,0.8);
+	-ms-transform:scale(0.8,0.8);
+	transform:scale(0.8,0.8);
+}
+.header-left .box-ship .icon-Navigationdownhome{	
+  height: 20px;
+    width: 20px;
+    color: #999;
+	position: absolute;
+	right: 0;
+	display: block;
+	top: 2px;
+  cursor: pointer;
+}
+.header-left .box-ship.free-shipping:after{display: none;}
+.header-left .deposit {float: left; margin-top: 5px;}
+.header-left .deposit .icon-fund{vertical-align: middle; fill:#5aac68}
+.header-left .box-ship strong{color: #019901; text-transform: uppercase;}
+.header-left .box-ship .info-box-ship {
+	position: absolute;
+	top: 22px;
+    left: 0;
+	background-color: #fff;
+    padding: 10px;
+    border: 1px solid #DDD;
+    box-shadow: 1px 2px 4px #CCC;
+    -webkit-box-shadow: 1px 2px 4px #CCC;
+    -moz-box-shadow: 1px 2px 4px #CCC;
+    display: none;
+	z-index: 5;
+	word-wrap: break-word;
+	width: 300px;
+  border-radius: 2px;
+}
+
+.header-left .box-ship .info-box-ship .ship-info-label:before{
+	content: '';
+	background: url("//static.scdn.vn/images/ecom/ic-sprite.png") -387px -62px no-repeat;
+	width: 28px;
+	height: 21px;
+	display: block;
+	position: absolute;
+	left: 10px;
+}
+.header-left .box-ship  .info-box-ship strong {color: rgb(0, 153, 0);}
+.header-left .box-ship  .info-box-ship span{display: block;line-height: 20px;font-size: 11px;}
+.header-left .box-ship:hover .info-box-ship{display: block;}

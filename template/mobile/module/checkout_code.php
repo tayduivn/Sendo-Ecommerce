@@ -1,0 +1,175 @@
+<?if (!isset($_SESSION['log']) || $_SESSION['log']==''){	unset($_SESSION['log']);}
+if (count($_SESSION['cart'])<=0){
+?>
+<script>window.location='./cart.html'</script>
+<?}?>
+<?	function send_mail_order()
+{		
+global $con;	
+global $adminemail;		
+$sql_pay = "select * from user_shop where user='".$_SESSION['log']."' ";	
+$result = mysql_query($sql_pay,$con);
+$cust=mysql_fetch_assoc($result);		
+$name=$cust['fullname'];	
+$address=$cust['address'];	
+$phone=$cust['phone'];	
+$email=$cust['email'];	
+$dathang="";	
+$cart=$_SESSION['cart'];	
+$tongcong=0;	
+$cnt=0;	
+foreach ($cart as $product){		
+	$sql = "select * from products where id='".$product[0]."'";		
+	$result = mysql_query($sql,$con);		
+	$pro=mysql_fetch_assoc($result);				
+	$dathang.="Ma san pham : ".$pro['code']."<br>"; 		
+	$dathang.="Ten san pham : ".$pro['name']."<br>"; 		
+	$dathang.="So luong : ".$product[1]."<br>"; 			
+	$dathang.="Don gia : ".$pro['price']."<br>";		
+	$dathang.="Thanh tien : ".$pro['price']*$product[1]."<br><br>";				
+	$tongcong=$tongcong+$pro['price']*$product[1];		
+	$cnt=$cnt+1;		} 		
+	$dathang.="<hr>Tong cong : ".$tongcong."<br>";	
+	$m2=sendmail($email,$adminemail, "Thong tin dat hang cua : ".$name, "Ho ten : ".$name."<br>Dia chi : ".$address."<br>Dien thoai : ".$phone."<br>Email : ".$email."<BR><hr><b>Don hang :</b><br>".$dathang);		if (m2)	
+	{			return "";		}		else			
+		return "Không th&#7875; g&#7903;i thông tin.";	}?>
+		<?	if (count($_SESSION['cart'])<=0) 
+		echo "<script>window.location='./?menu=cart'</script>";	
+	$cart=$_SESSION['cart'];	
+	$sql = "select * from user_shop where user='".$_SESSION['log']."'";	
+	$result = mysql_query($sql,$con);	
+	$cust=mysql_fetch_assoc($result);?>  
+<?
+	if (isset($_POST['butSub']))
+	{
+		$name=addslashes($_POST['name']);
+		$company=addslashes($_POST['company']);
+		$email=addslashes($_POST['email']);
+		$phone=addslashes($_POST['phone']);
+		$address=addslashes($_POST['address']);
+		$tongcong=0;
+		$cnt=0;
+		$sqlorder="insert into orders (orders_customer_id, orders_name, orders_company, orders_email, orders_phone, orders_address, orders_user, orders_date) values ('".$cust['id']."','".$name."','".$company."','".$email."','".$phone."','".$address."','".$user."',SYSDATE())";		
+		mysql_query($sqlorder,$con);
+		$newid=mysql_insert_id();
+		$cart=$_SESSION['cart'];
+		foreach ($cart as $product){
+			$sql = "select * from products where id='".$product[0]."'";
+			$result = mysql_query($sql,$con);
+			$pro=mysql_fetch_assoc($result);
+			$sqlorder="insert into orderdetail (ordersdetail_product_id,ordersdetail_quantity,ordersdetail_price,ordersdetail_ordersid) values (".$product[0].",".$product[1].",'".$pro['price']."',".$newid.")";
+//echo $sqlorder;exit(0);
+			mysql_query($sqlorder,$con);
+			$tongcong=$tongcong+$pro['price']*$product[1];
+			$cnt=$cnt+1;
+		} ?>
+		<?
+		if (send_mail_order()=="")
+		{?>
+			<script>window.location='<?if($domain=='')
+{?>./gianhang.php?user=<? echo $user;?>&home=checkout&code=1<?}else{?>./index.php?home=checkout&code=1<?}?>'</script>
+           <?}else
+			{
+				echo "<p align='center' class='err'><font color=red>Không th&#7875; g&#7903;i thông tin</font></p>";
+			}?>
+<?}
+?>
+
+<p align="center" style="line-height: 150%" class="err"><font face="Tahoma" style="font-size: 8.5pt">
+<? 	if ($_REQUEST['code']=='1') { 
+     ?>
+	Thông tin &#273;&#7863;t hàng c&#7911;a b&#7841;n &#273;ã &#273;&#432;&#7907;c g&#7903;i &#273;&#7871;n chúng tôi<br>
+	<?if($domain==''){?>
+	<a href="./<? echo $user;?>">Nh&#7845;n &#273;ây &#273;&#7875; tr&#7903; v&#7873; trang chính</a>
+	<?}else{?>
+		<a href="">Nh&#7845;n &#273;ây &#273;&#7875; tr&#7903; v&#7873; trang chính</a>
+	<?}?>
+<?
+unset($_SESSION['cart']);
+unset($_SESSION['tongcong']);
+}
+else{?>
+</font></p>
+<table bgcolor="#FFFFFF" border="0" width="100%" id="table1090" cellspacing="0" cellpadding="0">
+<tr>
+<td width="54"><a href="<?if($domain=='')
+{?>./<? echo $user;?><?}else{?>./index.php<?}?>"><img src="template/base/images/home.jpg"></a></td>
+<td>
+<b><font face="Tahoma" style="font-size: 9pt; color:#5A635C">
+Trang chủ> Thanh toán</b>
+</td>
+</tr>
+<tr>
+<td height="20" colspan="2"></td>
+<td>
+</td>
+</tr>
+</table>
+<FORM action="" method="POST" name="cartform">
+<TABLE bgcolor="#FFFFFF" border="0" cellspacing="1" cellpadding="2" width="100%" id="table8">
+<TR><TD align="right" width="100"><font color="#000000" style="font-size: 8.5pt">H&#7885; và tên :</font></TD>
+<TD width="6">                              
+&nbsp;</TD><TD nowrap>                                        
+<input value="<? echo $cust['fullname']; ?>" name="name" style="width:400px"></b></span>
+</TD></TR><TR><TD align="right" width="100"><font color="#000000" style="font-size: 8.5pt">Công ty :</font></TD>
+<TD width="6">&nbsp;</TD><TD nowrap>                                      
+<span style="font-size: 8.5pt">                                                
+<input value="<? echo $cust['company']; ?>" name="company" style="width:400px"></span>		
+</TD></TR>
+<TR><TD align="right" width="100"><font color="#000000" style="font-size: 8.5pt">&#272;&#7883;a ch&#7881; :</font></TD>
+<TD width="6">
+</TD><TD nowrap>                            
+<font face="Tahoma">                                <span style="font-size: 8.5pt">
+<input value="<? echo $cust['address']; ?>" name="address" style="width:400px"></b></span>
+</TD></TR>
+<TR><TD align="right" width="100"><font color="#000000" style="font-size: 8.5pt">&#272;i&#7879;n th&#7885;ai :</font></TD>
+<TD width="6"> &nbsp;</TD>
+<TD nowrap>                 
+<span style="font-size: 8.5pt">
+<input value="<? echo $cust['phone']; ?>" name="phone" style="width:400px"></span>				
+</TD></TR>
+<TR><TD align="right" width="100"><font color="#000000" style="font-size: 8.5pt">E-mail :</font></TD>
+<TD width="6"></TD>
+<TD nowrap>                                                  
+<span style="font-size: 8.5pt">                     
+<input value="<? echo $cust['email']; ?>" name="email" style="width:400px"></span>
+</TD></TR></TABLE>
+<TABLE bgcolor="#FFFFFF" border="0" cellpadding="10" cellspacing="1" width="100%" id="table1">
+<TR><TD class="DialogBox">
+<table border="1" width="100%" cellspacing="0" cellpadding="4" id="table7" style="border-collapse: collapse">	
+<tr>	
+<td align="center" nowrap width="100">&nbsp;</td>		
+<td align="center" nowrap><font face="Tahoma" style="font-size: 8.5pt">S&#7843;n ph&#7849;m</font></td>		
+<td align="center" nowrap width="60"><font face="Tahoma" style="font-size: 8.5pt">S&#7889; l&#432;&#7907;ng</font></td>		
+<td align="center" nowrap width="60"><font face="Tahoma" style="font-size: 8.5pt">&#272;&#417;n giá</font></td>		
+<td align="center" nowrap width="60"><font face="Tahoma" style="font-size: 8.5pt">Thành ti&#7873;n</font></td>	</tr>
+
+<?$cart=$_SESSION['cart'];$cnt=0;$tongcong=0;
+foreach ($cart as $product)
+{$sql = "select * from products where id='".$product[0]."'";
+$result = mysql_query($sql,$con);
+if (mysql_num_rows($result)>0)
+	{
+	$pro=mysql_fetch_assoc($result);?>	
+	
+<tr>		
+<td align="center" width="100">		
+<font face="Tahoma" style="font-size: 8.5pt">
+<A href="<?if($domain=='')
+{?>./<? echo $user;?>/products/<? echo $pro['id']; ?>/<? echo $pro['cat_mem']; ?>/<? echo str_replace($marTViet,$marKoDau,$pro['name']); ?>.html<?}else{?>./products/<? echo $pro['id']; ?>/<? echo $pro['cat_mem']; ?>/<? echo str_replace($marTViet,$marKoDau,$pro['name']); ?>.html<?}?>">
+<IMG id="" src="<? echo $pro['image']; ?>" alt="<? echo $pro['name']; ?>" border="0" width="100"></A></font></td>		
+<td align="left"><span style="font-size: 8.5pt"><? echo $pro['name']; ?></span></td>	
+<td align="center" width="60"><span style="font-size: 8.5pt"><? echo $product[1]; ?></span></td>	
+<td align="center" width="60"><span style="font-size: 8.5pt"><? echo number_format($pro['price']); ?>VNĐ</span></td>		
+<td align="center" width="60"><span style="font-size: 8.5pt"><? echo number_format(($pro['price']*$product[1])); ?>VNĐ</span></td></tr>
+
+<?}$tongcong=$tongcong+$pro['price']*$product[1];$cnt=$cnt+1;} ?>
+</table>
+<TABLE border="0" width="100%" id="table2">
+<TR><TD>
+<p align="right"><font face="Tahoma" style="font-size: 8.5pt"><b>T&#7893;ng c&#7897;ng : <? echo number_format($tongcong); ?>VNĐ	</b></font></TD></TR></TABLE><HR align="left" noshade size="1">
+<TABLE border="0" cellpadding="0" cellspacing="0" width="100%" id="table5">
+<TR><TD><p align="center"><font face="Verdana" size="1">
+<input type=submit name=butSub value="Gửi thông tin mua hàng"></font></TD></TR></TABLE>
+<input type="hidden" name="menu" value="checkout"></FORM>
+<font face="Tahoma" style="font-size: 8.5pt">&nbsp; </font></TD></TR></TABLE><?}?>

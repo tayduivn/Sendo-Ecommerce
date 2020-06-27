@@ -1,0 +1,180 @@
+<?php
+mysql_connect("localhost","root","");
+mysql_select_db("muaban");
+$id=$_REQUEST['id'];
+$sql=mysql_query("SELECT * FROM user_shop where id='".$id."'");
+$row=mysql_fetch_assoc($sql);
+?>
+<style>
+.left
+{
+float:left
+}
+.left input
+{
+width:250px;
+}
+</style>
+<table><tr>
+<td style="font-weight:bold">
+<?php if($row['active']=='0')
+{?>
+<font color="red">Chưa thanh toán</font>
+<?}else{?>
+<font color="blue">Đã thanh toán hoa hồng</font>
+<?}?>
+</td>
+</tr></table>
+<div>
+<div class="left">
+<div style="background-color:#8CA6EE;padding:10px">
+Thông tin cá nhân
+</div>
+<div style="">
+<table>
+<tr>
+<td align="right"><p>Tên đăng nhập: </td>
+<td><input type="text" disabled value="<?php echo $row['user'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Email: </td>
+<td><input type="text" disabled value="<?php echo $row['email'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Họ tên: </td>
+<td><input type="text" disabled value="<?php echo $row['fullname'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Loại thành viên: </td>
+<td><font color="blue"><b><?php if($row['level_shop']=='0'){?>Shop Vip<?}else{?>Shop Free<?}?></b></font></td>
+</tr>
+<tr>
+<td align="right"><p>Địa chỉ: </td>
+<td><input type="text" value="<?php echo $row['address'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Số điện thoại: </td>
+<td><input type="text" disabled value="<?php echo $row['phone'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Link giới thiệu bạn bè: </td>
+<td><input type="text" value="http://usd.la/?home=regestry&confim=confim&ref=<?php echo $row['user'];?>"></p></td>
+</tr>
+</table>
+</div>
+</div>
+
+
+
+<div style="float:right">
+<div style="background-color:#8CA6EE;padding:10px">
+Thông tin tài khoản
+</div>
+<div style="">
+<?php
+if(isset($_POST['Save']))
+{
+	$name_bank=$_POST['name_bank'];
+	$number_bank=$_POST['number_bank'];
+	$bank=$_POST['bank'];
+	$reg_time= strtotime(str_replace("/","-",$_POST['reg_time']));
+	$end_time= strtotime(str_replace("/","-",$_POST['end_time']));
+	$active=$_POST['active'];
+	$tien=str_replace(".","",$_POST['tien']);
+	$chietkhau=str_replace(".","",$_POST['chietkhau']);
+	if($pay_time=='')
+	{
+		$pay_time=strtotime(str_replace("/","-",date("d/m/Y")));
+	}
+	else
+	{
+        $pay_time=strtotime(str_replace("/","-",$_POST['pay_time']));
+	}
+	if($name_bank=='')
+	{
+		$err="Xin vui lòng điền Tên ngân hàng";
+	}
+	else
+	{
+		$sql="update user_shop set name_bank='".$name_bank."',number_bank='".$number_bank."',bank='".$bank."',re_time='".$reg_time."',end_time='".$end_time."',pay_time='".$pay_time."',active='".$active."',tien='".$tien."',chietkhau='".$chietkhau."' where id='".$id."'";
+		if(mysql_query($sql))
+		{
+			$err="Cập nhật thành công";
+		}
+		else
+		{
+			$err="Không thể cập nhật";
+		}
+	}
+
+}
+?>
+<form method="POST" action="">
+<table>
+<tr>
+<td align="right"></td>
+<td><?php echo $err;?></td>
+</tr>
+<tr>
+<td align="right"><p>Tên tài khoản Ngân hàng: </td>
+<td><input type="text" name="name_bank" value="<?php echo $row['name_bank'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Chủ tài khoản: </td>
+<td><input type="text" name="number_bank" value="<?php echo $row['number_bank'];?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Ngân hàng: </td>
+<td><input type="text" name="bank" value="<?php echo $row['bank'];?>"></p></td>
+</tr>
+<tr>
+<tr>
+<td align="right"><p>Người giới thiệu: </td>
+<td><input type="text" disabled value="<?php echo $row['reg_user'];?>"></p></td>
+</tr>
+<tr>
+<tr>
+<td align="right"><p>Ngày đăng ký: </td>
+<td><input type="text" name="reg_time" value="<? echo date("d/m/Y",$row['re_time']); ?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Ngày kích hoạt: </td>
+<td><input type="text" name="pay_time" value="<? echo date("d/m/Y",$row['pay_time']); ?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Ngày hết hạn: </td>
+<td><input type="text" name="end_time" value="<? echo date("d/m/Y",$row['end_time']); ?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Số tiền nạp: </td>
+<td><input type="text" name="tien" value="<? echo number_format($row['tien'],0); ?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Chiết khấu cho <font color="red"><?php echo $row['reg_user'];?></font>: </td>
+<td><input type="text" name="chietkhau" value="<? echo number_format($row['chietkhau'],0); ?>"></p></td>
+</tr>
+<tr>
+<td align="right"><p>Thanh toán hoa hồng cho <font color="red"><?php echo $row['reg_user'];?></font>: </td>
+<td>
+<select name="active">
+<?php if($row['active']=='0')
+{?>
+<option value="0" selected>Không thanh toán</option>
+<option value="1">Thanh toán</option>
+<?}else{?>
+<option value="0">Không thanh toán</option>
+<option value="1" selected>Thanh toán</option>
+<?}?>
+</select>
+</p>
+</td>
+</tr>
+<tr>
+<td></p></td>
+<td><input type="submit" name="Save" value="Kích hoạt"></p></td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+</div>

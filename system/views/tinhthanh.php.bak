@@ -1,0 +1,26 @@
+
+
+<?php
+$id = intval($_GET['id']);
+
+$con = mysqli_connect('localhost','shopct16_data','','gianhang');
+if (!$con) {
+    die('Could not connect: ' . mysqli_error($con));
+}
+
+mysqli_select_db($con,"ship_miennam");
+$sql="SELECT * FROM ship_miennam WHERE id = '".$id."'";
+$result = mysqli_query($con,$sql);
+
+while($row = mysqli_fetch_array($result)) {
+	$gia = $row['gia'];
+
+    echo "".$gia."";
+
+}
+
+mysqli_close($con);
+
+
+
+?>

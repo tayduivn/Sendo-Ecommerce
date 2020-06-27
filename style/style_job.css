@@ -1,0 +1,47 @@
+.tbInfo-header {
+    background: none repeat scroll 0 0 #F0E9F9;
+    border-bottom: 1px solid #E2D5F3;
+    border-top: 1px solid #E2D5F3;
+    color: #782DB6;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    position: relative;
+}
+.tbInfo-header h3
+{
+color:#008080;
+padding:0px;
+margin:0px;
+font-size:12px;
+}
+.tbInfo-row {
+    border-bottom: 1px dotted #DDDDDD;
+    line-height: 23px;
+    padding: 7px 20px;
+}
+.br-L {
+    border-left: 1px dotted #DDDDDD;
+}
+.tbInfo-row {
+    border-bottom: 1px dotted #DDDDDD;
+    line-height: 23px;
+    padding: 7px 20px;
+}
+.ntv_tbInfo-header {
+    background: none repeat scroll 0 0 #F0E9F9;
+    border-bottom: 1px solid #E2D5F3;
+    border-top: 1px solid #E2D5F3;
+    color: #782DB6;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    position: relative;
+}
+.ntv_tbInfo-header  h3
+{
+color:#008080;
+padding:0px;
+margin:0px;
+font-size:12px;
+}

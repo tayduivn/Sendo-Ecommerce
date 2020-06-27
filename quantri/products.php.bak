@@ -1,0 +1,636 @@
+<? if($_SESSION['level']=='0' or $_SESSION['level']=='3')
+{?>
+<?
+echo $_SESSION["session_message"];
+$_SESSION["session_message"] = "";
+$MAXPAGE=40;
+?>
+<table height="28" cellSpacing="0" cellPadding="0" width="100%" border="0">
+      <tr align=center>
+        <td class="title" width="100%">Danh sách các sản phẩm đã đăng
+		<span style="float: right">
+		<input type="button" value="Thêm mới" class="nhapmoi" onclick="window.location='./themmoisanpham'">		
+		</span>
+	</td>
+      </tr>
+    </table>
+<?
+	switch ($_GET['action'])
+	{
+		case 'del' :
+			$id = $_GET['id'];
+			$pro=GetProductInfo($id);
+			$link="../";
+			if ($pro)
+			{
+				$sql = "delete from products where id='".$id."'";
+				$sql1 = mysql_query("SELECT * FROM products where id='".$id."' ");
+				$result = mysql_query($sql,$con);
+				$pro1=mysql_fetch_array($sql1);
+				if ($result) 
+				{
+					if (file_exists($link.$pro['image'])) unlink($link.$pro['image']);
+					if (file_exists($link.$pro['image_large'])) unlink($link.$pro['image_large']);
+
+					echo "<p align=center class='err'>&#272;ã xóa thành công</p>";
+				}
+					else echo "<p align=center class='err'>Không th&#7875; xóa d&#7919; li&#7879;u</p>";
+			}
+			break;
+	}
+?>
+
+<?
+	if (isset($_POST['ButDel'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			$link="../";
+			if ($pro)
+			{
+				@$result = mysql_query("delete from products where id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+					if (file_exists($link.$pro['image'])) unlink($link.$pro['image']);
+					if (file_exists($link.$pro['image_large'])) unlink($link.$pro['image_large']);
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã xóa ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+
+
+
+	if (isset($_POST['ButDuyet'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				@$result = mysql_query("update products set products_status=0 where products_id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;&#227; duy&#7879;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+
+
+
+
+
+
+
+	if (isset($_POST['ButGood'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				if (CountRecord("pro_good","products_id=".$pro['products_id'])<=0)
+				{
+					$result = mysql_query("insert into pro_good (products_id,language,pro_dateadded) values ('".$pro['products_id']."','".$pro['language']."',SYSDATE())",$con);
+					if ($result) {
+						$cnt++;
+					}
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã c&#7853;p nh&#7853;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+	if (isset($_POST['ButNew'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				if (CountRecord("pro_new","products_id=".$pro['products_id'])<=0)
+				{
+					$result = mysql_query("insert into pro_new (products_id,language,pro_dateadded) values ('".$pro['products_id']."','".$pro['language']."',SYSDATE())",$con);
+					if ($result) {
+						$cnt++;
+					}
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã c&#7853;p nh&#7853;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+	if (isset($_POST['ButSaleoff'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				if (CountRecord("pro_saleoff","products_id=".$pro['products_id'])<=0)
+				{
+					$result = mysql_query("insert into pro_saleoff (products_id,language,pro_dateadded) values ('".$pro['products_id']."','".$pro['language']."',SYSDATE())",$con);
+					if ($result) {
+						$cnt++;
+					}
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã c&#7853;p nh&#7853;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+
+
+		
+	if (isset($_POST['noibat'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				@$result = mysql_query("update products set featured=1 where id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>Đã thêm ".$cnt." sản phẩm nổi bật</p>";
+	}
+		
+if (isset($_POST['huynoibat'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				@$result = mysql_query("update products set featured=0 where id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>Đã huy ".$cnt." sản phẩm nổi bật</p>";
+	}
+
+		
+	if (isset($_POST['banchay'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				@$result = mysql_query("update products set selling=1 where id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>Đã thêm ".$cnt." sản phẩm bán chạy</p>";
+	}
+		
+	if (isset($_POST['moi'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				@$result = mysql_query("update products set new=0 where id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>Đã thêm ".$cnt." sản phẩm mới</p>";
+	}
+
+
+?>
+
+<?
+	$page = $_GET["page"];
+	$p=0;
+	if ($page!='') $p=$page;
+	$where="1=1";
+	//if ($_REQUEST['status']!='') $where="products_status=".$_REQUEST['status']." ";
+	if ($_REQUEST['cat']!='') $where="cat_mem=".$_REQUEST['cat'];
+?>
+<form method="POST" name="frmList" action="index.php">
+<input type=hidden name="page" value="<? echo $page; ?>">
+<?
+function taotrang($total,$link,$nitem,$itemcurrent,$step=10)
+{	global $con;
+	$ret="";
+	
+	$param="";
+	$pages=count_page($total,$nitem);
+	if ($itemcurrent>0) $ret.='<a title="&#272;&#7847;u tiên" href="'.$link.'0" class="button_link">[&lt;]</a> ';
+	if ($itemcurrent>1) $ret.='<a title="V&#7873; tr&#432;&#7899;c" href="'.$link.($itemcurrent-1).'" class="button_link">[&lt;&lt;]</a> ';
+	$from=($itemcurrent-$step>0?$itemcurrent-$step:0);
+	$to=($itemcurrent+$step<$pages?$itemcurrent+$step:$pages);
+	for ($i=$from;$i<$to;$i++)
+	{
+		if ($i!=$itemcurrent) $ret.='<a href="'.$link.$i.'" class="button_link">'.($i+1).'</a> ';
+		else $ret.='<a class="active">'.($i+1).'</a> ';
+	}
+	if (($itemcurrent<$pages-2) && ($pages>1)) $ret.='<a class="button_link" title="Ti&#7871;p theo" href="'.$link.($itemcurrent+1).'">[&gt;&gt;]</a> ';
+	if ($itemcurrent<$pages-1) $ret.='<a class="button_link" title="Cu&#7889;i cùng" href="'.$link.($pages-1).'">[&gt;]</a>'; 
+	return $ret;
+}
+
+	$pageindex=taotrang(CountRecord("products",$where),"./?act=product&cat=".$_REQUEST['cat']."&page=",$MAXPAGE,$page);
+?>
+<table cellspacing="0" cellpadding="0" width="100%">
+<? if ($_REQUEST['code']==1) echo '<tr><td colspan="2" align="center" class="err">&#272;ã c&#7853;p nh&#7853;t thành công</td></tr>'; ?>
+<tr>
+<td class="smallfont">
+<div class="page">
+Trang : <? echo $pageindex; ?>
+</div>
+</td>
+<td height="30" align="right" class="smallfont">
+	<select style="width:160px;" onchange="window.open(this.options[this.selectedIndex].value,'_self');" class="Normal" id="dnn_ctr424_Links_cboLinks" name="ddCat">
+<?
+	$ms=GetListCategory(17);
+	echo '<option value="./sanpham">[T&#7845;t c&#7843;]</option>';
+	foreach ($ms as $m)
+		if ($m[0]!=$_REQUEST['cat'])
+			echo '<option value="./sanpham/'.$m[0].'">'.$m[1].'</option>';
+		else
+			echo '<option selected value="./sanpham/'.$m[0].'">'.$m[1].'</option>';
+?>
+	</select>
+	</td>
+</tr>
+</table>
+
+<table border="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#EDEDED" width="100%" id="AutoNumber1">
+  <tr class="dash-sub-menu">
+    <td align="center" nowrap class="title"><input type="checkbox" name="chkall" onclick="chkallClick(this);"></td>
+    <td align="center" nowrap class="title"><b>ID</b></td>
+	<td align="center" nowrap class="title"><b>Hình &#7843;nh</b></td>
+	 <td align="center" nowrap class="title"><b>Tên </b></td>
+	 <td align="center" nowrap class="title"><b>Giá bán </b></td>
+	 <td align="center" nowrap class="title"><b>Mới</b></td>
+	 <td align="center" width="20" nowrap class="title"><b>Bán chạy</b></td>
+	 <td align="center" width="20" nowrap class="title"><b>Nổi bật</b></td>
+    <td align="center" nowrap class="title"><b>Th&#7913; t&#7921;</b></td>
+    <td align="center" nowrap class="title"><b>Danh m&#7909;c</b></td>
+	<td align="center" nowrap class="title">Ch&#7913;c n&#259;ng</td>
+
+  </tr>
+  
+  <?php
+           	$sql="select * from products where $where and user='".$_SESSION['log']."' order by id limit ".($p*$MAXPAGE).",".$MAXPAGE;
+        	$result=mysql_query($sql,$con);
+        	$i=0;
+           	while(($row=mysql_fetch_array($result)))
+			{
+			$i++;
+			if ($i%2) $color="#d5d5d5"; else $color="#e5e5e5";
+			$catinfo=GetCategoryInfo($row['cat_mem']);
+			$providerinfo=GetProviderInfo($row['id']);
+			$donvi=GetDonviInfo($row['id']);
+  ?>
+  
+  <tr>
+    <td align="center"  class="smallfont">
+    <input type="checkbox" name="chk[]" value="<? echo $row['id']; ?>"></td>
+    <td  align="left" align="left" class="smallfont"><? echo $row['id']; ?>&nbsp;</td>
+		<td width="69" ><a title="<? echo $row['name']; ?>"><img src="../<? echo $row['image']; ?>" width="69px" height="37px"  alt="<? echo $row['name']; ?>" /></a></td>
+	<td  class="smallfont"><? echo $row['name']; ?>&nbsp;</td>
+	<td  class="td_sanpham"><? echo number_format($row['price']); ?>VNĐ&nbsp;</td>
+	<td  class="td_sanpham">
+	<? if($row['new']=='0')
+				{?>
+				<img src="css/active.png">
+				<?}else{?>
+				<img src="css/un_active.png">
+				<?}?>
+
+	</td>
+	<td  class="td_sanpham">
+	<? if($row['selling']=='1')
+				{?>
+				<img src="css/active.png">
+				<?}else{?>
+				<img src="css/un_active.png">
+				<?}?>
+
+	</td>
+	<td  class="td_sanpham">
+	<? if($row['featured']=='1')
+				{?>
+				<img src="css/active.png">
+				<?}else{?>
+				<img src="css/un_active.png">
+				<?}?>
+
+	</td>
+    <td  class="td_sanpham"><? echo $row['thutu']; ?>&nbsp;</td>
+    <td  class="smallfont"><? echo $catinfo['name']; ?>&nbsp;</td>
+    <td align="center"  class="quickaction">
+	<?if($page=='')
+				{?>
+	<a href="./edit/<? echo $row['id']; ?>/0"  class="edit"><img src="css/view.png"></a>  
+   <a href="./edit/<? echo $row['id']; ?>/0"  class="edit"><img src="css/sua.png"></a>  
+    <a onclick="return confirm('B&#7841;n có ch&#7855;c ch&#7855;n mu&#7889;n xoá ?');" href="./del/<? echo $row['id']; ?>"  class="delete"><img src="css/xoa.png"></a>
+	<?}else{?>
+	<a href="./edit/<? echo $row['id']; ?>/<? echo $page?>"  class="edit"><img src="css/view.png"></a>  
+   <a href="./edit/<? echo $row['id']; ?>/<? echo $page?>"  class="edit"><img src="css/sua.png"></a>  
+    <a onclick="return confirm('B&#7841;n có ch&#7855;c ch&#7855;n mu&#7889;n xoá ?');" href="./del/<? echo $row['id']; ?>"  class="delete"><img src="css/xoa.png"></a>
+	<?}?>
+                  </td>
+  </tr>
+  <?
+              	}
+  ?>
+</table>
+<input type="hidden" name="act" value="product">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+	<tr>
+		<td>
+<input type="submit" value="Xóa Ch&#7885;n" name="ButDel" onclick="return confirm('B&#7841;n có ch&#7855;c ch&#7855;n mu&#7889;n xoá ?');" class="button"></td>
+
+
+
+		<td align="right">
+<input type="submit" value="Nổi bật" name="noibat" class="button">
+<input type="submit" value="Huy nổi bật" name="huynoibat" class="button">
+<input type="submit" value="Bán chạy" name="banchay" class="button">
+<input type="submit" value="Mới" name="moi" class="button"></td>
+
+
+	</tr>
+</table>
+</form>
+<script language="JavaScript">
+function chkallClick(o) {
+  	var form = document.frmList;
+	for (var i = 0; i < form.elements.length; i++) {
+		if (form.elements[i].type == "checkbox" && form.elements[i].name!="chkall") {
+			form.elements[i].checked = document.frmList.chkall.checked;
+		}
+	}
+}
+</script>
+
+
+<?} else
+{?>
+
+<?
+echo $_SESSION["session_message"];
+$_SESSION["session_message"] = "";
+$MAXPAGE=20;
+?>
+<table height="28" cellSpacing="0" cellPadding="0" width="100%" border="0">
+      <tr align=center>
+        <td class="title" width="100%">Tin t&#7913;c : <a href="./?act=product_m&page=<? echo $page?>&cat=<? echo $_REQUEST['cat']; ?>"><font class="V10pt" color="#ffffff">Nh&#7853;p M&#7899;i</font></a>&nbsp;&nbsp;
+	</td>
+      </tr>
+    </table>
+<?
+	switch ($_GET['action'])
+	{
+		case 'del' :
+			$id = $_GET['id'];
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				$sql = "delete from products where products_id='".$id."'";
+				$result = mysql_query($sql,$con);
+				if ($result) 
+				{
+					if (file_exists($pro['products_image'])) unlink($pro['products_image']);
+					if (file_exists($pro['products_image_large'])) unlink($pro['products_image_large']);
+					mysql_query("delete from pro_new where products_id='".$id."'",$con);
+					mysql_query("delete from pro_good where products_id='".$id."'",$con);
+					mysql_query("delete from pro_saleoff where products_id='".$id."'",$con);
+
+					echo "<p align=center class='err'>&#272;ã xóa thành công</p>";
+				}
+					else echo "<p align=center class='err'>Không th&#7875; xóa d&#7919; li&#7879;u</p>";
+			}
+			break;
+	}
+?>
+
+<?
+	if (isset($_POST['ButDel'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				@$result = mysql_query("delete from products where products_id='".$id."'",$con);
+				if ($result) {
+					$cnt++;
+					if (file_exists($pro['products_image'])) unlink($pro['products_image']);
+					if (file_exists($pro['products_image_large'])) unlink($pro['products_image_large']);
+					mysql_query("delete from pro_new where products_id='".$id."'",$con);
+					mysql_query("delete from pro_good where products_id='".$id."'",$con);
+					mysql_query("delete from pro_saleoff where products_id='".$id."'",$con);
+
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã xóa ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+	if (isset($_POST['ButGood'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				if (CountRecord("pro_good","products_id=".$pro['products_id'])<=0)
+				{
+					$result = mysql_query("insert into pro_good (products_id,language,pro_dateadded) values ('".$pro['products_id']."','".$pro['language']."',SYSDATE())",$con);
+					if ($result) {
+						$cnt++;
+					}
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã c&#7853;p nh&#7853;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+	if (isset($_POST['ButNew'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				if (CountRecord("pro_new","products_id=".$pro['products_id'])<=0)
+				{
+					$result = mysql_query("insert into pro_new (products_id,language,pro_dateadded) values ('".$pro['products_id']."','".$pro['language']."',SYSDATE())",$con);
+					if ($result) {
+						$cnt++;
+					}
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã c&#7853;p nh&#7853;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+	if (isset($_POST['ButSaleoff'])) {
+		$cnt=0;
+		foreach ($_POST['chk'] as $id)
+		{
+			$pro=GetProductInfo($id);
+			if ($pro)
+			{
+				if (CountRecord("pro_saleoff","products_id=".$pro['products_id'])<=0)
+				{
+					$result = mysql_query("insert into pro_saleoff (products_id,language,pro_dateadded) values ('".$pro['products_id']."','".$pro['language']."',SYSDATE())",$con);
+					if ($result) {
+						$cnt++;
+					}
+				}
+			}
+		}
+		echo "<p align=center class='err'>&#272;ã c&#7853;p nh&#7853;t ".$cnt." ph&#7847;n t&#7917;</p>";
+	}
+
+
+?>
+
+<?
+	$page = $_GET["page"];
+	$p=0;
+	if ($page!='') $p=$page;
+	$where="1=1";
+	//if ($_REQUEST['status']!='') $where="products_status=".$_REQUEST['status']." ";
+	if ($_REQUEST['cat']!='') $where="categories_id=".$_REQUEST['cat'];
+?>
+<form method="POST" name="frmList" action="index.php">
+<input type=hidden name="page" value="<? echo $page; ?>">
+<?
+function taotrang($total,$link,$nitem,$itemcurrent,$step=10)
+{	global $con;
+	$ret="";
+	
+	$param="";
+	$pages=count_page($total,$nitem);
+	if ($itemcurrent>0) $ret.='<a title="&#272;&#7847;u tiên" href="'.$link.'0" class="lslink">[&lt;]</a> ';
+	if ($itemcurrent>1) $ret.='<a title="V&#7873; tr&#432;&#7899;c" href="'.$link.($itemcurrent-1).'" class="lslink">[&lt;&lt;]</a> ';
+	$from=($itemcurrent-$step>0?$itemcurrent-$step:0);
+	$to=($itemcurrent+$step<$pages?$itemcurrent+$step:$pages);
+	for ($i=$from;$i<$to;$i++)
+	{
+		if ($i!=$itemcurrent) $ret.='<a href="'.$link.$i.'" class="lslink">'.($i+1).'</a> ';
+		else $ret.='<b>'.($i+1).'</b> ';
+	}
+	if (($itemcurrent<$pages-2) && ($pages>1)) $ret.='<a title="Ti&#7871;p theo" href="'.$link.($itemcurrent+1).'">[&gt;&gt;]</a> ';
+	if ($itemcurrent<$pages-1) $ret.='<a title="Cu&#7889;i cùng" href="'.$link.($pages-1).'">[&gt;]</a>'; 
+	return $ret;
+}
+
+	$pageindex=taotrang(CountRecord("products",$where),"./?act=product&cat=".$_REQUEST['cat']."&page=",$MAXPAGE,$page);
+?>
+
+<table cellspacing="0" cellpadding="0" width="100%">
+<? if ($_REQUEST['code']==1) echo '<tr><td colspan="2" align="center" class="err">&#272;ã c&#7853;p nh&#7853;t thành công</td></tr>'; ?>
+<tr>
+<td class="smallfont">Trang : <? echo $pageindex; ?></td>
+<td height="30" align="right" class="smallfont">
+	<select size="1" name="ddCat" class="smallfont">
+<?
+	$ms=GetListCategory(17);
+	echo '<option value="">[T&#7845;t c&#7843;]</option>';
+	foreach ($ms as $m)
+		if ($m[0]!=$_REQUEST['cat'])
+			echo '<option value="'.$m[0].'">'.$m[1].'</option>';
+		else
+			echo '<option selected value="'.$m[0].'">'.$m[1].'</option>';
+?>
+	</select> 
+	<input type="button" value="Chuy&#7875;n" class="button" onclick="window.location='./?act=product&cat='+ddCat.value">
+	</td>
+</tr>
+</table>
+
+<table border="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#C9C9C9" width="100%" id="AutoNumber1">
+  <tr class="dash-sub-menu">
+    <td align="center" nowrap class="title"><input type="checkbox" name="chkall" onclick="chkallClick(this);"></td>
+    <td align="center" nowrap class="title"><b>ID</b></td>
+	<td align="center" nowrap class="title"><b>Hình &#7843;nh</b></td>
+	 <td align="center" nowrap class="title"><b>Tên </b></td>
+    <td align="center" nowrap class="title"><b>Th&#7913; t&#7921;</b></td>
+    <td align="center" nowrap class="title"><b>Danh m&#7909;c</b></td>
+<td align="center" nowrap class="title"><b>Tr&#7841;ng th&#225;i</b></td>
+        <td align="center" nowrap class="title"><b>Ng&#432;&#7901;i g&#7917;i</td>
+		<td nowrap class="title">Ch&#7913;c n&#259;ng</td>
+
+  </tr>
+  
+  <?php
+           	$sql="select * from products where $where and categories_id!=45 and categories_id!=46 and user_post='".$_SESSION['log']."' order by products_id limit ".($p*$MAXPAGE).",".$MAXPAGE;
+        	$result=mysql_query($sql,$con);
+        	$i=0;
+           	while(($row=mysql_fetch_array($result)))
+			{
+			$i++;
+			if ($i%2) $color="#d5d5d5"; else $color="#e5e5e5";
+			$catinfo=GetCategoryInfo($row['categories_id']);
+			$providerinfo=GetProviderInfo($row['providers_id']);
+			$donvi=GetDonviInfo($row['donvi_id']);
+  ?>
+  
+   <tr>
+    <td align="center"  class="smallfont">
+    <input type="checkbox" name="chk[]" value="<? echo $row['products_id']; ?>"></td>
+    <td  align="left" align="left" class="smallfont"><? echo $row['products_id']; ?>&nbsp;</td>
+		<td ><a href="#" class="img_small" title="<? echo $row['products_name']; ?>"><img src="../<? echo $row['products_image']; ?>" width="69px" height="37px"  alt="product image" /></a></td>
+	<td  class="smallfont"><? echo $row['products_name']; ?>&nbsp;</td>
+    <td  class="smallfont"><? echo $row['products_ordered']; ?>&nbsp;</td>
+    <td  class="smallfont"><? echo $catinfo['categories_name']; ?>&nbsp;</td>
+    <td  class="status"><? if($row['products_status']=='0') echo "<span class=\"approved\">&#272;&#227; duy&#7879;t</span>"; else echo "<span class=\"pending\">Ch&#432;a duy&#7879;t</span>"; ?></td>
+    <td  class="smallfont"><?if($row['level']=='0') echo '<font color=\"#F98406\"><b>'.$row['user_post'].'</b></font>'; else echo '<font color=\"#F98406\"><b>'.$row['user_post'].'</b></font>';?></td>
+    <td align="center"  class="quickaction">
+    <ul>
+                    <li><a href="#"  class="view"><span><span>Xem</span></span></a></li>
+                    <li><a href="./?act=product_m&cat=<? echo $_REQUEST['cat']; ?>&status=<? echo $_REQUEST['status']; ?>&id=<? echo $row['products_id']; ?>&page=<? echo $page?>""  class="edit"><span><span>S&#7917;a</span></span></a></li>
+                    <li><a onclick="return confirm('B&#7841;n có ch&#7855;c ch&#7855;n mu&#7889;n xoá ?');" href="./?act=product&action=del&cat=<? echo $_REQUEST['cat']; ?>&status=<? echo $_REQUEST['status']; ?>&id=<? echo $row['products_id']; ?>"  class="delete"><span><span>X&#243;a</span></span></a></li>
+                  </ul></td>
+				  </tr>
+  <?
+              	}
+  ?>
+</table>
+<input type="hidden" name="act" value="product">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+<td><td height="20">
+</td></tr>
+	<tr>
+		<td>
+<input type="submit" value="Xóa Ch&#7885;n" name="ButDel" onclick="return confirm('B&#7841;n có ch&#7855;c ch&#7855;n mu&#7889;n xoá ?');" class="button"></td>
+		<td align="right">
+<input type="submit" value="S&#7843;n ph&#7849;m hi&#7879;n trang ch&#7911;" name="ButGood" class="button">
+<input type="submit" value="S&#7843;n ph&#7849;m &#273;&#7863;c tr&#432;ng" name="ButSaleoff" class="button"></td>
+
+
+	</tr>
+</table>
+</form>
+<script language="JavaScript">
+function chkallClick(o) {
+  	var form = document.frmList;
+	for (var i = 0; i < form.elements.length; i++) {
+		if (form.elements[i].type == "checkbox" && form.elements[i].name!="chkall") {
+			form.elements[i].checked = document.frmList.chkall.checked;
+		}
+	}
+}
+</script>
+
+<?}?>

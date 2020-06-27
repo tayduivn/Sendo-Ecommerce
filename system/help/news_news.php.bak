@@ -1,0 +1,117 @@
+<?php
+$row=15;
+$col=1;
+$MAXPAGE=5;
+$p=0;
+$name=$_GET['name'];
+$cat=0;
+if ($_REQUEST['cat']!='') $cat=killInjection($_REQUEST['cat']);
+$catallsub=GetCatNews($cat);
+if ($_REQUEST['p']!='') $p=$_REQUEST['p'];
+$sql_pro = "select * from help where cat_id in (".$catallsub."0) order by id DESC limit ".$row*$col*$p.",".$row*$col;
+$result = @mysql_query($sql_pro,$con);
+$total=CountRecord("help","cat_id in (".$catallsub."0)");
+$sql_cat=@mysql_query("SELECT name,id FROM help_cat where id='".$cat."' ");
+$row_cat=mysql_fetch_assoc($sql_cat);
+?>
+<div id="content_center">
+<div id="list_cat">
+<?php if(($_REQUEST['cat']=='')&&($_REQUEST['views']==''))
+{?>
+<h3>Trung tâm trợ giúp</h3>
+<?}else{?>
+<h3><?php echo $row_cat['name'];?></h3>
+<?}?>
+</div>
+<div id="list_cat_content_help">
+<?php if(($_REQUEST['cat']==''))
+{?>
+<div style="padding-top:30px;padding-left:50px;">
+<p style="font-size:14px;font-weight:bold;color:#FF7F27">
+Chào bạn !
+</p>
+<p style="padding-top:15px;font-size:17px;font-weight:bold;color:#00B2F4">
+ĐÂY LÀ TRUNG TÂM TRỢ GIÚP KHÁCH HÀNG
+<br>
+WWW.TIEUDUNGVINH.COM
+</p>
+<p style="padding-top:20px;font-size:14px">
+Tại đây chúng tôi cung cấp những thông tin hữu ích để các bạn sử dụng Tieudungvinh hiệu quả nhất. 
+</p>
+<p style="padding-top:15px;padding-left:200px;font-size:14px;font-style:italic;color:#3F48D5">
+" Chúng tôi luôn mong muốn đem lại dịch vụ tốt nhất cho bạn,
+<br>xin chân thành cảm ơn! "
+</p>
+</div>
+<?}else{?>
+<?php
+for($i=1;$i<=$row&&$row_pro=@mysql_fetch_array($result);$i++)
+{
+    $sql_user=@mysql_query("SELECT user,company,level_shop FROM user_shop where user='".$row_pro['user']."' ");
+    $row_user=@mysql_fetch_assoc($sql_user);
+    $sql_city=@mysql_query("SELECT id,name FROM city where id='".$row_pro['city']."' ");
+    $row_city=@mysql_fetch_assoc($sql_city);
+    if($i%2)
+    {
+        $color="#EAEAEA";
+    }
+    else
+    {
+        $color="#FFFFFF";
+    }
+?>
+<div class="row_pro_cat_help">
+<div style="height:20px;color:#094FC8;">
+<a href="./?home=help&act=views&views=<?php echo $row_pro['id'];?>&cat=<?php echo $row_pro['cat_id'];?>">
+<?php echo $row_pro['name'];?>
+</a>
+</div>
+<div style="padding-top:5px">
+<div style="float: left;padding-top:0px">
+<a href="./?home=help&act=views&views=<?php echo $row_pro['id'];?>&cat=<?php echo $row_pro['cat_id'];?>">
+<img src="<?php echo $row_pro['image'];?>" width="110" height="80" style="border:1px solid #C0C0C0">
+</a>
+</div>
+
+<div style="float: left;width:950px;padding-top:0px;padding-left:10px;">
+<div style="color:#a0a0a0;font-size:11px;padding-bottom:5px">
+<?php echo $row_pro['date'];?>
+</div>
+<div><?php echo $row_pro['short'];?></div>
+</div>
+
+</div>
+</div>
+<?}?>
+<?}?>
+<? if ($total>0) { ?>
+<div style="clear:both;height:10px;padding-top:5px">
+<hr color="#E9E9E9" width="100%" SIZE=1 align="center">
+</div>
+<div class="pagination">
+<TABLE bgcolor="#FFFFFF" cellSpacing=10 cellPadding=0 width="100%" border=0 id="table35" style="line-height: 120%; text-align: justify" align="center">
+<?
+$pages=count_page($total,($row*$col));
+echo '<tr><td class="smallfont" align="left" ></td>';
+echo '<td class="smallfont" align="right">';
+$param="";
+if ($p>1) echo '<a class="buton_timkiem" title="&#272;&#7847;u tiên" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-0.html">&lt;</a> ';
+if ($p>0) echo '<a class="buton_timkiem" title="V&#7873; tr&#432;&#7899;c" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($p-1).'.html">&lt;&lt;</a> ';
+$from=($p-10>0?$p-1:0);
+$to=($p+10<$pages?$p+10:$pages);
+for ($i=$from;$i<$to;$i++)
+{
+	if ($i!=$p) echo '<a href="'.$_SERVER['REQUEST_URI'].'&p='.$i.'">'.($i+1).'</a> ';
+	else echo '<a class="active1">'.($i+1).'</a> ';
+}
+if ($p<$i-1) echo '<a class="buton_timkiem" title="Ti&#7871;p theo" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($p+1).'.html">&gt;&gt;</a> ';
+if ($p<$pages-1) echo '<a class="buton_timkiem" title="Cu&#7889;i cùng" href="./nhu-cau-'.$_REQUEST['cat'].'/trang-'.($pages-1).'.html">&gt;</a>'; 
+echo '</td></tr></table>';
+?>
+
+</div>
+<?
+}
+?>
+</div>
+</div>

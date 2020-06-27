@@ -1,0 +1,80 @@
+<?
+$id=$_GET['views'];
+$name=$_GET['name'];
+$sql = "select * from help where id='".$id."' ";
+$result = @mysql_query($sql,$con);
+$row=mysql_fetch_assoc($result);
+$sql_user=mysql_query("SELECT * FROM user_shop where user='".$row['user']."' ");
+$row_user=mysql_fetch_assoc($sql_user);
+$sql_city=mysql_query("SELECT * FROM city where id='".$row['city']."' ");
+$row_city=mysql_fetch_assoc($sql_city);
+$sqlup = "update help set views=views+1 where id=$id";
+$resultup = mysql_query($sqlup,$con);
+?>
+<?if($row['id']!==$id)
+{?>
+<div style="padding-top:20px;padding-bottom:20px;text-align:center;color:red;font-weight:bold">
+<img src="images/alert.jpg">
+<br><br>
+Dữ liệu không tồn tại
+</div>
+<?}else{?>
+<div id="list_cat_content_help">
+<div style="padding-top:13px;border-bottom: 1px solid #C0C0C0;height:20px;">
+<span style="float:left;color:#ED3237;font-size:14px;font-weight:bold"><? echo $row['name'];?></span>
+<span style="float:right;padding-right:20px;font-size:11px;color:#a8a8a8"><?php echo $row['date'];?></span>
+</div>
+<div id="tin_rao_moi_content">
+<div class="space_center"></div>
+
+<div id="news_views">
+<div style="padding:10px">
+<?echo $row['content'];?>
+</div>
+</div>
+<!-- begin tin moi rao -->
+<div class="space"></div>
+<div class="space"></div>
+<div style="width: 100%;height:28px;;font-size:14px;font-weight:bold;color:#FF7500">
+<div style="border-bottom: 1px solid #C0C0C0;height:20px;color:#FF7500;font-size:14px;font-weight:bold">
+Các tin khác
+</div>
+</div>
+<div id="tin_rao_moi_content">
+<?php
+$sql_pro_vip = "select * from help where cat_id='".$row['cat_id']."' order by id desc";
+$result_vip = @mysql_query($sql_pro_vip,$con);
+for($i=1;$i<=mysql_num_rows($result_vip)&&$row_pro_vip=@mysql_fetch_array($result_vip);$i++)
+{
+    if($i%2)
+    {
+        $color="#EAEAEA";
+    }
+    else
+    {
+        $color="#FFFFFF";
+    }
+    if($row_pro_vip['vip']=='1')
+    {
+        $bg="images/vip-icon.png";
+    }
+    else
+    {
+        $bg="images/arr_right.png";
+    }
+?>
+<div style="width: 100%;height:20px;padding-top:5px">
+<div style="float:left;width:17px;height:20px;background-repeat:no-repeat;background-position: 20% 50%;background-image: url('<?php echo $bg;?>');">
+</div>
+<div style="float:left;width:690px;padding-top:2px">
+<a href="./?home=help&act=views&views=<?php echo $row_pro_vip['id'];?>&cat=<?php echo $row_pro_vip['cat_id'];?>"><?php echo dwebvn($row_pro_vip['name'],20);?></a>
+</div>
+<div style="float:right;padding-right:20px;padding-top:2px;font-size:11px;color:#a8a8a8">
+<?php echo $row_pro_vip['date'];?>
+</div>
+</div>
+<?}?>
+</div>
+<?}?>
+</div>
+</div>
